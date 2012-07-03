@@ -239,9 +239,9 @@ class TrabalhadosController < ApplicationController
     $teacher = params[:trabalhado_professor_id].to_i
     session[:professor] = params[:trabalhado_professor_id].to_i
     @two_times = Trabalhado.find_all_by_professor_id(session[:professor], :conditions => ["flag = 0 and ano_letivo = ?", $data.to_s])
-    if @two_times.count == 2
-      @ano = []
-    end
+#    if @two_times.count == 2
+#      @ano = []
+#    end
     if !($teacher.nil?) or !($teacher == '') then
       if (Professor.find($teacher)).nil? then
          $teacher_id = 0
@@ -251,7 +251,7 @@ class TrabalhadosController < ApplicationController
             page.replace_html 'visualizar', :text => ''
             page.replace_html 'teste11' ,:text => ''
             page.replace_html 'teste' ,:text => ''
-            page.replace_html 'ano', :partial => "ano"
+ #           page.replace_html 'ano', :partial => "ano"
           end
       else
         $teacher_id = $teacher
@@ -331,7 +331,7 @@ class TrabalhadosController < ApplicationController
             page.replace_html 'teste11' ,:partial=> 'relatorio_tps'
             page.replace_html 'teste' ,:text => 'Favor incluir pontuação inicial antes de continuar'
             page.replace_html 'nomeprof', :text => 'Nome: ' + (nomeprofessor).to_s
-            page.replace_html 'ano', :partial => "ano"
+  #          page.replace_html 'ano', :partial => "ano"
           end
         else
 
@@ -343,7 +343,7 @@ class TrabalhadosController < ApplicationController
             page.replace_html 'teste11' ,:partial=> 'relatorio_tps'
             page.replace_html 'voltar' ,:partial=> 'voltar'
             page.replace_html 'nomeprof', :text => 'Nome: ' + (nomeprofessor).to_s
-            page.replace_html 'ano', :partial => "ano"
+   #         page.replace_html 'ano', :partial => "ano"
           end
         end
         end
@@ -361,7 +361,7 @@ class TrabalhadosController < ApplicationController
             page.replace_html 'visualizar', :partial => 'visualizar'
             page.replace_html 'total' ,:text => 'Favor incluir pontuação inicial'
             page.replace_html 'nomeprof', :text => 'Nome: ' + (nomeprofessor).to_s
-            page.replace_html 'ano', :partial => "ano"
+    #        page.replace_html 'ano', :partial => "ano"
           end
         else
           render :update do |page|
@@ -370,7 +370,7 @@ class TrabalhadosController < ApplicationController
             page.replace_html 'visualizar', :partial => 'visualizar'
             page.replace_html 'teste11' ,:partial=> 'relatorio_tps'
             page.replace_html 'nomeprof', :text => 'Nome: ' + (nomeprofessor).to_s
-            page.replace_html 'ano', :partial => "ano"
+     #       page.replace_html 'ano', :partial => "ano"
           end
         end
         else
@@ -380,7 +380,7 @@ class TrabalhadosController < ApplicationController
            page.replace_html 'visualizar', :text => ''
            page.replace_html 'teste11' ,:text => ''
            page.replace_html 'teste' ,:text => ''
-           page.replace_html 'ano', :partial => "ano"
+      #     page.replace_html 'ano', :partial => "ano"
           end
         end
       end

@@ -1,4 +1,5 @@
-set :application, "187.35.111.69"
+#set :application, "187.35.111.69"
+set :application, "192.168.0.122"
 set :repository, "git://github.com/alexsoares/pontuacao_atual.git"
 set :user, "servidor"
 set :use_sudo, false
