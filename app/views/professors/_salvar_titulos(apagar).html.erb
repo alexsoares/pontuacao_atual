@@ -1,0 +1,48 @@
+  
+  <fieldset>
+    
+
+   <legend><font size=4>Cadastro Titulação</font></legend>
+  
+<% form_for(@titulo_professor) do |f| %>
+  <%= f.error_messages %>
+
+<table>
+     <tr>
+        <td><%= f.hidden_field(:professor_id, :value => $professor) %></td>
+     </tr>
+
+     <tr>
+        <td><%= f.label :titulo_id, 'Título: ' %></td>
+
+        <%= collection_select :titulacao, :titulo_id, @titulacaos, :id, :descricao, :include_blank => ' -- Selecione -- ' %>
+         <%= observe_field 'titulacao_titulo_id',
+         :frequency => 0.5,
+         #:update => 'valor',
+         :with => :titulacao_titulo_id,
+         :url => { :action => 'guarda_valor' } %>
+         <div id="valor"></div>
+        
+     </tr>
+      <div id="valores">
+      </div>
+
+     <tr>
+        <td><%= f.label :quantidade, 'Quantidade do Título:' %></td>
+       <td><%= f.text_field(:quantidade, :size => 10)%></td>
+
+   <!--<%= f.label :pontuacao_titulo, 'Pontuacao Obtida' %>
+   <%= f.text_field(:pontuacao_titulo, :size => 10)%><br/>!-->
+     </tr>
+     <tr>
+       <td><%= f.label :dt_titulo, 'Data de Emissão do Título:' %>
+       <td><%= f.date_select :dt_titulo, :order => [:day, :month, :year] %></td>
+    </tr>
+
+</table>
+  <br/>
+    <%= f.submit "Salvar", :url => "titulo_professors/new"%>
+  
+<% end %></fieldset>
+
+| <%= link_to_remote('Voltar', :url => { :action => "pontua_prof"}) %> |

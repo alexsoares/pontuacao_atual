@@ -1,0 +1,111 @@
+<script Language="JavaScript">
+function Imprimir(){
+window.print();
+}
+</script>
+<style media="print">
+.botao {
+display: none;
+}
+</style>
+
+<br/>
+<div class="relatorios">
+<table border ="1" cellpadding="1" cellspacing="1" width="100%" >
+  <tr>
+    <center><th bgcolor="#cccccc">Matrícula</th></center>
+    <th bgcolor="#cccccc">Nome</th>
+    <th bgcolor="#cccccc">Sede</th>
+    <th bgcolor="#cccccc">Função</th>
+    <th bgcolor="#cccccc">No. RG </th>
+    <th bgcolor="#cccccc">No. CPF</th>
+    <th bgcolor="#cccccc">Pontuação Total</th>
+    <th bgcolor="#cccccc">Jornada</th>
+    <th bgcolor="#cccccc">Data Ingresso</th>
+  </tr>
+
+  <% for professor in @professors %>
+   <tr>
+    <p><td><center><%=h professor.matricula %></center></td>
+    <td><center><%=h professor.nome %></center></td>
+    <td><center><%=h professor.unidade.nome%></center></td>
+    <td><center><%=h professor.funcao%></center></td>
+    <td><center><%=h professor.RG%></center></td>
+    <td><center><%=h professor.CPF%></center></td>
+    <td><center><%=h format("%.3f",professor.pontuacao_final)%></center></td>
+    <td><center><%=h professor.jornada_sem%></center></td>
+    <% if professor.dt_ingresso.nil? then %>
+      <td><center><%=h professor.dt_ingresso %></center></td>
+    <%else%>
+      <td><center><%=h professor.dt_ingresso.strftime("%d/%m/%y") %></center></td>
+    <%end%>
+   <tr/>
+  <% end %>
+</table>
+
+   <table width="80%" align="right" frame="box" rules="all">
+     <tr>
+       <th bgcolor="#cccccc" width="35%">Graduação</th>
+       <th bgcolor="#cccccc" width="28%">Titulo</th>
+       <th bgcolor="#cccccc" width="11%">Data Conclusão</th>
+     </tr>
+<% $contador2 = 0%>
+    <%for tp in @tp%>
+    <tr>
+      <td><%=h tp.titulo.descricao %></td>
+      <td><%=h tp.obs%></td>
+      <td><center><%=h tp.dt_titulo.strftime("%d/%m/%y")%></center></td>
+     <tr/>
+    <% $contador2= $contador2+1 %>
+    <%end%>
+
+  <%for tp1 in @tp1%>
+    <tr>
+      <td><%=h tp1.titulo.descricao %></td>
+      <td><%=h tp1.obs%></td>
+      <td><center><%=h tp1.dt_titulo.strftime("%d/%m/%y")%></center></td>
+    <tr/>
+  <%end%>
+  <% contador= @tp.count+@tp1.count%>
+</table>
+<table border="1">
+  <tr>
+    <td>
+      <font color="green">Este professor possue <%=contador%> titulo(s) cadastrado(s)</font>
+    </td>
+  </tr>
+</table>
+</div>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<div class="botao">
+  <table width="100%" border="1">
+    <tr>
+      <td>
+       <div class="botao3d"><%= link_to 'Dados Pessoais', professor %></div>
+       <% @ficha = Ficha.all(professor) %>
+       <% if @ficha %>
+         <div class="botao3d"><%= link_to('Pontuação', :url => { :action => "relatorio_indiv"}) %></div> </td>
+       <%end%>
+      <td align="right"><input type="Button" Value="Imprimir" onclick="Imprimir()"></td>
+    </tr>
+  </table>
+</div>
+    
+<br />
+
+
+<br/>
+
+

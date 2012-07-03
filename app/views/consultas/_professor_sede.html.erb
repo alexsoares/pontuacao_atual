@@ -1,0 +1,9 @@
+<p>
+<tr><font style="font-size: 12pt">Nome:  </font></tr>
+<%= collection_select :pro, :professor_id, @professorsnome, :id, :nome, :include_blank => ' -- Selecione -- ' %>
+</p>
+          <%= observe_field 'pro_professor_id',
+         :frequency => 0.5,
+         :with => :pro_professor_id,
+         #:update => "consultas",
+         :url => { :action => 'consulta_nome' } %>

@@ -1,0 +1,198 @@
+class ProfessorsController < ApplicationController
+before_filter :load_titulos
+before_filter :load_professors
+before_filter :load_trabalhados
+before_filter :load_titulacao
+before_filter :inicializa
+
+
+  # GET /professors
+  # GET /professors.xml
+
+  def teste
+    render :text => 'teste'
+  end
+
+  def index
+    @professors = Professor.find(:all)
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.xml  { render :xml => @professors }
+    end
+  end
+
+  # GET /professors/1
+  # GET /professors/1.xml
+  def show
+    @professor = Professor.find(params[:id])
+
+    respond_to do |format|
+      format.html # show.html.erb
+      format.xml  { render :xml => @professor }
+    end
+  end
+
+  # GET /professors/new
+  # GET /professors/new.xml
+  def new
+    @professor = Professor.new
+    $contador=0
+    $Total_de_titulos=0
+
+    respond_to do |format|
+      format.html # new.html.erb
+      format.xml  { render :xml => @professor }
+    end
+  end
+
+  # GET /professors/1/edit
+  def edit
+    @professor = Professor.find(params[:id])
+  end
+
+  # POST /professors
+  # POST /professors.xml
+  def create
+    @professor = Professor.new(params[:professor])
+    
+    respond_to do |format|
+      if @professor.save
+        flash[:notice] = 'PROFESSOR CADASTRADO COM SUCESSO.'
+        format.html { redirect_to(@professor) }
+        format.xml  { render :xml => @professor, :status => :created, :location => @professor }
+      else
+        format.html { render :action => "new" }
+        format.xml  { render :xml => @professor.errors, :status => :unprocessable_entity }
+      end
+    end
+  end
+
+  # PUT /professors/1
+  # PUT /professors/1.xml
+  def update
+    @professor = Professor.find(params[:id])
+
+    respond_to do |format|
+      if @professor.update_attributes(params[:professor])
+        flash[:notice] = 'PROFESSOR CADASTRADO COM SUCESSO.'
+        format.html { redirect_to(@professor) }
+        format.xml  { head :ok }
+      else
+        format.html { render :action => "edit" }
+        format.xml  { render :xml => @professor.errors, :status => :unprocessable_entity }
+      end
+    end
+  end
+
+  # DELETE /professors/1
+  # DELETE /professors/1.xml
+  def destroy
+    @professor = Professor.find(params[:id])
+    @professor.destroy
+
+    respond_to do |format|
+      format.html { redirect_to(professors_url) }
+      format.xml  { head :ok }
+    end
+  end
+  def load_titulos
+    @titulos = Titulacao.find(:all, :order => "descricao")
+  end
+
+  def load_professors
+    @professors = Professor.find(:all, :order => "nome ASC")
+  end
+
+  def load_trabalhados
+    @trabalhados = Trabalhado.find(:all)
+   
+  end
+
+  def load_titulacao
+    @titulacaos = Titulacao.find(:all)
+  end
+
+  def titulacao
+    
+    if (@titulacaos = Titulo_professor.find_by_professor_id($professor)).nil?
+      @titulacaos = Titulo_professor.new
+      render :partial => 'titulacaos'
+    else
+      @titulacaos = Titulo_professor.findfind_by_professor_id($professor)
+      render :partial => 'titulacaos'
+    end
+  end
+
+  def tempo_servico
+      @trabalhados = Trabalhado.new
+      render :partial => 'pontuar_tempo_servico'
+   
+  end
+
+  def alt_tempo_servico
+
+    if (@trabalhados = Trabalhado.find_by_professor_id($professor)).nil?
+    else
+      @trabalhados = Trabalhado.find_by_professor_id($professor)
+      render :partial => 'pontuar_tempo_servico'
+    end
+  end
+
+
+  def nome_professor
+    $professor = params[:professor_professor_id]
+    @professors = Professor.find(:all, :conditions => ['id=' + $professor ])
+    render :partial => 'lista_professor'
+  end
+
+
+  def desc
+    @titulo_desc = Titulacao.find(:all, :conditions => ["id="+ params[:professor_titulacao_id]])
+    if not @titulo_desc.empty? then
+       $contador=0
+       render :update do |page|
+         page.insert_html :bottom , 'desc_titulo', :text =>  "Código: " + (Titulacao.find_by_id(params[:professor_titulacao_id]).id).to_s     + " - Descrição do Título: " + (Titulacao.find_by_id(params[:professor_titulacao_id]).descricao).to_s + '<br/>'
+         page.replace_html 'contador', :text => ''
+        end
+    end
+  end
+
+  def rel_prof
+    @professors = Professor.find(:all)
+    render :update do |page|
+      page.replace_html 'tempo_serv', :text =>''
+      page.replace_html 'prof_pontua', :partial => 'relatorio_professors'
+    end
+
+  end
+
+  def pontua_prof
+    #@professors = Professor.find(:all)
+    render :partial => 'professor_tempo_servico'
+  end
+
+  def relato_prof
+    #@professors = Professor.find(:all)
+    render :partial => 'professor_relatorio_pontuacao'
+  end
+
+   def dados_professor
+     $professor = params[:professor_professor_id]
+    @professors = Professor.find(:all, :conditions => ['id=' + $professor ])
+    @trabalho = Trabalhado.find(:all, :conditions => ['professor_id=' +$professor])
+    @t = Trabalhado.find(:all, :conditions => ['professor_id=' +$professor])
+    @nome_professor = Professor.find_by_id($professor)
+    render :partial => 'exibicao_pontuatempservico'
+  end
+
+  def inicializa
+     $st_dt = 0
+     $st_de = 0
+     $st_dr = 0
+     $st_du = 0
+  end
+
+  
+end
+

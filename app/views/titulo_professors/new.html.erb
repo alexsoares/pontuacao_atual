@@ -1,0 +1,24 @@
+<div id="conteudo">
+  <br/>
+  <h1 align="center">Cadastro dos Títulos dos Professores</h1>
+<br/>
+<br/>
+<table border="1">
+<tr>
+<div id ="menu">
+  <td><div class="botao3d"><%= link_to 'Novo', new_titulo_professor_path %></div>
+  <div class="botao3d"><%= link_to 'Alterar', titulo_professors_path %></div></td>
+</div>
+</tr>
+<br/>
+<tr>
+<td colspan="2"><hr align="left" width="17%" color=#9C9C9C size="3"></hr></td>
+</tr>
+<tr>
+<td colspan="3">
+ <h2>Cadastro Titulação</h2>
+ <%= render "form"%>
+</td>
+</tr>
+</table>
+</div>

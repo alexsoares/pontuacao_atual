@@ -1,0 +1,35 @@
+<br/>
+<%= link_to 'Nova Config', new_configuration_path, :class => "botao3d" %>
+<br/>
+<br/>
+<div class="relatorios">
+  <table border="1" cellpadding="5" cellspacing="1" width="100%" class="tabelas">
+    <tr>
+      <td colspan="8">
+        <h1 align="center">Configurações Ativas</h1>
+      </td>
+    </tr>
+    <tr>
+      <th>Usuário</th>
+      <th>Data vigente</th>
+      <th>Inicio de Periodo</th>
+      <th>Fim de Periodo</th>
+      <th>Configurado em</th>
+    </tr>
+
+  <% @configurations.each do |configuration| %>
+    <tr>
+      <td align="center"><%=h configuration.user.login %></td>
+      <td align="center"><%=h configuration.data.strftime("%d/%m/%y") %></td>
+      <td align="center"><%=h configuration.begin_period ? configuration.begin_period.strftime("%d/%m/%y") : "Não Configurado" %></td>
+      <td align="center"><%=h configuration.begin_period ? configuration.end_periods.strftime("%d/%m/%y") : "Não configurado" %></td>
+      <td align="center"><%=h configuration.created_at.strftime("%d/%m/%y %H:%M") %></td>
+      <td><%= link_to 'Exibir', configuration %></td>
+      <td><%= link_to 'Alterar', edit_configuration_path(configuration) %></td>
+      <td><%= link_to 'Apagar', configuration, :confirm => 'Confirma?', :method => :delete %></td>
+    </tr>
+  <% end %>
+  </table>
+</div>
+<br />
+

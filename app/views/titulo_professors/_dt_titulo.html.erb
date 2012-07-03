@@ -1,0 +1,9 @@
+      <%if $tipo == 2 then%>
+            <td><%= label :dt_titulo, 'Data de Emissão:' %></td>
+            <td><%= date_select(:dt_titulo, :order => [:day, :month, :year], :start_year => (Date.today.year), :end_year => (Date.today.year - 50)) %></td>           
+       <%  $data_anual = nil %>
+      <%else%>
+        <%  $data_anual = (($data2).to_s + '-10-31') %>
+      <%end%>
+
+

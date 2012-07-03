@@ -1,0 +1,28 @@
+<script src="http://cdn.jquerytools.org/1.2.5/full/jquery.tools.min.js"></script>
+<h1 align="center">Fichas Geradas - Profº <%= @professor.nome %></h1>
+<br>
+  <br>
+    <br>
+
+<table align="center" border="1" >
+  <tr>
+    <th colspan="3">Ano Letivo</th>
+  </tr>
+
+<% for ficha in @fichas %>
+  <tr>
+    <td><%=h ficha.ano_letivo %></td>
+    <td class="botao3d"><%= link_to 'Exibir', [@professor,ficha], :title => "Importante! Nem todos os usuários possuirão fichas correspondente a este ano." %></td>
+    <td class="botao3d"><%= link_to 'Apagar', [@professor,ficha], :confirm => 'Tem Certeza?', :method => :delete %></td>
+  </tr>
+ 
+<% end %>
+</table>
+
+<br/>
+<br/>
+      <%= button_to 'Voltar', :back, :method => :get %>
+<br />
+<script>
+$("#demo a[title]").tooltip();
+</script>

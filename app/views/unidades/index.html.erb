@@ -1,0 +1,71 @@
+<script Language="JavaScript">
+function Imprimir(){
+window.print();
+}
+</script>
+<style media="print">
+.botao {
+display: none;
+}
+</style>
+<div id="conteudo">
+  <div class="botao">
+    <table width="100%">
+      <tr>
+          <% form_tag unidades_path, :method => 'get' do %>
+           <p>
+             <tr>
+                <td align="right"> Nome da Unidade:
+                 <%= text_field_tag :search, params[:search] %>
+                 <%= submit_tag "Filtrar", :name => nil %> </td>
+              </tr>
+           </p>
+          <% end %>
+
+      </tr>
+    </table>
+  </div>
+
+<div class="botao">
+    <br/>
+  <input type="Button" Value="Imprimir" onclick="Imprimir()">
+   <br/>
+  <br/>
+</div>
+<div class="relatorios">
+  <fieldset>
+   <legend><font size=4>Unidades</font></legend>
+   <table border ="1" cellpadding="5" cellspacing="1" width="100%"  frame="box" rules="all">
+      <tr>
+        <td colspan="14">
+          <h1 align="center">Relatório de Unidades</h1>
+        </td>
+      </tr>
+      <tr>
+        <th colspan="4" >Localização</th>
+        <th colspan="4" >Nome</th>
+        <th colspan="3" >Tipo de Ensino</th>
+        <th colspan="3"></th>
+      </tr>
+      <% for unidade in @unidades %>
+
+        <tr>
+          <td colspan="4"><center><%=h unidade.regiao.nome %></center></td>
+          <td colspan="4"><center><%=h unidade.nome %></center></td>
+          <td colspan="3"><center><%=h unidade.nome_tipo %></center></td>
+            <td colspan="1" align="CENTER" ><%= link_to 'Exibir', unidade,:class => 'botao3d'%></td>
+            <td align="CENTER"><%= link_to 'Alterar', edit_unidade_path(unidade),:class => 'botao3d' %>
+            <td align="CENTER"><%= link_to 'Apagar', unidade, :confirm => 'Tem certeza?', :method => :delete, :class => 'botao3d' %></td>
+
+         </tr>
+      <% end %>
+    </table>
+  </fieldset>
+ <br />
+<div class="botao">
+  <%= will_paginate @unidades %>
+  <br/>
+ <input type="Button" Value="Imprimir" onclick="Imprimir()">  
+</div>
+</div>
+</div>

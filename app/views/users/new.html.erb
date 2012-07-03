@@ -1,0 +1,54 @@
+<div id="conteudo">
+  <div id="entrar">
+    <%if logged_in? then%>
+      <td><%= link_to '|Sair|', logout_path %></td>
+     <td>Está logado como: <%= current_user.login %></td>
+    <%else%>
+      <td><%= button_to 'Login', login_path %></td>
+    <%end%>
+  </div>
+<br/>
+<fieldset><legend>Criação de Senha de Acesso</legend>
+   <%= error_messages_for :user %>
+      
+       <% form_for :user, :url => users_path do |f| -%>
+       <p><label for="login">Usuário:</label><br/>
+       <%= f.text_field :login %></p>
+
+       <p><label for="password">Senha:</label><br/>
+       <%= f.password_field :password %></p>
+
+       <p><label for="password_confirmation">Confirmação Senha:</label><br/>
+       <%= f.password_field :password_confirmation %></p>
+
+       <p><label for="email">Email:</label><br/>
+       <%= f.text_field :email %></p>
+
+
+       <p><label for="regiao_id">Unidade:</label><br/>
+               <%= f.collection_select :regiao_id, @unidades, :id, :nome, :include_blank => ' -- Selecione -- ' %></p>
+             <%= observe_field :user_regiao_id,
+             :with => :user_regiao_id,
+             :update => 'aviso',
+             :url => { :action => 'reg_id' } %>
+             <div id="aviso"></div>
+       <p><%= submit_tag 'Increver-se' %></p>
+      <% end -%>
+     
+
+</fieldset>
+
+<div id="obs">
+<fieldset>
+  <legend><font size=5>Observações:</font></legend>
+   <div id="mensagem">
+     1. Ao criar um usuário utilize o padrão <b> unidade.nome</b><br/>
+     2. Crie uma senha com no mínimo seis dígidos.<br/>
+     3. Selecione a unidade. <br/>
+     4. A senha é responsabilidade do usuário. <br/>
+     5. Todo usuário necessita de validação.<br>
+     6. Lige para supervisão para validar usuário.<br/>
+  </div>
+</fieldset>
+</div>
+</div>

@@ -1,0 +1,39 @@
+
+     <% form_for(@acum_trab) do |f| %>
+     <%= f.error_messages %>
+  <fieldset>
+  <table >
+
+        <%= f.hidden_field(:professor_id, :value => $teacher_id) %>
+     <tr>
+         <td><%= f.label :tot_acum_trab, 'Dias Trabalhados Acumulados' %></td>
+        <td><%= f.text_field :tot_acum_trab, :size => 3 %></td>
+        <%= f.hidden_field(:pont_base_trab, :value => '0.008') %>
+     </tr>
+     <tr>
+        <td><%= f.label :tot_acum_efet, 'Dias Efetivos Acumulados' %></td>
+        <td><%= f.text_field :tot_acum_efet, :size => 3 %></td>
+        <%= f.hidden_field(:pont_base_efet, :value => '0.002') %>
+     </tr>
+     <tr>
+        <td><%= f.label :tot_acum_rede, 'Dias de Rede Acumulados' %></td>
+        <td><%= f.text_field :tot_acum_rede, :size => 3 %></td>
+        <%= f.hidden_field(:pont_base_rede, :value => '0.001') %>
+     </tr>
+     <tr>
+        <td><%= f.label :tot_acum_unid, 'Dias de Unidade Acumulados' %></td>
+        <td><%= f.text_field :tot_acum_unid, :size => 3 %></td>
+        <%= f.hidden_field(:pont_base_unid, :value => '0.002') %>
+     </tr>
+
+
+
+
+  </table>
+
+      <%= f.submit "Salvar"%>
+   </fieldset>
+
+
+<%end%>
+

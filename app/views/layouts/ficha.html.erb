@@ -1,0 +1,152 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+    <title>PONTUAÇÃO DOS PROFESSORES : <%= controller.action_name %></title>
+    <%= stylesheet_link_tag 'scaffold','pontuacao','msg','style','menu','jquery-ui' %>
+    <%= stylesheet_link_tag 'scaffold','pontuacao','ficha','menu', :cache => true %>
+    <%= stylesheet_link_tag 'impressao', :media => 'print' %>
+    <%= javascript_include_tag :all, :defaults, :cache => true %>
+    
+</head>
+<body>
+<style media="print">
+.botao {
+display: none;
+}
+</style>
+<script Language="JavaScript">
+function Imprimir(){
+window.print();
+}
+</script>
+
+
+    <div id="contents">
+      <div class="botao">
+      <div id="header">
+        <div id="topo">
+        </div>
+
+        <!-- HEADER -->
+          <p style="color: red"><%= flash[:notice] %></p>
+          <%if logged_in? then%>
+            <td width="100%" align="right">
+            <font size="4" color="green"><%= link_to h(current_user.login.capitalize), user_path(current_user) %> </font>
+          <%else%>
+            <td><%= link_to '|Entrar|', login_path %></td>
+          <%end%>
+        <!-- FIM HEADER -->
+      </div>
+<!-- MENU-->
+            <span class="preload1"></span>
+            <span class="preload2"></span>
+            <ul id="nav">
+                    <li class="top"><a href="#nogo53" id="arquivo" class="top_link"><span class="down">Arquivo</span></a>
+                      <ul class="sub">
+                        <!-- <li> <%= link_to ' Serviço de mensagens' , mensagems_path %></li> !-->
+                        <li> <%= link_to ' Início' , home_path %></li>
+                        <li><%= link_to 'Sair', logout_path,:confirm => "Tem certeza que deseja fazer logout?" %></li>
+                      </ul>
+                    </li>
+                    <li class="top"><a href="#nogo27" id="executar" class="top_link"><span class="down">Executar</span></a>
+                    <ul class="sub">
+
+                       <%if !(@ficha.nil?)%>
+                        <li><a  href="#nogo29" class="fly">Gerar Ficha</a>
+                          <ul>
+                              <li><%= link_to('Voltar', :back) %></li>
+                              <li><%= link_to('Export to PDF', "#{@ficha.id}.pdf") %></li>
+                              <li><a class="botao3d" href="javascript:window.print();">Imprimir</a></li>
+                          </ul>
+                         </li>
+                       <%else%>
+                          <li><%= link_to 'Gerar Ficha',gerar_ficha_professors_path %></li>
+                       <%end%>
+
+
+                        <li><a href="#nogo29" class="fly">Pontuação</a>
+                        <ul>
+                          <li><%= link_to 'Tempo Serviço', new_trabalhado_path%></li>
+                          <li><%= link_to 'Títulos',new_titulo_professor_path %></li>
+                          <li><%= link_to_remote('Pontuação', :url => { :action => "relato_prof", :controller => "professors"}) %></li>
+                        </ul>
+                      </li>
+                        <%  if current_user.has_role?('direcao') or (current_user.has_role?('supervisao')) or (current_user.has_role?('admin'))  or (current_user.has_role?('planejamento'))%>
+                          <li><a href="#nogo29" class="fly">Consultas</a>
+                            <ul>
+                              <%  if current_user.has_role?('direcao') or (current_user.has_role?('supervisao')) or (current_user.has_role?('admin')) or current_user.has_role?('planejamento') %>
+                                <li><%= link_to_remote('Profº Individual', :url => { :controller => "consulta", :action => "consulta_ppu"}) %></li>
+                                <li><%= link_to_remote('Unidade', :url => {  :controller => "consulta", :action => "consulta_pu"}) %></li>
+                                <li><%= link_to_remote('Titulação', :url => {  :controller => "consulta", :action => "consulta_pt"}) %></li>
+                                <li><%= link_to_remote('Geral', :url => { :controller => "consulta", :action => "consulta_geral"}) %></li>
+                              <%end%>
+                            </ul>
+                          </li>
+                        <%end%>
+                      <li><%= link_to "Gerar Remoção", remocaos_path %></li>
+                    </ul>
+                  </li>
+                  <li class="top"><a href="#nogo2" id="cadastrar" class="top_link"><span class="down">Cadastrar</span></a>
+                  <ul class="sub">
+                    <li><b>Primário</b></li>
+                    <li><%= link_to "Professores", new_professor_path %></li>
+                    <li><b>Secundários</b></li>
+                    <%if current_user.has_role?('admin') or current_user.has_role?('supervisao') or current_user.has_role?('planejamento') then%>
+                      <li><%= link_to "Títulos", new_titulacao_path %></li>
+                      <li><%= link_to "Unidades", new_unidade_path %></li>
+                      <li><%= link_to "Região", new_regiao_path %></li>
+                    <%end%>
+                  </ul>
+                </li>
+
+                <%  if current_user.has_role?('admin') or current_user.has_role?('supervisao') or current_user.has_role?('planejamento') then%>
+                  <li class="top"><a href="#nogo22" id="config" class="top_link"><span class="down">Configuração</span></a>
+                    <ul class="sub">
+                      <li><b>Gerencial</b></li>
+                      <li><%= link_to 'Verificar Log', logs_path %></li>
+                      <%  if current_user.has_role?('admin') then%>
+                        <li><%= link_to_remote('Usuários', :url => { :action => "gen_user", :controller => 'home'}) %></li>
+                        <li><b>Anual</b></li>
+                        <li><%= link_to('Novo Ano', iniciar_ano_path) %></li>
+                        <li><%= link_to('Arrumar Titulos', arrumar_titulos_path) %></li>
+                      <%end%>
+                    </ul>
+                  </li>
+                <%end%>
+
+                <li class="top"><a href="#nogo2" id="relatorios" class="top_link"><span class="down">Relatórios</span></a>
+                <ul class="sub">
+                  <li><b>Professores por</b></li>
+                    <li><%= link_to "Nome", professors_path %></li>
+                    <li><%= link_to "Função", relatorio_por_funcao_path %></li>
+                    <li><a href="#nogo29" class="fly">Titulação</a>
+                    <ul>
+                      <li><%= link_to "Invalidados", relatorio_titulos_anuais_invalidos_titulo_professors_path %></li>
+                      <li><%= link_to "Titulação", relatorio_prof_titulacao_titulo_professors_path %></li>
+                      <li><%= link_to "Por descrição", relatorio_por_descricao_titulo_titulo_professors_path %></li>
+                    </ul>
+                  </li>
+          	      <li><b>Secundários</b></li>
+                  <%if current_user.has_role?('admin') or current_user.has_role?('supervisao') or current_user.has_role?('planejamento') then%>
+                    <li><%= link_to "Títulos", titulacaos_path %></li>
+                    <li><%= link_to "Unidades", unidades_path %></li>
+                    <li><%= link_to "Região", regiaos_path %></li>
+                  <%end%>
+                </ul>
+              </li>
+            </ul>
+<!-- FIM MENU -->
+      </div>
+      <div id="menu">
+      </div>
+      <div id="principal">
+        <%= yield  %>
+      </div>
+    
+  </div>
+</body>
+</html>
+
+
+

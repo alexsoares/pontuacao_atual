@@ -1,0 +1,497 @@
+<% $subtot_perm = 0 %>
+<% $subtot_um = 0 %>
+<% $subtot_cinco = 0 %>
+<% $subtotal_titulos = 0 %>
+<%$numero = 0%>
+<div id="separator">
+  <div class="botao">
+    <p align="center"><%= link_to "Voltar", relatorio_ficha_path %></p>
+  </div>
+</div>
+<div id="ficha2">
+<%if !(@ficha.nil?) %>
+<table border="1" width="87%" align="center" frame="box" rules="all">
+  <tr><td colspan="2" align="center"><%= image_tag("/stylesheets/Imagens/brasao.jpg", :size => "150x100") %></td><td colspan="12" align="right"><h2>FICHA DE PONTUACAO DE PROFESSOR</h2>
+ <h4><font size="2"> Americana <%= Time.now.strftime("%d de %B de %Y - %H:%M ") %>horas</font></h4></td></tr>
+<br/><br/>
+ <br/>
+ <br/>
+  <tr>
+    <td colspan="5">
+        <b>MatrIcula:
+          <%=h @ficha.professor.matricula %><br/>
+        <b>Nome:</b>
+          <%=h @ficha.professor.nome %></b><br/>
+        <b>Data Ingresso:</b>
+            <%if @ficha.professor.dt_ingresso.nil? then %>
+              <%=h @ficha.professor.dt_ingresso %><br/>
+            <%else%>
+              <%=h @ficha.professor.dt_ingresso.strftime("%d/%m/%y") %><br/>
+            <%end%>
+        <b>sede:</b>
+          <%=h Unidade.find(@ficha.professor.sede_id).nome%><br/>
+        <b>Endereco:</b>
+          <%=h @ficha.professor.endres%>
+        <b>No. </b>
+          <%=h @ficha.professor.num %><br/>
+        <b>Bairro:</b>
+          <%=h @ficha.professor.bairro%><br/>
+        <b>Formação apr. concurso</b>
+          <%=h @ficha.entrada_concurso %>
+        <b>Observacoes:</b>
+          <%=h @ficha.professor.obs %><br/>
+    </td>
+    <td colspan="5">
+     <b>Ano:</b>
+          <%= @ficha.ano_letivo %>
+     <br/><br/>
+      <b>Data Nascimento:</b>
+    <% if @ficha.professor.dt_nasc.nil? then %>
+      <%=h @ficha.professor.dt_nasc %><br/>
+    <%else%>
+      <%=h @ficha.professor.dt_nasc.strftime("%d/%m/%y") %><br/>
+    <%end%>
+       <b>Jornada Semanal:</b>
+          <%=h @ficha.professor.jornada_sem%><br/><br/>
+       <b>Telefone:</b>
+          <%=h @ficha.professor.telefone%><br/><br/>
+    </td>
+    <td colspan="4">
+         <br/>
+         <b>No. Filhos:</b>
+          <%=h @ficha.professor.n_filhos%> <br/>
+        <b>Funcao:</b>
+          <%=h @ficha.professor.funcao%> <br/><br/>
+       <b>Cidade:</b>
+          <%=h @ficha.professor.cidade%><br/>
+
+    </td>
+  </tr>
+  <tr>
+    <th colspan="14" align="center" class="semi_titulo"><b>Contagem de Tempo de Servico</b></th>
+  </tr>
+  <tr>
+    <th colspan="1">Ano</th>
+    <th colspan="1">Dias</th>
+    <th colspan="1">Unidade</th>
+    <th colspan="1">Outro Emprego</th>
+    <th colspan="1">Faltas Abonadas</th>
+    <th colspan="1">Faltas Atestados</th>
+    <th colspan="1">Faltas Justif.</th>
+    <th colspan="1">Faltas Injust.</th>
+    <th colspan="1">Licenças Saude</th>
+    <th colspan="1">Afast. / nao remun.</th>
+    <th colspan="1">Dias Trabalhados</th>
+    <th colspan="1">Dias Efetivos</th>
+    <th colspan="1">Dias Rede</th>
+    <th colspan="1">Dias Unidade</th>
+  </tr>
+  <tr>
+      <tr>
+    <td colspan="1">
+      <center><%= @ficha.trabalhado_anterior.ano %><br/></center>
+    </td>
+     <td colspan="1">
+      <center><%= @ficha.trabalhado_anterior.dias%><br/></center>
+     </td>
+     <td colspan="1">
+        <center><%= @ficha.trabalhado_anterior.unidade %><br/></center>
+     </td>
+     <td colspan="1">
+        <center><%= @ficha.trabalhado_anterior.outro_trab %> <br/></center>
+     </td>
+
+     <td colspan="1">
+        <center><%= @ficha.trabalhado_anterior.f_abonada %><br/></center>
+     </td>
+     <td colspan="1">
+        <center><%= @ficha.trabalhado_anterior.atestado %><br/></center>
+     <td colspan="1">
+        <center><%= @ficha.trabalhado_anterior.f_justif %><br/></center>
+     </td>
+     <td colspan="1">
+        <center><%= @ficha.trabalhado_anterior.f_injustif %><br/></center>
+    </td>
+    <td colspan="1">
+        <center><%= @ficha.trabalhado_anterior.lic_saude %><br/></center>
+    </td>
+    <td colspan="1">
+        <center><%= @ficha.trabalhado_anterior.afastamento %></center>
+    </td>
+    <td colspan="1">
+      <center><%= $st_dt = @ficha.trabalhado_anterior.dias_trab %></center>
+    </td>
+    <td colspan="1">
+      <center><%= $st_de = @ficha.trabalhado_anterior.dias_efetivos %></center>
+    </td>
+    <td colspan="1">
+      <center><%= $st_dr = @ficha.trabalhado_anterior.dias_rede %></center>
+    </td>
+    <td colspan="1">
+      <center><%= $st_du = @ficha.trabalhado_anterior.dias_unidade %></center>
+    </td>
+  </tr>
+  <tr>
+        <td colspan="1">
+      <center> <%= @ficha.trabalhado_atual.ano %><br/></center>
+    </td>
+     <td colspan="1">
+      <center><%= @ficha.trabalhado_atual.dias%><br/></center>
+     </td>
+     <td colspan="1">
+        <center><%= @ficha.trabalhado_atual.unidade %><br/></center>
+     </td>
+     <td colspan="1">
+        <center><%= @ficha.trabalhado_atual.outro_trab %> <br/></center>
+     </td>
+
+     <td colspan="1">
+        <center><%= @ficha.trabalhado_atual.f_abonada %><br/></center>
+     </td>
+     <td colspan="1">
+        <center><%= @ficha.trabalhado_atual.atestado %><br/></center>
+     <td colspan="1">
+        <center><%= @ficha.trabalhado_atual.f_justif %><br/></center>
+     </td>
+     <td colspan="1">
+        <center><%= @ficha.trabalhado_atual.f_injustif %><br/></center>
+    </td>
+    <td colspan="1">
+        <center><%= @ficha.trabalhado_atual.lic_saude %><br/></center>
+    </td>
+    <td colspan="1">
+        <center><%= @ficha.trabalhado_atual.afastamento %></center>
+    </td>
+    <td colspan="1">
+      <center><%= $st_dt = @ficha.trabalhado_atual.dias_trab %></center>
+    </td>
+    <td colspan="1">
+      <center><%= $st_de = @ficha.trabalhado_atual.dias_efetivos %></center>
+    </td>
+    <td colspan="1">
+      <center><%= $st_dr = @ficha.trabalhado_atual.dias_rede %></center>
+    </td>
+    <td colspan="1">
+      <center><%= $st_du = @ficha.trabalhado_atual.dias_unidade %></center>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="14">
+
+    </td>
+  </tr>
+
+  <tr>
+    <td colspan="10">
+        <b>Sub-Total (Em Dias)</b>
+    </td>
+     <td colspan="1" align="center"><%= $total_dt_ano = (@ficha.trabalhado_atual.dias_trab + @ficha.trabalhado_anterior.dias_trab) %></td>
+     <td colspan="1" align="center"><%= $total_de_ano = (@ficha.trabalhado_atual.dias_efetivos + @ficha.trabalhado_anterior.dias_efetivos) %></td>
+     <td colspan="1" align="center"><%= $total_dr_ano = (@ficha.trabalhado_atual.dias_rede + @ficha.trabalhado_anterior.dias_rede) %></td>
+     <td colspan="1" align="center"><%= $total_du_ano = (@ficha.trabalhado_atual.dias_unidade + @ficha.trabalhado_anterior.dias_unidade) %></td>
+  </tr>
+  <tr>
+    <th colspan="2">Descricao</th>
+    <th colspan="2">Total Anterior</th>
+    <th colspan="2">01/07 a 31/12</th>
+    <th colspan="2">01/01 a 30/06</th>
+    <th colspan="2">Total</th>
+    <th colspan="2">Pontuacao</th>
+    <th colspan="2">Valor</th>
+  </tr>
+     
+
+
+
+
+
+    <%  ano_anterior = Trabalhado.find(@ficha.trabalhado_anterior) %>
+
+          <% $exibe_ano_anterior_dias_trab = ano_anterior.dias_trab %>
+          <%$exibe_ano_anterior_dias_efet = ano_anterior.dias_efetivos%>
+          <%$exibe_ano_anterior_dias_rede = ano_anterior.dias_rede%>
+          <%$exibe_ano_anterior_dias_unid = ano_anterior.dias_unidade%>
+
+    <%  ano_atual = Trabalhado.find(@ficha.trabalhado_atual) %>
+
+        <%  $exibe_ano_atual_dias_trab = ano_atual.dias_trab%>
+        <%  $exibe_ano_atual_dias_efet = ano_atual.dias_efetivos%>
+        <%  $exibe_ano_atual_dias_rede = ano_atual.dias_rede%>
+        <%  $exibe_ano_atual_dias_unid = ano_atual.dias_unidade%>
+
+    <%pontuacao = AcumTrab.find(@ficha.acum_trab)%>
+      <%if @ficha.created_at.strftime("%Y").to_i < 2011 %>
+        <%$exibe_pont_trab = pontuacao.pont_base_trab / 2%>
+      <%else%>
+        <%$exibe_pont_trab = pontuacao.pont_base_trab%>
+      <%end%>
+        <%$exibe_pont_efet = pontuacao.pont_base_efet%>
+        <%$exibe_pont_rede = pontuacao.pont_base_rede%>
+        <%$exibe_pont_unid = pontuacao.pont_base_unid%>
+
+
+  <tr>
+      <td colspan="2"> 1 - Total de dias trabalhados </td>
+    <td colspan="2" align="center"><%=  @ficha.tot_acum_ant_trab %></td>
+    <td colspan="2" align="center"><%= $exibe_ano_anterior_dias_trab %></td>
+    <td colspan="2" align="center"><%= $exibe_ano_atual_dias_trab %></td>
+    <%if !(@ficha.tot_geral_trab).nil? then %>
+      <td colspan="2" align="center"><%= format("%.0f",@ficha.tot_geral_trab)%></td>
+    <%else%>
+      <td colspan="2" align="center"><%= format("%.0f",0)%></td>
+    <%end%>
+    <td colspan="2" align="center"><%= $exibe_pont_trab %></td>
+    <%if !(@ficha.valor_trab).nil? then %>
+      <td colspan="2" align="right"><%= format("%.3f",@ficha.valor_trab) %></td>
+    <%else%>
+      <%$exibe_tot_trab=0%>
+      <td colspan="2" align="right"><%= format("%.3f",0) %></td>
+    <%end%>
+  </tr>
+  <tr>
+    <td colspan="2">2 - Total de dias de efetivo exercicio </td>
+    <td colspan="2" align="center"><%=@ficha.tot_acum_ant_efet%></td>
+    <td colspan="2" align="center"><%= $exibe_ano_anterior_dias_efet %></td>
+    <td colspan="2" align="center"><%= $exibe_ano_atual_dias_efet %></td>
+    <%if !(@ficha.tot_geral_efet).nil? then %>
+      <td colspan="2" align="center"><%= format("%.0f",@ficha.tot_geral_efet) %></td>
+    <%else%>
+      <%$exibe_tot_geral_efet=0%>
+    <td colspan="2" align="center"><%= format("%.0f",0) %></td>
+    <%end%>
+    <td colspan="2" align="center"><%= $exibe_pont_efet %></td>
+    <% if !(@ficha.valor_efet).nil? then %>
+      <td colspan="2" align="right"><%= format("%.3f",@ficha.valor_efet) %></td>
+    <%else%>
+      <%$exibe_tot_efet=0%>
+      <td colspan="2" align="right"><%= format("%.3f",0) %></td>
+    <%end%>
+
+  </tr>
+  <tr>
+    <td colspan="2">3 - Total de dias na rede </td>
+    <td colspan="2" align="center"><%=@ficha.tot_acum_ant_rede%></td>
+    <td colspan="2" align="center"><%= $exibe_ano_anterior_dias_rede %></td>
+    <td colspan="2" align="center"><%= $exibe_ano_atual_dias_rede %></td>
+    <%if !(@ficha.tot_geral_rede).nil? then%>
+      <td colspan="2" align="center"><%= format("%.0f",@ficha.tot_geral_rede) %></td>
+    <%else%>
+      <%$exibe_tot_geral_rede=0%>
+      <td colspan="2" align="center"><%= format("%.0f",0) %></td>
+    <%end%>
+    <td colspan="2" align="center"><%= $exibe_pont_rede %></td>
+    <%if !(@ficha.valor_rede).nil? then %>
+      <td colspan="2" align="right"><%= format("%.3f",@ficha.valor_rede) %></td>
+    <%else%>
+      <%$exibe_tot_rede=0%>
+      <td colspan="2" align="right"><%= format("%.3f",0) %></td>
+    <%end%>
+  </tr>
+  <tr>
+        <td colspan="2">4 - Total de dias na unidade </td>
+    <td colspan="2" align="center"><%=@ficha.tot_acum_ant_unid%></td>
+    <td colspan="2" align="center"><%= $exibe_ano_anterior_dias_unid %></td>
+    <td colspan="2" align="center"><%= $exibe_ano_atual_dias_unid %></td>
+    <%if !(@ficha.tot_geral_unid).nil? then%>
+      <td colspan="2" align="center"><%= format("%.0f",@ficha.tot_geral_unid) %></td>
+    <%else%>
+      <%$exibe_tot_geral_unid=0%>
+      <td colspan="2" align="center"><%= format("%.0f",0) %></td>
+    <%end%>
+    <td colspan="2" align="center"><%= $exibe_pont_unid %></td>
+    <%if !(@ficha.valor_unid).nil? then%>
+      <td colspan="2" align="right"><%= format("%.3f",@ficha.valor_unid) %></td>
+    <%else%>
+      <%$exibe_tot_unid=0%>
+      <td colspan="2" align="right"><%= format("%.3f",0) %></td>
+    <%end%>
+
+  </tr>
+  <tr>
+    <th colspan="12" align="left">
+      <b>TOTAL TEMPO DE SERVIÇO</b>
+    </th>
+    <th colspan="2">
+      <%= @ficha.total_trabalhado %>
+    </th>
+  </tr>
+  <tr>
+
+      <th colspan="14">Titulos de Contagem Anual</th>
+
+  </tr>
+  <tr>
+    <th colspan="3">
+      Titulo
+    </th>
+    <th colspan="3">
+      Descricao
+    </th>
+    <th colspan="2">
+      Valor Titulo
+    </th>
+    <th colspan="2">
+      Quantidade
+    </th>
+    <th colspan="2">
+      Valor Referencia
+    </th>
+    <th colspan="2">
+      Pontuacao Obtida
+    </th>
+  </tr>
+  <%  @tp1 = TituloProfessor.find_by_sql("SELECT * FROM titulo_professors tp inner join titulacaos t on tp.titulo_id=t.id where tp.professor_id=" + (@ficha.professor.id).to_s + " and t.tipo = 'ANUAL' and tp.ano_letivo = " + @ficha.ano_letivo.to_s) %>
+  <% @tp1.each do |tp1| %>
+  <% if !(tp1.nil?) %>
+    <tr>
+      <td colspan="3" align="left">
+        <%= $numero %> -
+        <%= Titulacao.find_by_id(tp1).descricao %>
+      </td>
+      <td colspan="3" align="center">
+        <%= truncate(tp1.obs,:length => 20,:omission => "...") %>
+      </td>
+      <td colspan="2" align="center">        
+          <%= tp1.valor %>
+      </td>
+      <td colspan="2" align="center">
+        <%= tp1.quantidade %>
+      </td>
+      <td colspan="2" align="center">
+        <%= tp1.referencia%>
+      </td>
+      <td colspan="2" align="right">
+          <%= format("%.3f",tp1.pontuacao_titulo) %>
+          <%if @ficha.ano_letivo == ($data.to_i - 1)%>
+            <% $subtot_um = $subtot_um + (tp1.pontuacao_titulo).to_f %>
+          <%end%>
+      </td>
+        <%if tp1.status == true then %>
+          
+          <% $subtot_um = $subtot_um + (tp1.pontuacao_titulo).to_f %>
+        <%else%>
+          <% $subtot_um = $subtot_um + 0 %>
+        <%end%>
+
+    </tr>
+    <%$numero= $numero +1%>
+  <%end%>
+  <%end%>
+
+  <tr>
+    <th colspan="12" align="left">SUB-TOTAL  (Titulacao Anual)</th>
+    <th  align="right" colspan="2">
+      <%= format("%.3f",$subtot_um) %>
+    </th>
+  </tr>
+  <tr>
+       <th colspan="3">
+        Titulo
+       </th>
+       <th colspan="3">
+        Descricao
+       </th>
+
+       <th colspan="2">
+        Valor Titulo
+       </th>
+       <th colspan="2">
+        Quantidade
+       </th>
+       <th colspan="2">
+        Valor Referencia
+       </th>
+       <th colspan="2">
+        Pontuacao Obtida
+       </th>
+
+  </tr>
+    <% @tp = TituloProfessor.find_by_sql("SELECT * FROM titulo_professors tp inner join titulacaos t on tp.titulo_id=t.id where tp.professor_id=" + (@ficha.professor.id).to_s + " and t.tipo = 'PERMANENTE'")%>
+    <% @tp.each do |tp| %>
+      <tr>
+        <td colspan="3" align="left">
+          <%= $numero %> -
+          <%= Titulacao.find_by_id(tp.titulo_id).descricao %>
+        </td>
+        <td colspan="3" align="center">
+          <%= truncate(tp.obs,:length => 30,:omission => "...")%>
+        </td>
+        <td colspan="2" align="center">
+          <%if @ficha.created_at.strftime("%Y").to_i < 2011 && tp.titulo_id == 1 %>
+            <%= tp.valor / 2 %>
+          <%else%>
+            <%= tp.valor %>
+          <%end%>
+
+        </td>
+        <td colspan="2" align="center">
+          <%= tp.quantidade %>
+        </td>
+        <td colspan="2" align="center">
+          <%= tp.referencia %>
+        </td>
+        <td colspan="2" align="right">
+        <%if @ficha.created_at.strftime("%Y").to_i < 2011 && tp.titulo_id == 1  %>
+          <%= format("%.3f",(tp.pontuacao_titulo - 1 )) %>
+        <%else%>
+          <%= format("%.3f",tp.pontuacao_titulo) %>
+        <%end%>
+        <%if @ficha.created_at.strftime("%Y").to_i < 2011 && tp.titulo_id == 1%>
+          <% $subtot_perm = $subtot_perm + (tp.pontuacao_titulo - 1).to_f %>
+        <%else%>
+          <% $subtot_perm = $subtot_perm + (tp.pontuacao_titulo).to_f %>
+        <%end%>
+        </td>
+      </tr>
+      <%$numero= $numero +1%>
+
+    <%end%>
+
+  <tr>
+    <th colspan="12" align="left">SUB-TOTAL (Titulacao Permanente)</th>
+      <th align="right" colspan="2">
+        <%= format("%.3f",$subtot_perm) %>
+      </th>
+  </tr>
+      <% $subtotal_titulos = $subtot_um + $subtot_cinco + $subtot_perm %>
+  <tr>
+    <th colspan="12" align="left">TOTAL TITULOS</th>
+    <th align="right" colspan="2">
+        <%= @ficha.total_titulacao %>
+     </th>
+  </tr>
+  <tr>
+      <th colspan="12" align="left">
+        TOTAL GERAL
+      </th>
+      <th colspan="2" align="right">
+        <%@doisanos = Professor.insercao_completa(@ficha.professor) %>
+        <% if @doisanos.count >= 2 then %>
+          <%= @ficha.total_geral %>
+        <%else%>
+          <% render :text => 'Indicacoes sobre procedimento de calculo nao foi seguido. Favor entrar em contato com A '%>
+        <%end%>
+      </th>
+  </tr>
+</table>
+  <% $anoA = Time.current-1.years %>
+  <br/>
+  <br/>
+  <br/>
+  <table  width="87%" align="center">
+    <tr>
+      <td width="35%">Data Base: 01/11/<%= $anoA.strftime("%Y")%>           à 30/06/<%= Time.current.strftime("%Y") %><br/><br/></td>
+      <td width="35%">Professor:_______________<br/><br/></td>
+      <td width="50%">Diretor Unidade:____________<br/><br/></td>
+    </tr>
+    <tr>
+      <td width="35%">Data Assinatura: ___/___/___<br/><br/></td>
+      <td width="35%">Visto da Comissão:_____________<br/><br/></td>
+      <td width="50%">Responsável Digitação:________________<br/><br/></td>
+    </tr>
+    <tr>
+      <td><%= link_to "Voltar", :back, :class => "botao3d" %></td>
+    </tr>
+  </table>
+<%end%>
+</div>

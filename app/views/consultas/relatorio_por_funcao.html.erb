@@ -1,0 +1,68 @@
+<div id="conteudo">
+<style media="print">
+.botao {
+display: none;
+}
+</style>
+<br/>
+<br/>
+<hr/>
+
+<div class="botao">
+    <table width="100%">
+      <tr>
+        <% form_for @search do |f| %>
+          <tr>
+            <td align="right">
+              <%= f.label :funcao_equals, "Função" %>
+              <%= f.select :funcao_equals, options_for_select(CARGO), :include_blank => true%>
+            </td>
+            <td align="center" colspan="2">
+              <%= f.submit "Buscar" %>
+            </td>
+          </tr>
+        <% end %>
+      </tr>
+    </table>
+</div>
+
+<hr/>
+<br/>
+<br/>
+<div id="contador"></div>
+<div class="botao">
+  <input type="Button" Value="Imprimir" onclick="Imprimir()">
+</div>
+<table border ="1" width="100%"  class="tabelas">
+    <tr style="font-size:12px">
+     <br/>
+
+        <th width="15%"><%= sortable(params[:search],"matricula") %></th>
+        <th width="70%"><%= sortable(params[:search],"nome") %></th>
+        <th width="15%"><%= sortable(params[:search],"pontuacao_final","Pontuação Final") %></th>
+    </tr>
+    <%if  @relatorio_funcao == "Selecione uma função"%>
+      <center><b><%= @relatorio_funcao %></b></center>
+      <br/>
+    <%else%>
+        <h3 align="center">Professores com cargo de:  <%= params[:search][:funcao_equals] %></h3>
+      <% for funcao in @relatorio_funcao %>
+        <tr>
+          <td><center><%=h funcao.matricula %></center></td>
+          <td><center><%=h funcao.nome %></center></td>
+          <td><center><%=h funcao.pontuacao_final %></center></td>
+        </tr>
+        <tr>
+        </tr>
+    <% end %>
+<%= will_paginate @relatorio_funcao %>
+<%end%>
+
+</table>
+<br/>
+
+<div class="botao">
+  <input type="Button" Value="Imprimir" onclick="Imprimir()">
+</div>
+</div>
+

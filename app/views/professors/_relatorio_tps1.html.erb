@@ -1,0 +1,244 @@
+<table width="100%" frame="box" rules="all">
+<tr><th width="100%" colspan="5" align="center"><hr/>Contagem de Tempo de Serviço<hr/></th></tr>
+</table>
+
+
+<table border="1" width="100%" frame="box" rules="all">
+<tr>
+    <th>Ano</th>
+    <th>Dias</th>
+    <th>Unidade</th>
+    <th>Outro Emprego</th>
+    <th>Faltas Abonadas</th>
+    <th>Faltas Atestados</th>
+    <th>Faltas Justif.</th>
+    <th>Faltas Injust.</th>
+    <th>Licenças Saúde</th>
+    <th>Afast. / não remun.</th>
+    <th>Dias Trabalhados</th>
+    <th>Dias Efetivos</th>
+    <th>Dias Rede</th>
+    <th>Dias Unidade</th>
+  </tr>
+
+
+
+
+  <tr>
+    <td>
+      <center> <%= @trabalho.ano %><br/></center>
+    </td>
+     <td>
+      <center><%= @trabalho.dias%><br/></center>
+     </td>
+     <td>
+        <center><%= @trabalho.unidade %><br/></center>
+     </td>
+     <td>
+        <center><%= @trabalho.outro_trab %> <br/></center>
+     </td>
+
+     <td>
+        <center><%= @trabalho.f_abonada %><br/></center>
+     </td>
+     <td>
+        <center><%= @trabalho.atestado %><br/></center>
+     <td>
+        <center><%= @trabalho.f_justif %><br/></center>
+     </td>
+     <td>
+        <center><%= @trabalho.f_injustif %><br/></center>
+    </td>
+    <td>
+        <center><%= @trabalho.lic_saude %><br/></center>
+    </td>
+    <td width ="7%">
+        <center><%= @trabalho.afastamento %></center>
+    </td>
+    <td width ="7%">
+      <center><%= $st_dt = @trabalho.dias_trab %></center>
+      
+    </td>
+    <td width ="7%">
+      <center><%= $st_de = @trabalho.dias_efetivos %></center>
+      
+    </td>
+    <td width ="7%">
+      <center><%= $st_dr = @trabalho.dias_rede %></center>
+      
+
+    </td>
+    <td width ="7%">
+      <center><%= $st_du = @trabalho.dias_unidade %></center>
+      
+    </td>
+  </tr>
+
+    <tr>
+      <td colspan="10">
+        <b>Sub-Total (Em Dias)</b>
+      </td>
+      <td align="center"><%= $total_dt_ano = Professor.sub_total_dt.to_s %></td>
+      <td align="center"><%= $total_de_ano = Professor.sub_total_de.to_s %></td>
+      <td align="center"><%= $total_dr_ano = Professor.sub_total_dr.to_s %></td>
+      <td align="center"><%= $total_du_ano = Professor.sub_total_du.to_s %></td>
+    </tr>
+
+
+<table border="1" width="100%" frame="box" rules="groups">
+  <tr>
+    <td align="center" width="100%">
+      <hr>
+      <b>Pontuacao Tempo de Serviço</b>
+      <hr>
+      </td>
+  </tr>
+</table>
+<table border="1" frame="box" rules="all" width="100%">
+  <tr>
+    <th width="25%" >Descrição</th>
+    <th width="10%" >Total Anterior</th>
+
+    <th width="10%" >01/07 à 31/12</th>
+    <th width="10%" >01/01 à 30/06</th>
+    <th width="10%" >Total</th>
+    <th width="10%" >Pontuação</th>
+    <th width="10%" colspan="2" >Valor</th>
+  </tr>
+  <tr>
+
+
+    <% @lista_dados = AcumTrab.find(:all, :conditions => ['professor_id = ?',@trabalho.professor_id ]) %>
+    <%  for ld in @lista_dados %>
+      <% $exibe_dias_ant_trab_ano = ld.tot_acum_ant_trab %>
+      <% $exibe_dias_ant_efet_ano = ld.tot_acum_ant_efet %>
+      <% $exibe_dias_ant_rede_ano = ld.tot_acum_ant_rede %>
+      <% $exibe_dias_ant_unid_ano = ld.tot_acum_ant_unid %>
+
+
+      <% $exibe_dias_trab_ano = ld.tot_acum_trab %>
+      <% $exibe_dias_efet_ano = ld.tot_acum_efet %>
+      <% $exibe_dias_rede_ano = ld.tot_acum_rede %>
+      <% $exibe_dias_unid_ano = ld.tot_acum_unid %>
+      <% $exibe_tot_trab = ld.valor_trab %>
+      <% $exibe_tot_efet = ld.valor_efet %>
+      <% $exibe_tot_rede = ld.valor_rede %>
+      <% $exibe_tot_unid = ld.valor_unid %>
+      <% $exibe_tot_geral_trab = ld.tot_geral_trab %>
+      <% $exibe_tot_geral_efet = ld.tot_geral_efet %>
+      <% $exibe_tot_geral_rede = ld.tot_geral_rede %>
+      <% $exibe_tot_geral_unid = ld.tot_geral_unid %>
+
+    <%end%>
+
+    <%  @dias_trab_anterior = Trabalhado.find_by_sql("Select * from trabalhados where ano = " + $data2.to_s + " and professor_id = " + @trabalho.professor_id.to_s + " and ano_letivo = " + $data.to_s) %>
+    <%  for ano_anterior in @dias_trab_anterior %>
+          <% $exibe_ano_anterior_dias_trab = ano_anterior.dias_trab %>
+          <%$exibe_ano_anterior_dias_efet = ano_anterior.dias_efetivos%>
+          <%$exibe_ano_anterior_dias_rede = ano_anterior.dias_rede%>
+          <%$exibe_ano_anterior_dias_unid = ano_anterior.dias_unidade%>
+       <%end%>
+<!--      <%@dias_trab_atual = Trabalhado.find(:all, :conditions => ['ano = ' + $data.to_s + ' and professor_id= ' + @trabalho.professor_id.to_s])%>!-->
+          <%  @dias_trab_atual = Trabalhado.find_by_sql("Select * from trabalhados where ano = " + $data.to_s + " and professor_id = " + @trabalho.professor_id.to_s + " and ano_letivo = " + $data.to_s) %>
+       <% for ano_atual in @dias_trab_atual%>
+        <%  $exibe_ano_atual_dias_trab = ano_atual.dias_trab%>
+        <%  $exibe_ano_atual_dias_efet = ano_atual.dias_efetivos%>
+        <%  $exibe_ano_atual_dias_rede = ano_atual.dias_rede%>
+        <%  $exibe_ano_atual_dias_unid = ano_atual.dias_unidade%>
+       <%end%>
+        <%@acum_pont = AcumTrab.find(:all, :conditions => ['professor_id= ?',@trabalho.professor_id ])%>
+       <%for pontuacao in @acum_pont%>
+        <%$exibe_pont_trab = pontuacao.pont_base_trab%>
+        <%$exibe_pont_efet = pontuacao.pont_base_efet%>
+        <%$exibe_pont_rede = pontuacao.pont_base_rede%>
+        <%$exibe_pont_unid = pontuacao.pont_base_unid%>
+       <%end%>
+
+<td> 1 - Total de dias trabalhados </td>
+    <td align="center"><%=$exibe_dias_ant_trab_ano%></td>
+    <td align="center"><%= $exibe_ano_anterior_dias_trab %></td>
+    <td align="center"><%= $exibe_ano_atual_dias_trab %></td>
+    <%if !($exibe_tot_geral_trab).nil? then %>
+      <td align="center"><%= format("%.0f",$exibe_tot_geral_trab)%></td>
+    <%else%>
+      <td align="center"><%= format("%.0f",0)%></td>
+    <%end%>
+    <td align="center"><%= $exibe_pont_trab %></td>
+    <%if !($exibe_tot_trab).nil? then %>
+    <td align="right"><%= format("%.3f",$exibe_tot_trab) %></td>
+    <%else%>
+    <%$exibe_tot_trab=0%>
+    <td align="right"><%= format("%.3f",0) %></td>
+    <%end%>
+
+  </tr>
+  <tr>
+    <td>2 - Total de dias de efetivo exercício </td>
+    <td align="center"><%=$exibe_dias_ant_efet_ano%></td>
+    <td align="center"><%= $exibe_ano_anterior_dias_efet %></td>
+    <td align="center"><%= $exibe_ano_atual_dias_efet %></td>
+    <%if !($exibe_tot_geral_efet).nil? then %>
+    <td align="center"><%= format("%.0f",$exibe_tot_geral_efet) %></td>
+    <%else%>
+    <%$exibe_tot_geral_efet=0%>
+    <td align="center"><%= format("%.0f",0) %></td>
+    <%end%>
+    <td align="center"><%= $exibe_pont_efet %></td>
+    <% if !($exibe_tot_efet).nil? then %>
+    <td align="right"><%= format("%.3f",$exibe_tot_efet) %></td>
+    <%else%>
+    <%$exibe_tot_efet=0%>
+    <td align="right"><%= format("%.3f",0) %></td>
+    <%end%>
+  </tr>
+  <tr>
+    <td>3 - Total de dias na rede </td>
+    <td align="center"><%=$exibe_dias_ant_rede_ano%></td>
+    <td align="center"><%= $exibe_ano_anterior_dias_rede %></td>
+    <td align="center"><%= $exibe_ano_atual_dias_rede %></td>
+    <%if !($exibe_tot_geral_rede).nil? then%>
+    <td align="center"><%= format("%.0f",$exibe_tot_geral_rede) %></td>
+    <%else%>
+    <%$exibe_tot_geral_rede=0%>
+    <td align="center"><%= format("%.0f",0) %></td>
+    <%end%>
+    <td align="center"><%= $exibe_pont_rede %></td>
+    <%if !($exibe_tot_rede).nil? then %>
+    <td align="right"><%= format("%.3f",$exibe_tot_rede) %></td>
+    <%else%>
+    <%$exibe_tot_rede=0%>
+    <td align="right"><%= format("%.3f",0) %></td>
+    <%end%>
+
+
+  </tr>
+  <tr>
+    <td>4 - Total de dias na unidade </td>
+    <td align="center"><%=$exibe_dias_ant_unid_ano%></td>
+    <td align="center"><%= $exibe_ano_anterior_dias_unid %></td>
+    <td align="center"><%= $exibe_ano_atual_dias_unid %></td>
+    <%if !($exibe_tot_geral_unid).nil? then%>
+    <td align="center"><%= format("%.0f",$exibe_tot_geral_unid) %></td>
+    <%else%>
+    <%$exibe_tot_geral_unid=0%>
+    <td align="center"><%= format("%.0f",0) %></td>
+    <%end%>
+    <td align="center"><%= $exibe_pont_unid %></td>
+    <%if !($exibe_tot_unid).nil? then%>
+    <td align="right"><%= format("%.3f",$exibe_tot_unid) %></td>
+    <%else%>
+    <%$exibe_tot_unid=0%>
+    <td align="right"><%= format("%.3f",0) %></td>
+    <%end%>
+    <% $subtotal_dias = format("%.3f",($exibe_tot_trab + $exibe_tot_efet + $exibe_tot_rede + $exibe_tot_unid).to_f) %>
+  </tr>
+  <tr>
+    <th align="left" width="80%" colspan="6">
+    TOTAL TEMPO DE SERVIÇO
+    </th>
+    <th align="right" width="20%" colspan="2">
+      <%= $subtotal_dias %>
+    </th>
+  </tr>
+</table>
+</table>

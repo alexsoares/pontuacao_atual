@@ -1,0 +1,59 @@
+<div id="conteudo">
+<p>
+
+<fieldset>
+ <legend><font size=4>Alteração de Títulos Cadastrados</font></legend>
+    <table width="100%" frame="box" rules="all">
+   <tr><th width="100%" colspan="6" align="center"><hr/>Títulos Permanentes<hr/></th></tr>
+     <tr>
+       <th>
+        Título
+       </th>
+       <th>
+        Quantidade
+       </th>
+       <th>
+        Valor do Título
+       </th>
+       <th>
+        Pontuação Obtida
+       </th>
+       <th>
+         Data do Título
+       </th>
+     </tr>
+
+    <%for tp in @titulo_busca%>
+
+      <tr>
+        <td align="center">
+          <%= Titulacao.find_by_id(tp.titulo_id).descricao %>
+        </td>
+      <td align="center">
+        <%= tp.quantidade %>
+      </td>
+      <td align="center">
+        <%= tp.valor %>
+      </td>
+      <td align="center">
+        <%= tp.pontuacao_titulo %>
+        <% $subtot_perm = $subtot_perm + (tp.pontuacao_titulo).to_f %>
+      </td>
+      <td align="center">
+        <%= tp.dt_titulo.strftime("%d/%m/%Y") %>
+      </td>
+
+      </tr>
+    <tr>
+      <td><%= link_to '|Apagar|', tp, :confirm => 'Confirma?', :method => :delete %></td><td></td>
+    </tr>
+
+  <%end%>
+
+</table>
+<br />
+<%= will_paginate @titulo_busca %>
+</fieldset>
+
+</div>
+

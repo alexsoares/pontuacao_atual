@@ -1,0 +1,26 @@
+<h1>Listing correcaos</h1>
+
+<table>
+  <tr>
+    <th>Professor</th>
+    <th>Acum trab</th>
+    <th>Valor ant</th>
+    <th>Valor</th>
+  </tr>
+
+<% @correcaos.each do |correcao| %>
+  <tr>
+    <td><%=h correcao.professor %></td>
+    <td><%=h correcao.acum_trab %></td>
+    <td><%=h correcao.valor_ant %></td>
+    <td><%=h correcao.valor %></td>
+    <td><%= link_to 'Show', correcao %></td>
+    <td><%= link_to 'Edit', edit_correcao_path(correcao) %></td>
+    <td><%= link_to 'Destroy', correcao, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New correcao', new_correcao_path %>

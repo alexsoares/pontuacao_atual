@@ -1,0 +1,30 @@
+<br/>
+<br/>
+<% form_for(@configuration) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    Configuração para o usuário:
+    <b><%= current_user.login %></b>
+  </p>
+  <p>
+    <%= f.label :data, "Ano do Sistema" %>:
+    <%= f.date_select(:data, :order => [:year, :month, :day], :discard_day => true, :discard_month => true) %>
+  </p>
+  <p>
+    <fieldset>
+    <p><%= f.check_box(:check_inicio) %> Configurar Data Letiva?</p>
+    <p>
+      <%= f.label :begin_periods, "Data de Inicio da contagem" %>:
+      <%= f.text_field :begin_period, :id => "begin_period", :size =>10 %>
+    </p>
+    <p>
+      <%= f.label :end_periods, "Data de Inicio da contagem" %>:
+      <%= f.text_field :end_periods, :id => "end_periods",:size =>10 %>
+    </p>
+    </fieldset>
+  </p>
+  <p>
+    <%= f.submit 'Salvar' %>
+  </p>
+<% end %>

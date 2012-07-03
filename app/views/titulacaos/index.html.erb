@@ -1,0 +1,78 @@
+<script Language="JavaScript">
+function Imprimir(){
+window.print();
+}
+</script>
+<style media="print">
+.botao {
+display: none;
+}
+</style>
+<div id="conteudo">
+  <div class="botao">
+    <table width="100%">
+      <tr>
+        <% form_tag titulacaos_path, :method => 'get' do %>
+            <p>
+             <tr>
+                <td align="right"> Titulo:
+                 <%= text_field_tag :search, params[:search] %>
+                 <%= submit_tag "Filtrar", :name => nil %></td>
+             </tr>
+           </p>
+        <% end %>
+       </tr>
+    </table>
+  </div>
+<br/>
+<div class="botao">
+  <input type="Button" Value="Imprimir" onclick="Imprimir()">
+   <br/>
+  <br/>
+</div>
+  <fieldset>
+   <legend><font size=4>Títulos</font></legend>
+
+<table border ="1" width="100%" class="tabelas">
+  <tr>
+    <th colspan="14" class="titulo">
+      <h1 align="center">Relatório Títulos</h1>
+    </th>
+  </tr>
+  <tr>
+    <th colspan="3">Descrição</th>
+    <th colspan="3">Validade</th>
+    <th colspan="2">Valor</th>
+    <th colspan="3">Referência</th>
+    <th colspan="3"></th>
+  </tr>
+
+<% @titulacaos.each do |titulacao| %>
+
+  <tr>
+    <td colspan="3" align="center"><%= titulacao.descricao %></td>
+    <td colspan="3" align="center"><%= titulacao.tipo %></td>
+    <td colspan="2" align="center"><%= titulacao.valor %></td>
+    <td colspan="3" align="center"><%= titulacao.referencia %></td>
+    
+      <div class="botao">
+        <% if current_user.has_role?('direcao') or current_user.has_role?('supervisao') or current_user.has_role?('admin') or current_user.has_role?('planejamento') %>
+           <td colspan="1" align="CENTER"><div class ="botao3d"><%= link_to 'Alterar', edit_titulacao_path(titulacao) %></div></td>
+           <td colspan="1" align="CENTER"><div class ="botao3d"><%= link_to 'Apagar', titulacao, :confirm => 'Confirma deleção?', :method => :delete %></div></td>
+        <%end%>
+      </div>
+    
+
+ </tr>
+
+<% end %>
+</table>
+
+</fieldset>
+<br />
+
+<div class="botao">
+  <input type="Button" Value="Imprimir" onclick="Imprimir()">
+</div>
+
+</div>

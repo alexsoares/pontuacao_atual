@@ -1,0 +1,139 @@
+<br/>
+<div id="conteudo">   
+   <fieldset>
+      <legend><font size=5>Alteração do Cadastro de Professores</font></legend>
+
+      <% form_for(@professor) do |f| %>
+       <%= f.error_messages %>
+    <table>
+     <tr>
+        <td>Matrícula:</td>
+     <%  if current_user.has_role?('admin') or current_user.has_role?('supervisao') or current_user.has_role?('planejamento') then%>
+        <td><%= f.text_field :matricula, :size => 10 %></td>
+     <%else%>
+        <td><%= @professor.matricula %></td>
+     <%end%>
+     </tr>
+     <tr>
+        <td><%= f.label :nome, 'Nome:' %></td>
+        <td><%= f.text_field :nome, :size => 32 %></td>
+     </tr>
+     <tr>
+     <%  if current_user.has_role?('admin') or current_user.has_role?('supervisao') or current_user.has_role?('planejamento') then%>
+        <td> <%= f.label :dt_ingresso, 'Data Ingresso:' %></td>
+        <td><%= @professor.dt_ingresso.strftime("%d-%m-%Y") %> ==> <%= datepicker_tag(:professor, :dt_ingresso,{ :size => 10},{:dateFormat => "'dd-mm-yy'", :changeYear => true, :changeMonth => true,:yearRange => "'1930:+0'", :buttonImage => "'/stylesheets/images/datepicker.gif'",:showOn => "'both'"}) %></td>
+     <%else%>
+        <td>Data de Ingresso:</td>
+        <td><%= @professor.dt_ingresso %></td>
+     <%end%>
+    </tr>
+      <tr>
+     <%  if current_user.has_role?('admin') or current_user.has_role?('supervisao') or current_user.has_role?('planejamento') then%>
+        <td><%= f.label :sede_id, 'Sede: ' %></td>
+        <td><%= f.collection_select :sede_id, @unidades, :id, :nome, :include_blank => ' -- Selecione -- ' %></td>
+     <%else%>
+        <td>Sede:</td>
+        <td><%= Unidade.find(@professor.sede_id).nome %></td>
+     <%end%>
+      </tr>
+     <tr>
+        <td><%= f.label :endres, 'Endereço Res:' %></td>
+        <td><%= f.text_field :endres, :size =>21 %></td>
+     </tr>
+     <tr>
+        <td><%= f.label :num, 'Número:' %></td>
+        <td><%= f.text_field :num, :size => 2 %></td>
+     </tr>
+     <tr>
+        <td><%= f.label :complemento, 'Complemento:' %></td>
+        <td><%= f.text_field :complemento, :size => 20 %></td>
+     </tr>
+     <tr>
+        <td><%= f.label :bairro, 'Bairro:' %></td>
+        <td><%= f.text_field :bairro, :size => 15 %></td>
+     </tr>
+     <tr>
+        <td><%= f.label :cidade, 'Cidade:' %></td>
+        <td><%= f.text_field :cidade, :size => 15 %></td>
+     </tr>
+   <tr>
+        <td><%= f.label :n_filhos, 'No. de Filhos:' %></td>
+        <td><%= f.text_field :n_filhos, :size => 03 %></td>
+   </tr>
+    <tr>
+        <td><%= f.label :RG, 'No. RG:' %></td>
+        <td><%= f.text_field :RG, :size => 12 %></td>
+    </tr>
+    <tr>
+        <td><%= f.label :CPF, 'No. CPF:' %></td>
+        <td><%= f.text_field :CPF, :size => 12 %></td>
+    </tr>
+    <tr>
+        <td><%= f.label :INEP, 'No. INEP:' %></td>
+        <td><%= f.text_field :INEP, :size => 12 %></td>
+    </tr>
+    <tr>
+        <td><%= f.label :RD, 'No. RD:' %></td>
+        <td><%= f.text_field :RD, :size => 12 %></td>
+    </tr>
+    <tr>
+        <td><%= f.label :dt_nasc, 'Data de Nascimento:' %></td>
+        <td><%= @professor.dt_nasc.strftime("%d-%m-%Y") %> ==>
+          <%= datepicker_tag(:professor, :dt_nasc,{ :size => 10},{:dateFormat => "'dd-mm-yy'", :changeYear => true, :changeMonth => true, :buttonImage => "'/stylesheets/images/datepicker.gif'",:yearRange => "'1920:+0'",:showOn => "'both'"}) %></td>
+     </tr>
+     <tr>
+        <td><%= f.label :jornada_sem, 'Jornada Semanal:' %></td>
+        <td><%= f.text_field :jornada_sem, :size =>10 %></td>
+     </tr>
+     <tr>
+        <td><%= f.label :telefone, 'Telefone Residencial:' %></td>
+        <td><%= f.text_field :telefone, :size => 15 %></td>
+     </tr>
+     <tr>
+       <td><%= f.label :entrada_concurso, "Formação para o concurso:" %></td>
+       <td>
+         <b><%= @professor.entrada_concurso %></b>
+          <%  if current_user.has_role?('admin') or current_user.has_role?('supervisao') or current_user.has_role?('planejamento') then%>
+            <%= f.select :entrada_concurso, options_for_select(Professor::Curso), :include_blank => true%>
+          <%end%>
+       </td>
+     </tr>
+     <tr>
+        <td><%= f.label :funcao, 'Cargo (concurso):' %></td>
+        <%  if current_user.has_role?('admin') or current_user.has_role?('supervisao') or current_user.has_role?('planejamento') then%>
+          <%@cargo = Professor.find_by_sql("Select distinct(funcao) from professors")%>
+            <td><%= f.collection_select :funcao, @cargo, :funcao, :funcao, :include_blak => true %></td>
+        <%else%>
+          <td><%= @professor.funcao %></td>
+        <%end%>
+        
+     </tr>
+     <tr>
+        <td><%= f.label :obs, 'Observações:' %></td>
+        <td><%= f.text_field :obs, :size => 45 %></td>
+     </tr>
+    </table>
+ <fieldset>
+      <%= f.submit "Atualizar" %>
+ <% end %>
+ </fieldset>
+ </fieldset>
+
+ <div class="botao3d"><%= link_to 'Exibir', @professor %></div>
+ <div class="botao3d"><%= link_to 'Voltar', professors_path %></div>
+</div>
+
+<div id = "instrucoes">
+      <div id="mensagem">
+        <br/>
+        <u>OBSERVAÇÕES:</u> <br /> <br />
+          1) UTILIZAR  SOMENTE LETRAS MAIÚSCULAS<br /><br />
+          2) DIGITAR SEMPRE NOMES E DADOS COMPLETOS <br /><br />
+          3) NÃO UTILIZAR ACENTUAÇÃO, TIL E CEDILHA<br /><br />
+          4) NÃO UTILIZAR ABREVIAÇÕES<br /><br />
+          5) <font color="red" size="6">*</font> PREENCHIMENTO OBRIGATÓRIO<br /><br />
+          6) INEP , RD E FONE SOMENTE OS NÚMEROS  <br /><br />
+          7) RG e CPF UTILIZE PONTOS E TRAÇOS <br />
+          exemplo: xx.xxx.xxx-xx
+     </div>
+</div>

@@ -1,0 +1,73 @@
+<div id="prof_pontua">
+<div id="conteudo">
+<br/>
+ <fieldset>
+    <legend><font size=5> Professor Cadastrado</font></legend>
+        <br/>
+        <b>Matrícula:</b>
+        <%= @professor.matricula %><br/>
+        <b>Nome do Professor:</b>
+        <%= @professor.nome %><br/>
+        <b>Data Ingresso:</b>
+        <%  if @professor.dt_ingresso.nil? then %>
+          <%= @professor.dt_ingresso %><br/>
+        <%else%>
+          <%= @professor.dt_ingresso.strftime("%d/%m/%Y") %><br/>
+        <%end%>
+        <b>Sede :</b>
+        <%= Unidade.find(@professor.sede_id).nome %><br/>
+        <b>Endereço Res:</b>
+        <%= @professor.endres %><br/>
+        <b>Numero:</b>
+        <%= @professor.num %><br/>
+        <b>Complemento:</b>
+        <%= @professor.complemento %><br/>
+        <b>Bairro:</b>
+        <%= @professor.bairro %><br/>
+        <b>Cidade:</b>
+        <%=  @professor.cidade %><br/>
+        <b>No.de Filho:</b>
+        <%=  @professor.n_filhos %><br/>
+        <b>No.RG:</b>
+        <%=  @professor.RG %><br/>
+        <b>No.CPF:</b>
+        <%=  @professor.CPF%><br/>
+        <b>No.INEP:</b>
+        <%=  @professor.INEP %><br/>
+        <b>No.RD:</b>
+        <%=  @professor.RD%><br/>
+        <b>Data de Nascimento:</b>
+         <%if @professor.dt_nasc.nil? then%>
+           <%= @professor.dt_nasc %><br/>
+         <%else%>
+           <%= @professor.dt_nasc.strftime("%d/%m/%Y") %><br/>
+         <%end%>
+        <b>Jornada Semanal:</b>
+          <%= @professor.jornada_sem%><br/>
+        <b>Telefone:</b>
+          <%= @professor.telefone%><br/>
+        <b>Formação apresentada para o concurso:</b>
+          <%= @professor.entrada_concurso %><br/>
+        <b>Função:</b>
+          <%= @professor.funcao %><br/>
+        <b>Observações:</b>
+        <%= @professor.obs%><br/>
+        <b>Pontuacao Titulos:</b>
+        <font color="red"><%= @professor.total_titulacao %></font><br/>
+        <b> Pontuacao Tempo Serviço:</b>
+        <font color="red"><%= @professor.total_trabalhado %><br/></font>
+        <b>Pontuação:</b>
+        <font color="blue"><%= @professor.pontuacao_final %></font><br/><br/>
+
+  </fieldset>
+
+
+<%= link_to 'Alterar', edit_professor_path(@professor),:class => 'botao3d' %>
+<%= link_to 'Cadastrar', new_professor_path,:class => 'botao3d' %>
+<%if $consulta == 1 then%>
+  <%= link_to_remote('Voltar', :url => { :action => "consulta"},:class => 'botao3d') %>
+<%else%>
+  <%= link_to 'Voltar', professors_path, :class => 'botao3d' %>
+<%end%>
+</div>
+</div>

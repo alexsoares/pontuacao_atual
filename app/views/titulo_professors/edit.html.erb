@@ -1,0 +1,51 @@
+<h1>Editing titulo_professor</h1>
+
+<% form_for(@titulo_professor) do |f| %>
+  <%= f.error_messages %>
+<table border="1">
+  <td valign="top">
+
+    <table border="1">
+      <tr>
+        <td><%= f.label :professor_id, 'Professor: ' %></td>
+         <td><%= f.collection_select :professor_id, @professors, :id, :matricula, :include_blank => '---Selecione---' %></td>
+      </tr>
+     <tr>
+        <td><%= f.label :titulo_id, 'Titulo: ' %></td>
+        <td><%= f.collection_select :titulo_id, @titulacaos, :id, :descricao, :include_blank => ' -- Selecione -- ' %></td>
+         <%= observe_field 'titulo_professor_titulo_id',
+         :frequency => 0.5,
+         #:update => 'valor',
+         :with => :titulo_professor_titulo_id,
+         :url => { :action => 'guarda_valor1' } %>
+     </tr>
+     <tr><td colspan="2"><div id="valor"></div></td></tr>
+      <div id="valores">
+      </div>
+
+     <tr>
+        <td><%= f.label :quantidade, 'Quantidade:' %></td>
+       <td><%= f.text_field(:quantidade, :size => 10)%></td>
+
+   <!--<%= f.label :pontuacao_titulo, 'Pontuacao Obtida' %>
+   <%= f.text_field(:pontuacao_titulo, :size => 10)%><br/>!-->
+     </tr>
+     <tr>
+       <td><%= f.label :dt_titulo, 'Data de Emissão:' %>
+       <td><%= f.text_field(:dt_titulo, :id => "dt_titulo", :size => 10) %></td>
+    </tr>
+
+  </table>
+
+ </td>
+
+</table>
+  <br/>
+
+  <p>
+    <%= f.submit "Salvar" %>
+  </p>
+<% end %>
+
+
+<%= link_to 'Voltar', titulo_professors_path %>

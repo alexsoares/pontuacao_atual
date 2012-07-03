@@ -1,0 +1,33 @@
+<div id="conteudo">
+
+<h1>Alterar Nível de acesso</h1>
+<br/>
+
+<fieldset>
+
+<% form_for(@role_user) do |f| %>
+  <%@user = User.find(:all,:conditions => ['id = ' + @role_user.user_id.to_s])%>
+  <%= f.error_messages %>
+<p>
+<td><%= f.label :user_id,'Selecione o Usuário' %></td>
+<td><%= f.collection_select  :user_id,@user, :id, :login, :include_blank => ' -- Selecione -- ' %>
+</p>
+
+<p>
+<td><%= f.label :role_id,'Selecione o nível de acesso :' %></td>
+<td><%= f.collection_select  :role_id,@roles, :id, :name, :include_blank => ' -- Selecione -- ' %>
+             <%= observe_field :roles_user_role_id,
+             :with => :roles_user_role_id,
+             :url => { :action => 'role_id' } %>
+             <div id="aviso"></div>
+
+</p>
+
+  <p>
+    <%= f.submit "Salvar" %>
+  </p>
+<% end %>
+</fieldset>
+<br/>
+|<%= link_to 'Voltar', roles_users_path %>|
+</div>

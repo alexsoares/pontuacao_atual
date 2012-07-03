@@ -1,0 +1,73 @@
+<script Language="JavaScript">
+function Imprimir(){
+window.print();
+}
+</script>
+<style media="print">
+.botao {
+display: none;
+}
+</style>
+
+<br/>
+<br/>
+<div class="botao"><input type="Button" Value="Imprimir" onclick="Imprimir()"></div>
+<br/>
+
+<div id="conteudo">
+<h2 align="center">Listagem de Professores com remoção/permuta solicitada</h2>
+<br/>
+<div class="relatorios">
+<table border="1" frame="box" rules="all" width="80%" align="center">
+  <tr>
+    <th bgcolor="#cccccc">Matrícula</th>
+    <th bgcolor="#cccccc">Nome</th>
+    <th bgcolor="#cccccc">Função</th>
+    <th bgcolor="#cccccc">Pontuacao Obtida</th>
+    <th bgcolor="#cccccc">Ano Letivo</th>
+    <th bgcolor="#cccccc">Tipo</th>
+    <th bgcolor="#cccccc" colspan="2" class="botao">Administração</th>
+  </tr>
+  <% for remocao in @remocaos_sim %>
+    <tr align="center">
+
+      <td><%= remocao.professor.matricula %> </td>
+      <td><%= remocao.professor.nome %> </td>
+      <td><%= truncate(remocao.professor.funcao, :length => 30, :omission => "...") %> </td>
+      <td><%= remocao.professor.pontuacao_final %> </td>
+      <td><%= remocao.ano_letivo %> </td>
+      <td>
+        <%if remocao.type_of.to_i == 1%>
+          <%= "Remoção" %>
+        <%else%>
+          <%= "Permuta" %>
+        <%end%>
+      </td>
+      <%if logged_in?%>
+        <%if current_user.has_role?("admin") or current_user.has_role?("planejamento") %>
+          <td align="center" bgcolor="white" class="botao"><%= link_to image_tag("/stylesheets/images/status_red.png", :size => "15x15"), edit_remocao_path(remocao), :title => "Decisão de Remoção Pendente" %></td>
+        <%end%>
+      <%else%>
+        <td align="center" bgcolor="white" class="botao"><%= image_tag("/stylesheets/images/status_red.png", :size => "15x15", :title => "Decisão de Remoção Pendente") %></td>
+      <%end%>
+      <% if remocao.type_of == 1%>
+        <% link = ficha_remocao_remocaos_path(:professor => remocao.professor.matricula, :type_of => 1) %>
+        <% kind = "remoção"%>
+      <%else%>
+        <% link = ficha_permuta_remocaos_path(:professor => remocao.professor.matricula, :type_of => 2) %>
+        <% kind = "permuta" %>
+      <%end%>
+      <td align="center" bgcolor="white" class="botao"><%= link_to image_tag("/stylesheets/images/imprimir.png", :size => "15x15"), link, :title => "Imprimir ficha de #{kind}" %></td>
+    </tr>
+
+
+  <% end %>
+</table>
+<br />
+</div>
+ </div>
+<%= render "tipo_remocao"%>
+ </div>
+
+
+

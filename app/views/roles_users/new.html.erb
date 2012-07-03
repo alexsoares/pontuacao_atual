@@ -1,0 +1,30 @@
+<br/>
+<div id="conteudo">
+  
+<h1>Nível de acesso</h1>
+
+<br/>
+
+
+
+<fieldset>
+<% form_for(@role_user) do |f| %>
+  <%= f.error_messages %>
+<p>
+<td><%= f.label :user_id,'Selecione o Usuário' %></td>
+<td><%= f.collection_select  :user_id,@users, :id, :login, :include_blank => ' -- Selecione -- ' %>
+</p>
+<p>
+<td><%= f.label :role_id,'Selecione o nível de acesso :' %></td>
+<td><%= f.collection_select  :role_id,@roles, :id, :name, :include_blank => ' -- Selecione -- ' %>
+</p>
+
+  <p>
+    <%= f.submit "Associar" %>
+  </p>
+<% end %>
+</fieldset>
+<br/>
+
+|<%= link_to 'Voltar', roles_users_path %>|
+</div>

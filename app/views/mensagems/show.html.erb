@@ -1,0 +1,31 @@
+<h2 align="center">Descrição da mensagem</h2>
+<br/>
+<br/>
+
+<%if @mensagem.user_id == current_user.id%>
+  <p>
+    <b>Enviada para:</b>
+    <%if @mensagem.para == 0%>
+      TODOS
+    <%else%>
+      <%=h User.find(@mensagem.para).login %>
+    <%end%>
+  </p>
+<%else%>
+  <p>
+    <b>Enviada por:</b>
+    <%=h @mensagem.user.login %>
+  </p>
+<%end%>
+<p>
+  <b>Titulo:</b>
+  <%=h @mensagem.titulo %>
+</p>
+<p>
+  <b>Corpo da Mensagem:</b>
+  <%=h @mensagem.texto %>
+</p>
+<br/>
+<br/>
+<br/>
+<%= link_to 'Retornar para Caixa de Entrada', mensagems_path %>

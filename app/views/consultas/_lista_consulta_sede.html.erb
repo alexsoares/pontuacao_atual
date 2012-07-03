@@ -1,0 +1,64 @@
+<script Language="JavaScript">
+function Imprimir(){
+window.print();
+}
+</script>
+<style media="print">
+.botao {
+display: none;
+}
+</style>
+
+<%$teste=0%>
+<br/>
+<div class="botao">
+
+</div>
+<br/>
+<div class="relatorios">
+<table border ="1" cellpadding="1" cellspacing="1" width="100%" frame="box" rules="rows">
+  <tr><td align="center" width="100%" colspan="10"><h3>Professores alocados na unidade:  <%= @professorsnome.count %></h3></td></tr>
+   <table border ="1" cellpadding="1" cellspacing="1" width="100%">
+     <tr>
+      <th align="center" bgcolor="#cccccc">Posição</th>
+      <th align="center" bgcolor="#cccccc">Matricula</th>
+      <th align="center" bgcolor="#cccccc">Nome</th>
+      <th align="center" bgcolor="#cccccc">Função</th>
+      <th align="center" bgcolor="#cccccc">Jornada</th>
+      <th align="center" bgcolor="#cccccc">Pontuação</th>
+      <td bgcolor="#cccccc"></td>
+    </tr>
+    <% for professor in @professorsnome %>
+     <tr>
+      <td><center><%= $teste+1 %></center></td>
+      <td><center><%=h professor.matricula%></center></td>
+      <td><center><%=h professor.nome%></center></td>
+      <td><center><%=h professor.funcao%></center></td>
+      <td><center><%=h professor.jornada_sem%></center></td>
+      <td><center><%=h professor.pontuacao_final%></center></td>
+      <td colspan="2" align="center" bgcolor="#cccccc"><%= link_to 'Exibir', professor %></td>
+      
+    </tr>
+    <tr>
+
+    
+  </tr>
+  <%  $teste = $teste + 1%>
+<% end %>
+</table>  
+</table>
+</div>
+<tr>
+ <font size=3 color="green">Consulta realizada, <%=h $teste %> registro(s) encontado(s)</font>
+</tr>
+<div class="botao">
+<table width="100%">
+    <tr>
+      <td><div class="botao3d"><%= link_to_remote('Voltar', :url => { :action => "consulta"}) %></div></td>
+      <td align="right"><input type="Button" Value="Imprimir" onclick="Imprimir()"></td>
+    </tr>
+  </table>
+</div>
+
+
+

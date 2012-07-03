@@ -1,0 +1,16 @@
+<h1 align="center">Configuração para o Usuário: <b><%=h @configuration.user.login %></b></h1>
+<p>
+  <b>Data do Sistema:</b>
+  <%=h @configuration.data.strftime("%Y") %>
+</p>
+<p>
+  <b>Inicio do Periodo:</b>
+  <%=h @configuration.begin_period ? @configuration.begin_period.strftime("%d/%m/%Y") : "Não configurado" %>
+</p>
+<p>
+  <b>Fim do Periodo:</b>
+  <%=h @configuration.end_periods ? @configuration.end_periods.strftime("%d/%m/%Y") : "Não configurado" %>
+</p>
+
+<%= link_to 'Alterar', edit_configuration_path(@configuration) %> |
+<%= link_to 'Voltar', configurations_path %>

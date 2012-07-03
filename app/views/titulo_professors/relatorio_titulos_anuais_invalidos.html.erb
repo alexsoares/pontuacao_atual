@@ -1,0 +1,80 @@
+<div id="conteudo">
+<style media="print">
+.botao {
+display: none;
+}
+</style>
+<br/>
+<br/>
+<hr/>
+<div class="botao">
+  <%= form_tag relatorio_titulos_anuais_invalidos_titulo_professors_path, :method => :get%>
+    
+   <table width="100%">
+    <div class="botao">
+      <tr>
+        <td width="80%" align="right">
+          <div class="botao">
+          Professor:
+          <%= collection_select :professor_id,:professor_id, Professor.all, :id, :nome, :prompt => true%>
+          <%= submit_tag 'Filtrar' %></div>
+        </td>
+      </tr>
+    </div>
+    </table>
+</div>
+
+<hr/>
+<br/>
+<br/>
+<div id="contador"></div>
+<div class="botao">
+  <input type="Button" Value="Imprimir" onclick="Imprimir()">
+</div>
+<div class="relatorios">
+<table border ="1" cellpadding="1" cellspacing="1" width="100%" frame="box" rules="all">
+    <tr style="font-size:12px">
+     <br/>
+
+        <th bgcolor="gray">Matricula</th>
+        <th bgcolor="gray">Nome</th>
+        <th bgcolor="gray">Titulo</th>
+        <th bgcolor="gray">Descrição</th>
+        <th bgcolor="gray">Pontuação Perdida</th>
+        <th bgcolor="gray">Pontuação c/ titulos</th>
+        <th bgcolor="gray">Pontuação s/ titulos</th>
+    </tr>
+    <%if  @relatorio_tit_prof == "Selecione o professor"%>
+      <center><b><%= @relatorio_tit_prof %></b></center>
+      <br/>
+    <%else%>
+      <!-- rtp = relatorio titulo professor !-->
+      <% for rtp in @relatorio_tit_prof %>
+        <tr>
+          <td><center><%=h rtp.professor.matricula %></center></td>
+          <td><center><%=h rtp.professor.nome %></center></td>
+          <td><center><%=h Titulacao.find(rtp.titulo_id).descricao %></center></td>
+          <td><center><%=h rtp.obs %></center></td>
+          <td><center><%=h rtp.pontuacao_titulo %></center></td>         
+          <% sum = TituloProfessor.sum('pontuacao_titulo', :conditions => ["professor_id = " +(rtp.professor.id).to_s + " and (titulo_id = 6 or titulo_id = 7 or titulo_id = 8)"])%>
+          <td><%= rtp.professor.pontuacao_final + rtp.pontuacao_titulo %></td>
+          <td><%= rtp.professor.pontuacao_final%></td>
+        </tr>
+        <tr>
+        </tr>
+    <% end %>
+
+          
+
+  <%end%>
+
+</table>
+
+
+<br/>
+<div class="botao">
+  <input type="Button" Value="Imprimir" onclick="Imprimir()">
+</div>
+</div>
+</div>
+

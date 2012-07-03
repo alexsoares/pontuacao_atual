@@ -1,0 +1,49 @@
+<script Language="JavaScript">
+function Imprimir(){
+window.print();
+}
+</script>
+<style media="print">
+.botao {
+display: none;
+}
+</style>
+
+<div id="conteudo">
+<%$voltar=0%>
+  <div class="botao">
+    <td align="right"><input type="Button" Value="Imprimir" onclick="Imprimir()"></input></td>
+  </div>
+
+<div class="ficha2">
+  <table>
+    <tr><%= render :partial => 'lista_prof_relatorio' %></tr>
+    <tr><%= render :partial => 'relatorio_tps'%></tr>
+    <tr><%= render :partial => 'totaliza_titulo' %></tr>
+    <tr><%= render :partial => 'total_geral' %></tr>
+  </table>
+  <% $anoA = Time.current-1.years %>
+  <br/>
+  <table  width="100%">
+    <tr>
+      <td width="35%">Data Base: 01/11/<%= $anoA.strftime("%Y")%>           à 30/06/<%= Time.current.strftime("%Y") %><br/><br/></td>
+      <td width="35%">Professor:_______________<br/><br/></td>
+      <td width="50%">Diretor Unidade:____________<br/><br/></td>
+    </tr>
+    <tr>
+      <td width="35%">Data Assinatura: ___/___/___<br/><br/></td>
+      <td width="35%">Visto da Comissão:_____________<br/><br/></td>
+      <td width="50%">Responsável Digitação:________________<br/><br/></td>
+    </tr>
+  </table>
+</div>
+<div class="botao">
+    <table width="100%">
+    <tr>
+      <td align="right"><input type="Button" Value="Imprimir" onclick="Imprimir()"></td>
+    </tr>
+  </table>
+
+</div>
+
+</div>

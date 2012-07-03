@@ -1,0 +1,104 @@
+#header {
+    background: #FE7B09 url(Imagens/logo.jpg) repeat-x;
+    height: 80px;
+}
+#header h1 {
+    font-size: 30px;
+    font-weight: 100;
+    letter-spacing: -1px;
+    padding: 22px 0 5px 10px;
+}
+#header h1 a {
+color: #fff;
+text-decoration: none;
+}
+#header h1 a:hover {
+color: #000;
+text-decoration: none;
+}
+#header h2 {
+color: #eee;
+font-size: 19px;
+font-weight: 100;
+padding: 0 0 0 11px;
+letter-spacing: -1px;
+line-height: 12px;
+}
+
+body {
+margin:0;
+background-color:black;
+background-repeat:repeat-y;
+}
+root {
+    display: block;
+}
+
+#caixa {
+    margin-left:50px;
+    margin-right:50px;
+    border-width: thin;
+    border-style: solid;
+    border-color: #000;
+    height:100px;
+}
+#alinha{
+    margin-left:38px;
+    margin-right:38px;
+}
+
+
+#announcement{
+    background-color:silver;
+    margin-top:10px;
+    margin-left:95px;
+    margin-right:95px;
+    border:5px solid orange;
+    color:red;
+}
+#announcement h4{color:green;}
+
+
+#contents{
+    margin:0 auto;
+    background-image:url(Imagens/body.jpg);
+    width:950px;
+
+}
+
+.tabelas {
+  border: solid 1px #666;
+  border-collapse: collapse;
+
+}
+
+.tabelas th {
+  font-size: 10px;
+  color: #FFF;
+  background-color: #404C99;
+  padding: 4px 8px;
+  padding-bottom: 4px;
+  text-align: center;
+}
+
+.tabelas td {
+  padding: 4px 8px;
+}
+
+.frame{
+    margin:0;
+    border-width: medium;
+    border-style: solid;
+    border-color: orange;
+    height:100px;
+    text-align:center;
+
+}
+
+.tabelas .even td {
+  background-color: #E3E6FF;
+}
+
+.tabelas .odd td {
+  background-color: #D1D8F6;
+}

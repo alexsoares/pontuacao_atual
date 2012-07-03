@@ -1,0 +1,20 @@
+  <br/>
+<table border="1" width="100%" frame="box" rules="all">
+  <h1 align="center">Gerenciamento de usuários</h1>
+</table>
+<table border="1" width="100%" frame="box" rules="groups">
+  <br/>
+  <div id="conteudo">   
+    <br/>
+    <div class="sub-menu-hv">
+      <ul>
+        <li><%= link_to 'Usuários Cadastrados', users_path%></li>
+        <li><%= link_to 'Usuários Associados', roles_users_path%></li>
+      </ul>
+    </div>
+  </div>
+  <br/>
+  <br/>
+  </table>
+<%= button_to 'Voltar', root_path %>
+

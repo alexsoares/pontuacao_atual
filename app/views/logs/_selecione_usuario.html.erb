@@ -1,0 +1,9 @@
+<br/>
+<br/>
+<b>Selecione o usuário</b>
+<%= collection_select :log, :user_id, @users, :id, :login, :include_blank => '---Selecione---' %>
+        <%= observe_field 'log_user_id',
+           :url    => { :action => 'log_user' },
+           :with   => 'log_user_id'%>
+<br/>
+<br/>

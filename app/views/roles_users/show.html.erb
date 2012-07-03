@@ -1,0 +1,32 @@
+<div id="conteudo">
+<p>
+<br/>
+ <fieldset>
+    <legend><font size=5> Acesso </font></legend>
+        <br/>
+        <b>Login:</b>
+        <%= User.find(@role_user.user_id).login %><br/><br/>
+        <b>Nome do Professor:</b>
+        <%= Role.find(@role_user.role_id).name %><br/><br/>
+        <b>Nível de acesso:</b>
+            <%if Role.find(@role_user.role_id).name == 'admin' then%>
+      <td align="center">Usuário administrador do sistema. Acesso total.</td>
+    <%else%>
+      <%if Role.find(@role_user.role_id).name == 'supervisao' then%>
+        <td align="center">Usuário pertencente a Supervisão. Direito de manipulação dos dados do sistema.</td>
+      <%else%>
+        <%if Role.find(@role_user.role_id).name == 'direcao' then%>
+          <td align="center">Usuário pertencente ao grupo dos(as) Diretores(as). Direito de inserçao,alteraçao e execução dos calculos.</td>
+        <%else%>
+          <td align="center">Usuário pertencente ao grupo dos(as) Secretários(as). Direito apenas de cadastrar dados.</td>
+        <%end%>
+      <%end%>
+    <%end%>
+
+  </fieldset>
+
+
+
+|<%= link_to 'Alterar', edit_roles_user_path(@role_user) %>
+|<%= link_to 'Voltar', roles_users_path %>|
+</div>

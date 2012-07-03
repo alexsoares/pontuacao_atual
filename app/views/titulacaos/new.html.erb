@@ -1,0 +1,32 @@
+<br/>
+<div id="conteudo">  
+  <fieldset>
+   <legend><font size=4>Títulos</font></legend>
+
+    <h1 align="center">Cadastro de Títulos</h1>
+    <br/>
+    <br/>
+
+<% form_for(@titulacao) do |f| %>
+  <%= f.error_messages %>
+
+   <%= f.label :descricao, 'Descrição : ' %>
+   <%= f.text_field :descricao, :size => 43 %><br/>
+
+   <%= f.label :tipo, 'Tipo de Título' %>
+   <%= f.select :tipo, TIPO_TITULO, :include_blank => ''%><br/>
+
+   <%= f.label :referencia, 'Referência' %>
+   <%= f.select :referencia, REFERENCIA, :include_blank => ''%><br/>
+
+   <%= f.label :valor, 'Valor de multiplicação do Título: ' %>
+   <%= f.text_field :valor, :size => 5 %><br/>
+  
+   <br/>
+    <%= f.submit "Cadastrar" %>
+
+<% end %>
+
+</fieldset>
+| <%= link_to 'Voltar', titulacaos_path %> |
+</div>

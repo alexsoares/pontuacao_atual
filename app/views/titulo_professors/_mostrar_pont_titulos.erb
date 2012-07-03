@@ -1,0 +1,142 @@
+<% $subtot_perm = 0 %>
+<% $subtot_um = 0 %>
+<% $subtot_cinco = 0 %>
+<% $subtotal_titulos = 0 %>
+
+<table width="100%" frame="box" rules="all">
+
+<tr><th width="100%" colspan="6" align="center"><hr/>Títulos Permanentes<hr/></th></tr>
+
+     <tr style="font-size:10px">
+       <th>
+        Título
+       </th>
+       <th>
+        Quantidade
+       </th>
+       <th>
+        Valor do Título
+       </th>
+       <th colspan="2">
+        Pontuação Obtida
+       </th>
+     </tr>
+     <% if !((@tp.nil?) or (@tp.empty?)) %>
+<%for tp in @tp%>
+  
+     <tr>
+      <td align="center">
+        <font size="2"><%= Titulacao.find_by_id(tp.titulo_id).descricao %></font>
+      </td>
+      <td align="center">
+        <font size="2"><%= tp.quantidade %></font>
+      </td>
+      <td align="center">
+        <font size="2"><%= tp.valor %></font>
+      </td>
+      <td align="center" colspan="2">
+        <font size="2"><%= tp.pontuacao_titulo %></font>
+        <% $subtot_perm = $subtot_perm + (tp.pontuacao_titulo).to_f %>
+      </td>
+   </tr>
+   
+  <%end%>
+  <%end%>
+<tr>
+  <th width="80%" colspan="4" align="left">SUB-TOTAL </th>
+  <th align="right">
+
+    <%= $subtot_perm %>
+  </th>
+</tr>
+<tr>
+  <td width="100%" colspan="15" align="right"><%= link_to  '|Alterar|', titulo_professors_path(:professor => session[:teacher], :type => 2) %></td>
+</tr>
+
+</table>
+
+
+<table width="100%" frame="box" rules="all">
+
+<tr><th width="100%" colspan="6" align="center"><hr/>Títulos de Contagem Anual<hr/></th></tr>
+     <tr>
+       <th align="center">
+        Título
+       </th>
+       <th align="center">
+        Quantidade
+       </th>
+       <th align="center">
+        Valor do Título
+       </th>
+       <th align="center">
+        Pontuação Obtida
+       </th>
+       <th>
+        Tipo
+       </th>
+
+     </tr>
+<% if !((@tp1.nil?) or (@tp1.empty?)) %>
+<%for tp1 in @tp1%>
+  <%teste = Time.current.strftime("%Y")%>
+<% if (tp1.ano_letivo).to_s == Time.current.strftime("%Y") %>
+     <tr>
+      <td  align="center">
+
+        <%= Titulacao.find_by_id(tp1.titulo_id).descricao %>
+      </td>
+      <td  align="center">
+        <%= tp1.quantidade %>
+
+      </td>
+      <td  align="center">
+
+        <%= tp1.valor %>
+      </td>
+      <td  align="center">
+        <%= tp1.pontuacao_titulo %>
+        <% $subtot_um = $subtot_um + (tp1.pontuacao_titulo).to_f %>
+      </td>
+      <!--true = a distancia e false = presencial!-->
+      <td align="center">
+      <% if tp1.tipo_curso == true%>
+        <%= "PRESENCIAL" %>
+      <%else%>
+        <%= "Á DISTANCIA" %>        
+      <%end%>
+      </td>
+
+   </tr>
+  <%end%>
+  <%end%>
+<% end %>
+<tr>
+  <th width="80%" colspan="4" align="left">SUB-TOTAL </th>
+  <th  align="right">
+    <%= $subtot_um %>
+  </th>
+</tr>
+<tr>
+  <td width="100%" colspan="15" align="right"><%= link_to  '|Alterar|', titulo_professors_path(:professor => session[:teacher], :type => 1) %></td>
+</tr>
+<% $subtotal_titulos = $subtot_um + $subtot_cinco + $subtot_perm %>
+</table>
+<br/>
+<table width="100%" frame="box" rules="groups">
+<tr>
+  <th width="100%" colspan="4" align="left">TOTAL TÍTULOS</th>
+  <th align="right">
+    <%= "#{$subtotal_titulos}" %>
+  </th>
+</tr>
+</table>
+
+<div id="eu">
+
+</div>
+
+
+
+
+

@@ -1,0 +1,28 @@
+<br/>
+<br/>
+<br/>
+<br/>
+
+<table border="1" align="center" frame="box" rules="all">
+  <tr>
+    <td>
+      <h2>Alterando sua Senha</h2>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <% form_tag url_for(:action => "update", :id => params[:id]) do %>
+        Password:<br />
+        <%= password_field_tag :password %><br />
+        Confirm Password:<br />
+        <%= password_field_tag :password_confirmation %><br />
+        <%= submit_tag "Trocar a senha" %>
+      <% end %>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <%= link_to 'Voltar', new_password_path %>
+    </td>
+  </tr>
+</table>

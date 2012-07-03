@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  professor: 
+  acum_trab: 
+  valor_ant: 9.99
+  valor: 9.99
+
+two:
+  professor: 
+  acum_trab: 
+  valor_ant: 9.99
+  valor: 9.99

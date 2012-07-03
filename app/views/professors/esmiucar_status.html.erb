@@ -1,0 +1,16 @@
+<h2 align="center">Check-up Status - Professores sem calculo registrado</h2>
+<table border="1" align="center" class="tabelas">
+      <tr>
+        <th>Matricula</th>
+        <th>Nome</th>
+        <th>Sede</th>
+      </tr>
+      <% @status.each do |status| %>
+        <tr>
+          <td><%= status.professor.matricula %></td>
+          <td><%= status.professor.nome %></td>
+          <td><%= status.professor.unidade.nome %></td>
+        </tr>
+      <%end%>
+</table>
+<%= link_to "Voltar", status_professors_path %>

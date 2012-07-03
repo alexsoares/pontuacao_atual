@@ -1,0 +1,70 @@
+<br/>
+<br/>
+  <div id="conteudo">
+    <%= link_to 'Associar', new_roles_user_path,:class => 'botao3d' %>
+    <div class="botao3d"> <%= link_to_remote('Voltar', :url => { :action => "gen_user", :controller =>'home'}) %></div>
+<br/>
+<br/>
+
+
+<table border="1" frame="box" rules="all" align="center" class="relatorios">
+  <tr>
+        <td colspan="8" align="center"><h1>Listagem Usuários Associados</h1></td>
+  </tr>
+  <tr>
+    <th colspan="2">Login</th>
+    <th colspan="2">Acesso de</th>
+    <th colspan="2">Descricao</th>
+    <th colspan="2"></th>
+  </tr>
+<% for role_user in @role_users %>
+  <tr>
+    <td colspan="2" align="center"><%= User.find(role_user.user_id).login %></td>
+    <td colspan="2" align="center"><%= Role.find(role_user.role_id).name %></td>
+    <%if Role.find(role_user.role_id).name == 'admin' then%>
+      <td colspan="2" align="center">Usuário administrador do sistema. Acesso total.</td>
+    <%else%>
+      <%if Role.find(role_user.role_id).name == 'supervisao' then%>
+        <td colspan="2" align="center">Usuário pertencente a Supervisão. Direito de manipulação dos dados do sistema.</td>
+      <%else%>
+        <%if Role.find(role_user.role_id).name == 'direcao' then%>
+          <td colspan="2" align="center">Usuário pertencente ao grupo dos(as) Diretores(as). Direito de inserçao,alteraçao e execução dos calculos.</td>
+        <%else%>
+          <%if Role.find(role_user.role_id).name == 'planejamento' then%>
+            <td colspan="2" align="center">Usuário pertencente ao grupo doPlanejamento. Direito de inserçao,alteraçao e execução dos calculos e reinicialização dos valores.</td>
+          <%else%>
+            <td colspan="2" align="center">Usuário pertencente ao grupo dos(as) Secretários(as). Direito apenas de cadastrar dados.</td>
+          <%end%>
+        <%end%>
+      <%end%>
+    <%end%>
+    <td>
+      <%= link_to 'Exibir', role_user,:class=> 'botao3d'%>
+      <%= link_to 'Alterar', edit_roles_user_path(role_user),:class=> 'botao3d' %>
+      <%= link_to 'Apagar', role_user, :confirm => 'Confirma?', :method => :delete,:class=> 'botao3d' %>
+    </td>
+
+  </tr>
+
+<% end %>
+
+</table>
+<table border="1" width="100%" frame="box" rules="all">
+  <tr>
+    <td>
+      <br/>
+      <br/>
+      <br/>
+    </td>
+  </tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <%= link_to 'Associar', new_roles_user_path, :class => 'botao3d' %>
+    <div class="botao3d"><%= link_to_remote('Voltar', :url => { :action => "gen_user", :controller =>'home'}, :class => 'botao3d') %></div>
+  
+
+</div>

@@ -1,0 +1,25 @@
+  <div class="botao">
+    <table width="100%" class="frame">
+
+          <% form_tag visaos_path, :method => 'get' do %>
+           <p>
+             <tr>
+                <td><b>Tipo de Ensino</b></td>
+             </tr>
+             <tr>
+                <td>
+                  <%= select_tag :tipo ,options_for_select(%w(Fundamental Infantil Todos), params[:tipo]), :include_blank => true%>
+                  <%= submit_tag "Filtrar", :name => nil %>
+                </td>
+             </tr>
+           </p>
+          <% end %>
+          <tr><td><%= link_to "Instruções", instrucao_visaos_path %></td></tr>
+          <tr>
+            <td><div id="instrucoes"></div></td>
+          </tr>
+    </table>
+
+
+  </div>
+

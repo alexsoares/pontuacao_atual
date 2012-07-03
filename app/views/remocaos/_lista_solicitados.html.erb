@@ -1,0 +1,41 @@
+<%if @professor_remocao.present?%>
+<table border="1" class="tabelas" width="100%">
+  <tr>
+    <th>Matricula</th>
+    <th>Nome</th>
+  </tr>
+
+    <% @professor_remocao.each do |professor| %>
+      <tr>
+        <td>
+              <%= link_to professor.professor.matricula, ficha_remocao_remocaos_path(:professor => professor.professor.matricula, :type_of => 1)  %>
+        </td>
+        <td>
+          <%= professor.professor.nome %>
+        </td>
+      </tr>
+    <%end%>
+</table>
+<%else%>
+  <%if @professor_permuta.present?%>
+    <table border="1" class="tabelas" width="100%">
+      
+      <tr>
+        <th>Matricula</th>
+        <th>Nome</th>
+      </tr>
+
+        <% @professor_permuta.each do |professor| %>
+          <tr>
+            <td>
+                  <%= link_to professor.professor.matricula, ficha_permuta_remocaos_path(:professor => professor.professor.matricula, :type_of => 2)  %>
+            </td>
+            <td>
+              <%= professor.professor.nome %>
+            </td>
+          </tr>
+        <%end%>
+    </table>
+
+  <%end%>
+<%end%>

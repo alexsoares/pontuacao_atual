@@ -1,0 +1,12 @@
+<h3>Zerar Titulos</h3>
+
+<tr>
+        <b> Selecione o Professor</b>
+      <%= collection_select :t,:professor_id, @professors, :id, :matricula, :include_blank => ' -- Selecione -- ' %>
+</tr>
+        <%= observe_field :t_professor_id,
+         :frequency => 0.5,
+         :with => :t_professor_id,
+         :url => { :action => 'efetivar_zerar_titulos' } %>
+<tr>
+<div id="zerar"></div>

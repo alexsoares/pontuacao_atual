@@ -1,0 +1,39 @@
+<br/>
+<div id="conteudo">
+    <h1 align="right">Logs de acessos</h1>
+    <p>
+     <fieldset>
+   <legend><font size=4>Acessos</font></legend>
+        <p>
+          <b>Usuário:</b>
+          <%=h @log.user.login %>
+        </p>
+        <p>
+          <b>Ação realizada:</b>
+          <%=h @log.obs %>
+        </p>
+        <p>
+          <b>Em (Data e Hora):</b>
+          <%=h @log.data.strftime("%d/%m/%Y %H:%M") %>
+        </p>
+         <p>
+          <b>Criança afetada:</b>
+       <%  if @log.crianca_id == 0 then %>
+            TODAS AS CRIANCAS>
+          <%else%>
+          <% if @log.obs == "Apagado" %>
+            <%=  @log.crianca_id %> - Com a exclusão da criança, impossível exibir seu nome.
+          <%else%>
+            <%=  @log.crianca_id %> - <%=h @log.crianca.nome %>
+          <%end%>
+          <%end%>
+        </p>
+
+
+      </fieldset>
+    </p>
+   <br/>
+
+
+| <%= link_to 'Voltar', logs_path %> |
+</div>

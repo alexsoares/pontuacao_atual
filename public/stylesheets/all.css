@@ -1,0 +1,544 @@
+body { background-color: #fff; color: #333; }
+
+body, p, ol, ul, td {
+  font-family: verdana, arial, helvetica, sans-serif;
+  font-size:   13px;
+  line-height: 18px;
+}
+pre {
+  background-color: #eee;
+  padding: 10px;
+  font-size: 11px;
+}
+
+a { color: #000; }
+a:visited { color: #666; }
+a:hover { color: #fff; background-color:#000; }
+
+.fieldWithErrors {
+  padding: 2px;
+  background-color: red;
+  display: table;
+}
+
+#errorExplanation {
+  width: 400px;
+  border: 2px solid red;
+  padding: 7px;
+  padding-bottom: 12px;
+  margin-bottom: 20px;
+  background-color: #f0f0f0;
+}
+
+#errorExplanation h2 {
+  text-align: left;
+  font-weight: bold;
+  padding: 5px 5px 5px 15px;
+  font-size: 12px;
+  margin: -7px;
+  background-color: #c00;
+  color: #fff;
+}
+
+#errorExplanation p {
+  color: #333;
+  margin-bottom: 0;
+  padding: 5px;
+}
+
+#errorExplanation ul li {
+  font-size: 12px;
+  list-style: square;
+}
+
+   .pagination {
+       padding: 3px;
+       margin: 3px;
+     }
+     .pagination a {
+       padding: 2px 5px 2px 5px;
+       margin: 2px;
+       border: 1px solid black;
+       text-decoration: none;
+       color: white;
+       background-color:teal;
+     }
+     .pagination a:hover, .pagination a:active {
+       border: 1px solid white;
+       color: black;
+     }
+     .pagination span.current {
+       padding: 2px 5px 2px 5px;
+       margin: 2px;
+       border: 1px solid black;
+       font-weight: bold;
+       background-color: gray;
+       color: black;}
+
+     .pagination span.disabled {
+       padding: 2px 5px 2px 5px;
+       margin: 2px;
+       border: 1px solid #eee;
+       color: #ddd;
+       background-color:orange;
+     }
+     #topo {
+        background-image:url(Imagens/logo.jpg);
+        color:white;
+        height:80px;
+        margin:0;
+        font-weight:bold;
+     }
+
+
+
+
+
+/* css for timepicker */
+.ui-timepicker-div .ui-widget-header{ margin-bottom: 8px; }
+.ui-timepicker-div dl{ text-align: left; }
+.ui-timepicker-div dl dt{ height: 25px; }
+.ui-timepicker-div dl dd{ margin: -25px 0 10px 65px; }
+.ui-timepicker-div td { font-size: 90%; }
+
+
+
+
+.tooltip {
+	display:none;
+    background:transparent url(Imagens/black_arrow.png);
+	font-size:12px;
+	height:70px;
+	width:160px;
+	padding:25px;
+	color:#fff;
+}
+
+/* style the trigger elements */
+#demo img {
+	border:0;
+	cursor:pointer;
+	margin:0 8px;
+}
+
+body {
+margin:0;
+background-color:black;
+background-repeat:repeat-y;
+}
+root {
+    display: block;
+}
+
+
+.botao3d a { color: white;
+
+    }
+.botao3d a:visited { color: white; }
+#conteudo {
+    margin:25px;
+}
+#tabela {
+  position: relative;
+  left: 80px;
+}
+#voltar {
+margin:25px;
+}
+
+#alinha{
+    margin-left:85px;
+    margin-right:95px;
+}
+#instrucoes{
+ position: absolute;
+ left: 700px;
+ top: 180px;
+}
+
+#loginn {
+   position: absolute;
+   left: 960px;
+   top: 150px;
+   }
+
+#calcular {
+   position: absolute;
+   left: 500px;
+   top: 540px;
+   }
+
+#obs {
+   position: absolute;
+   left: 498px;
+   top: 180px;
+   }
+
+#rodape{
+    background-image:url(Imagens/fundo_rodape.jpg);
+    margin:25px;
+  	position:relative;
+    width:96%;
+    color:white;
+    text-align:center;
+}
+#mensagem{
+font-weight: bold;
+font-size:large;
+text-align: left;
+color: red;
+}
+.menu_list {
+	width: 1100px;
+}
+.menu_head {
+	padding: 1px 1px;
+	cursor: pointer;
+	position: relative;
+	margin:1px;
+    font-weight:bold;
+    font-size: medium;
+
+}
+.menu_body {
+    padding: 0px 67px;
+    display:none;
+    font-size: large;
+    
+ }
+ #menu li {
+  display:inline;
+  
+}
+#menu li a {
+  padding:1px;
+  border:1px solid black;
+  text-decoration:none;
+  width:130px;
+  
+  float:left;
+}
+#menu ul {
+  padding:0;
+  margin:0;
+  float:left;
+  width:100%;
+  list-style:none;
+  
+}
+
+#nome_aviso {
+font-weight: bold;
+font-size:x-large;
+color: red;
+}
+
+#mensagem{
+font-weight: bold;
+font-size:large;
+text-align: left;
+color: red;
+}
+
+#descricao {
+font-weight: bold;
+font-size:medium;
+text-align: left;
+color: green;
+}
+
+#Certeza{
+font-weight: bold;
+font-size:x-large;
+color: red;
+}
+#asterisco{
+ color: red;
+font-size: large;
+}
+
+#informacao{
+    margin:25px;
+  	position:relative;
+    width:96%;
+    color:white;
+    text-align:center;
+}
+
+#img{
+   background-image:url(Imagens/professores.jpg);
+   background-repeat: no-repeat;
+   background-position:center;
+   text-align: center;
+   color:white;
+   width:100%;
+   height:386px;
+   margin:0;
+   font-weight:bold;
+   border-color:black;
+   border-left: double;
+   border-bottom: double;
+   border-top: double;
+   border-right: double;
+}
+
+#rodape_login{
+    background-image:url(Imagens/fundo_rodape.jpg);
+    color:white;
+    text-align:center;
+}
+
+.cx th {background-color:white}
+.cx td {background-color:yellow}
+
+.botao3d a {
+    text-decoration:none;
+}
+
+#contents{
+    margin:0 auto;
+    background-image:url(Imagens/body.jpg);
+    height:980px;
+    width:950px;
+
+}
+
+#principal{
+    float:right;
+    height:980px;
+    width:950px;
+    background-image:url(Imagens/body.jpg);
+    background-color:gray;
+    font-size:10px;
+}
+
+.login{
+      border: solid 1px #666;
+      border-collapse: collapse;
+
+}
+
+.relatorios {
+
+}
+
+.relatorios th {
+    background-color:white;
+}
+
+.relatorios td {
+    background-color:#fbf5b5;
+    padding:inherit;
+    font-size:10px;
+}
+
+.relatorios tr:hover {
+    background-color:blue;
+}
+
+
+#busca_ficha
+{
+    float:right;
+    height:70px;
+    width:820px;
+    background-color:#c4c4c4;
+    font-size:10px;
+}
+
+.separator
+{
+    float:right;
+    height:50px;
+    width:800px;
+    background-color:#c4c4c4;
+    font-size:10px;
+}
+
+#teste
+{
+    
+}
+
+  .botao3d{
+        font-size:14px;
+        font-family:Verdana,Helvetica;
+        font-weight:bold;
+        background-color:#a9b9c2;
+        border:0px;
+        text-decoration:none;
+        display:inline;
+        border-top: gray 1px solid;
+        border-right: gray 1px solid;
+        border-bottom: gray 1px solid;
+        border-left: gray 1px solid;
+
+       }
+.botao3d:hover{
+        font-size:14px;
+        font-family:Verdana,Helvetica;
+        font-weight:bold;
+        color:white;
+        background-color:#646566;
+        border:0px;
+        width:100px;
+        height:19px;
+        text-decoration:none;
+        display:inline;
+        border-top: #FF8585 1px solid;
+        border-right: #410000 1px solid;
+        border-bottom: #410000 1px solid;
+        border-left: #FF8585 1px solid;
+
+    }
+#email1{
+    height:400px;
+    width:800px;
+    background-image:url(Imagens/email.jpg);
+    border-color:black;
+    border-left: double;
+    border-bottom: double;
+    border-top: double;
+    border-right: double;    
+}
+
+#mask {
+  position:absolute;
+  left:0;
+  top:200px;
+  z-index:9000;
+  background-color:#000;
+  display:none;
+}
+
+#boxes .window {
+  position:absolute;
+  left:0;
+  top:0;
+  width:840px;
+  height:800px;
+  display:none;
+  z-index:9999;
+  padding:20px;
+}
+
+#boxes #dialog {
+ 
+  width:375px;
+  height:100px;
+  padding:10px;
+  background-color:#ffffff;
+}
+
+#boxes #dialog1 {
+  width:375px;
+  height:203px;
+}
+
+#dialog1 .d-header {
+  background:url(login-header.png) no-repeat 0 0 transparent;
+  width:375px;
+  height:150px;
+}
+
+#dialog1 .d-header input {
+  position:relative;
+  top:60px;
+  left:100px;
+  border:3px solid #cccccc;
+  height:22px;
+  width:200px;
+  font-size:15px;
+  padding:5px;
+  margin-top:4px;
+}
+
+#dialog1 .d-blank {
+  float:left;
+  background:url(login-blank.png) no-repeat 0 0 transparent;
+  width:267px;
+  height:53px;
+}
+
+#dialog1 .d-login {
+  float:left;
+  width:108px;
+  height:53px;
+}
+
+#boxes #dialog2 {
+  background:url(Imagens/notice.png) no-repeat 0 0 transparent;
+  width:326px;
+  height:229px;
+  padding:50px 0 20px 25px;
+}
+.close{display:block; text-align:right;}
+
+#announcement{
+    background-color:silver;
+    margin-top:10px;
+    margin-left:95px;
+    margin-right:95px;
+    border:5px solid orange;
+    color:red;
+}
+#announcement h4{color:green;}
+#color a{
+    color:red;
+}
+
+#true {
+    background-image:url(images/true.jpg);
+    width:20px;
+    height:20px;
+    background-repeat:no-repeat;
+}
+#false {
+    background-image:url(images/false.jpg);
+    width:20px;
+    height:20px;
+    background-repeat:no-repeat;
+
+}
+
+.tabelas {
+  border: solid 1px #666;
+  border-collapse: separate;
+  
+}
+
+.tabelas th {
+  border-collapse: collapse;
+  border: solid 1px #666;
+  font-size: 10px;
+  color: white;
+  background-color: #404C99;
+  padding: 4px 8px;
+  padding-bottom: 4px;
+  text-align: center;
+}
+.tabelas th.titulo {
+    background-color: yellow;   
+}
+.tabelas th.titulo h1{
+    color:#000;
+}
+
+
+.tabelas td {
+  border: solid 1px #666;
+  border-collapse: collapse;
+  padding: 4px 8px;
+}
+
+.tabelas td:hover {
+  background-color: white;
+}
+
+.tabelas .even td {
+  background-color: #E3E6FF;
+}
+
+.tabelas .odd td {
+  background-color: #D1D8F6;
+}

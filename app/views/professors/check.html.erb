@@ -1,0 +1,137 @@
+<br/>
+<br/>
+* - Valores inseridos, porém não calculados
+<h2 align="center">Checagem Automática dos Calculos </h2>
+<table border="1" align="center" class="tabelas">
+      <% contador_ok =0 %>
+      <% contador_problemas =0 %>
+      <% contador_titulo_problemas =0 %>
+      <% contador_titulo_ok =0 %>
+      <% contador_pontuacao_problemas =0 %>
+      <% contador_pontua_ok =0 %>
+      <% calculo_nao_efetuado = 0 %>
+      <% @pontuacao = Professor.find(:all, :conditions => "(total_trabalhado + total_titulacao) <> pontuacao_final") %>
+      <% @titulo = Professor.find(:all,:joins => :titulo_professors,:select => "total_titulacao,titulo_professors.titulo_id, titulo_professors.ano_letivo,titulo_professors.pontuacao_titulo", :conditions => ["(titulo_professors.titulo_id in (1,2,3,4,5) or ( titulo_professors.ano_letivo = ? and titulo_professors.status = 1))",$data], :group => "matricula", :having => "professors.total_titulacao <> sum(titulo_professors.pontuacao_titulo)") %>
+      <% @tempo = Professor.find(:all, :joins => [:acum_trab,:trabalhados], :conditions => ["trabalhados.ano_letivo = ?",$data], :select => "sum(dias_trab) as soma_trab,sum(dias_efetivos) as soma_efet, sum(dias_rede) as soma_rede,sum(dias_unidade) as soma_unid,matricula, tot_acum_ant_trab, tot_acum_ant_efet, tot_acum_ant_rede, tot_acum_ant_unid, tot_acum_trab, tot_acum_efet, tot_acum_rede, tot_acum_unid", :group => 'matricula', :having => "(((sum(dias_trab) + tot_acum_ant_trab) <> tot_acum_trab) and ((sum(dias_efetivos) + tot_acum_ant_efet) <> tot_acum_efet) and ((sum(dias_rede) + tot_acum_ant_rede) <> tot_acum_rede) and ((sum(dias_unidade) + tot_acum_ant_unid) <> tot_acum_unid))" ) %>
+      <tr>
+        <td>
+          Total de checado:
+        </td>
+        <td colspan="8"><%=  @count_check.count%></td>
+      </tr>
+
+      <% @count_check.each do |check_professor| %>
+        <%@check_titulos = TituloProfessor.check_titulos($data,check_professor.id)%>
+        <%@check_acum = AcumTrab.acum(check_professor) %>
+        <%@check_trab_atual = Trabalhado.check(check_professor,$data) %>
+        <% total_titulacao = @check_titulos.total_titulacao %>
+        <% total_trabalhado = @check_titulos.total_trabalhado %>
+        <% soma_pont_titulo = @check_titulos.soma_pont_titulo %>
+        <% acum_ant_trab = @check_acum.tot_acum_ant_trab ? @check_acum.tot_acum_ant_trab : 0 %>
+        <% atual_trab = @check_trab_atual.soma_trab ? @check_trab_atual.soma_trab : 0 %>
+        <% somado_trab = @check_acum.tot_acum_trab  ? @check_acum.tot_acum_trab : 0%>
+        <% acum_ant_efet = @check_acum.tot_acum_ant_efet  ? @check_acum.tot_acum_ant_efet : 0%>
+        <% atual_efet = @check_trab_atual.soma_efet ? @check_trab_atual.soma_efet : 0 %>
+        <% somado_efet = @check_acum.tot_acum_efet  ? @check_acum.tot_acum_efet : 0%>
+        <% acum_ant_rede = @check_acum.tot_acum_ant_rede  ? @check_acum.tot_acum_ant_rede : 0%>
+        <% atual_rede = @check_trab_atual.soma_rede ? @check_trab_atual.soma_rede : 0%>
+        <% somado_rede = @check_acum.tot_acum_rede  ? @check_acum.tot_acum_rede : 0%>
+        <% acum_ant_unid = @check_acum.tot_acum_ant_unid  ? @check_acum.tot_acum_ant_unid : 0%>
+        <% atual_unid = @check_trab_atual.soma_unid ? @check_trab_atual.soma_unid : 0%>
+
+        
+        <% somado_unid = @check_acum.tot_acum_unid  ? @check_acum.tot_acum_unid : 0%>
+        
+          <% if (((acum_ant_trab.to_i + atual_trab.to_i) == somado_trab.to_i) && ((acum_ant_efet.to_i + atual_efet.to_i) == somado_efet.to_i) && ((acum_ant_rede.to_i + atual_rede.to_i) == somado_rede.to_i) && ((acum_ant_unid.to_i + atual_unid.to_i) == somado_unid.to_i)) %>
+            <% contador_ok = contador_ok + 1%>
+          <%else%>
+            <%if @check_acum.status == 0 %>
+              <% calculo_nao_efetuado = calculo_nao_efetuado + 1%>
+            <%else%>
+              <% contador_problemas = contador_problemas + 1%>
+            <%end%>
+          <%end%>
+
+        <% if soma_pont_titulo.nil? %>
+          <% soma_pont_titulo = 0 %>
+          <%soma_pont_titulo = format("%.3f",soma_pont_titulo)%>
+        <%end%>
+        <% if soma_pont_titulo.to_d == total_titulacao.to_d %>
+            <% contador_titulo_ok = contador_titulo_ok + 1 %>
+        <%else%>
+            <% contador_titulo_problemas = contador_titulo_problemas + 1 %>
+        <%end%>
+        <% total = total_trabalhado.to_d + total_titulacao.to_d %>
+        <% pontuacao_final = @check_titulos.pontuacao_final.to_d %>
+        <% if total == pontuacao_final %>
+          <% contador_pontua_ok = contador_pontua_ok + 1 %>
+        <%else%>
+          <% contador_pontuacao_problemas = contador_pontuacao_problemas + 1 %>
+        <%end%>
+      <%end%>
+        <tr align="center">
+          <th colspan="3" >Pontos Tempo de serviço</th>
+          <th colspan="2" >Pontos Titulos</th>
+          <th colspan="2" >Pontos Total Calculado</th>
+          <th>Status Geral</th>
+        </tr>
+        <tr align="center">
+          <td>
+            OK
+          </td>
+          <td>
+            Problemas
+          </td>
+          <td style="color:red">*</td>
+          <td>
+            OK
+          </td>
+          <td>
+            Problemas
+          </td>
+          <td>
+            OK
+          </td>
+          <td>
+            Problemas
+          </td>
+          <td rowspan="2" align="center"><% if ((@count_check.count == contador_ok + calculo_nao_efetuado) && (@count_check.count == contador_titulo_ok) && (@count_check.count == contador_pontua_ok))%><div id="true"></div><%else%><div id="false"></div><%end%></td>
+
+      </tr>
+      <tr align="center">
+        <td>
+          <%= contador_ok %>
+        </td>
+        <td>
+          <% if @tempo.present? %>
+            <%= link_to contador_problemas, esmiucar_tempo_servico_professors_path %>
+          <%else%>          
+            <%= contador_problemas %>
+          <%end%>
+        </td>
+        <td><%= calculo_nao_efetuado %></td>
+        <td>
+          <%= contador_titulo_ok %>
+        </td>
+        <td>
+          <% if @titulo.present? %>
+            <%= link_to contador_titulo_problemas, esmiucar_titulos_professors_path %>
+          <%else%>
+            <%= contador_titulo_problemas %>
+          <%end%>
+        </td>
+        <td>
+          <%= contador_pontua_ok %>
+        </td>
+        <td>
+          <% if @pontuacao.present? %>
+            <%= link_to contador_pontuacao_problemas, esmiucar_pontuacao_professors_path %>
+          <%else%>
+            <%= contador_pontuacao_problemas %>
+          <%end%>
+        </td>
+
+      </tr>
+</table>
+
+

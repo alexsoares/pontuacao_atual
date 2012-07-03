@@ -1,0 +1,43 @@
+<div id="conteudo">
+
+  <table border="1" width="100%">
+    <th align="center" colspan="2" bgcolor="red"  style="color:white">Arrumar titulos anuais?</th>
+    <% unless params[:ano].nil? %>
+        <tr>
+          <td colspan="3">
+            <h3 align="center">Ano Letivo: <%= params[:ano] %></h3>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2">
+              Constam <%= @titulos.count %> titulos anuais relativo ao ano de <%= params[:ano] %>. Caso haja algum ainda não invalidado esta ação realizará o processo.
+          </td>
+        </tr>
+        <tr>
+          <div id="teste">
+            <% if @titulos.present? %>
+              <td align="center">| <%= link_to_remote('SIM', :update => "conteudo", :url => {:controller => 'calculos', :action => 'efetiva_arrumar_titulos', :ano => params[:ano]}) %> |</td>
+              <td align="center">| <%= link_to 'NÃO', root_path %> |</td>
+            <%else%>
+              <td align="center">|Ação já realizada|</td>
+            <%end%>
+          </div>
+        </tr>
+    <%else%>
+        <tr>
+          <td>
+              <% form_tag arrumar_titulos_path, :method => 'get' do %>
+               <p>
+                 <tr>
+                    <td align="right"> Ano:
+                     <%= text_field_tag :ano, params[:ano] %>
+                     <%= submit_tag "Filtrar", :name => nil %> </td>
+                  </tr>
+               </p>
+              <% end %>
+        </tr>
+    <%end%>
+  </table>
+
+
+</div>

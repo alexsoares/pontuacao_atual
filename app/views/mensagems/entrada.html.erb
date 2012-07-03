@@ -1,0 +1,47 @@
+<div id="conteudo">
+<%= button_to 'Nova Mensagem', new_mensagem_path %>
+  <br/>
+  <br/>
+  <h1 align="center" style="color:green">Caixa de Entrada</h1>
+  <br/>
+  <br/>
+<br/>
+<br/>
+  <table align="center" width="90%" border="1" frame="box" rules="all">
+    <tr>
+      <th></th>
+      <th>De</th>
+      <th colspan="1">Titulo</th>
+      <th>Em</th>
+      <th colspan="2"></th>
+    </tr>
+  <% form_tag message_read_mensagems_path, :method => :put do %>
+    <%  if @mensagems.present? %>
+      <% for mensagem in @mensagems %>
+        <tr>
+          <td width="10%" align="center"><%= check_box_tag "message_ids[]",mensagem.id %></td>
+          <td width="30%" align="center"><%=h mensagem.user.login %></td>
+          <td width="40%" align="center"><%=h mensagem.titulo %></td>
+          <td width="20%" align="center"><%=h mensagem.created_at.strftime("%d/%m/%Y %H:%M") %></td>
+          <td><%= link_to 'Exibir', mensagem %></td>
+          <td><%= link_to 'Deletar', mensagem, :confirm => 'Tem certeza?', :method => :delete %></td>
+        </tr>
+      <% end %>
+      <tr>
+        <td colspan="6">
+          <%= submit_tag "Marcar Mensagem como lida"  %>
+        </td>
+      </tr>
+    <%else%>
+    <h1 align="center" style="color:red">Nenhuma mensagem</h1>
+    <%end%>
+  <%end%>
+  <%= will_paginate @memsagems %>
+  </table>
+  
+  <br/>
+  <br/>
+  
+  <%=  link_to 'Voltar', mensagems_path, :class => 'botao3d' %>
+
+  </div>

@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  professor: 
+  acum_trab: 
+  trabalhado_anterior: 
+  trabalhado_atual: 
+
+two:
+  professor: 
+  acum_trab: 
+  trabalhado_anterior: 
+  trabalhado_atual: 

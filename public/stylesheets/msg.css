@@ -1,0 +1,11 @@
+.relatorios th .current {
+    padding-right: 12px;
+    background-repeat: no-repeat;
+    background-position: right center;
+}
+.relatorios th .asc {
+    background-image:url(Imagens/up_arrow.gif)
+}
+.relatorios th .desc {
+    background-image:url(Imagens/down_arrow.gif)
+}

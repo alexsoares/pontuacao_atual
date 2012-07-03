@@ -1,0 +1,6 @@
+class Titulacao < ActiveRecord::Base
+  belongs_to :professor
+  validates_presence_of :professor_id, :message => ' -  PROFESSOR - PREENCHIMENTO OBRIGATÓRIO'
+  validates_presence_of :titulo_id, :message => ' -  TITULO - PREENCHIMENTO OBRIGATÓRIO'
+
+end

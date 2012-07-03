@@ -1,0 +1,108 @@
+<br/>
+<h2 align="center">   Sistema de Pontuação de Professores - Secretaria de Educação</h2>
+<br/>
+<div id="caixa" class="botao">
+<br/>
+<table width="100%" border="1">
+        <% form_for @search do |f| %>
+          <tr>
+            <td align="right">
+                <%= f.label :sede_id_equals, "Unidade / Sede" %>
+                <%= f.collection_select :sede_id_equals, Unidade.todos, :id, :nome, :include_blank => true%>
+            </td>
+            <td align="right">
+              <% ambos = ['ADI','Diretor Ed. Básica','Prof. Coordenador','Pedagogo','Prof. de Creche','PEB1 - Ed. Infantil','PEB1 - Ensino Fundamental','PEB2 - Artes','PEB2 - Ed. Física','PEB2 - História','PEB2 - Geografia','PEB2 - Matemática','PEB2 - Português','PEB2 - Inglês','PEB2 - Ciências','PEB - Ed. Especial','TODOS'] %>
+              <%= f.label :funcao_equals, "Função" %>
+              <%= f.select :funcao_equals, options_for_select(ambos.sort!{|t1,t2|t1 <=> t2}), :include_blank => true%>
+            </td>
+            <td align="center" colspan="2">
+              <%= f.submit "Buscar" %>
+            </td>
+          </tr>
+        <% end %>
+    </table>
+ </div>
+
+<br/>
+<br/>
+<div class="botao">
+  <table width="100%">
+    <tr>
+      <td align="right"><input type="Button" Value="Imprimir" onclick="Imprimir()"></input></td>
+    </tr>
+  </table>
+</div>
+<%if !(params[:search]).blank? %>
+  <h1 align = "center" id="teste">RELATORIO DE PONTUACAO </h1>
+  <% if params[:search][:sede_id_equals].present? %>
+    <% unidade = Unidade.sede(params[:search][:sede_id_equals]) %>
+  <%else%>
+  <% unidade = "Geral" %>
+  <%end%>
+  <% if params[:search][:funcao_equals].present? %>
+    <% funcao = params[:search][:funcao_equals] %>
+  <%else%>
+  <% funcao = "Geral" %>
+  <%end%>
+
+  <h3 align="center">Geral > <%= unidade %> > <%= funcao %></h3>
+<%end%>
+  <div id="aviso"><h5 style="color:red" align="center">Obs.: Listagem sujeita a alterações </h5></div>
+<br/>
+<br/>
+<table border ="1" width="90%" align="center" class="tabelas" >
+  <tr>
+    <th bgcolor="#cccccc"  width = "5%" >Clas.</th>
+    <center><th bgcolor="#cccccc" width = "4%">Matrícula</th></center>
+    <th bgcolor="#cccccc" width = "38%">Nome</th>
+    <th bgcolor="#cccccc" width = "25%">Sede</th>
+    <th bgcolor="#cccccc" width = "5%">Pontuação</th>
+    <%if funcao.present?%>
+      <%if funcao == "Geral" %>
+        <th bgcolor="#cccccc"  width = "20%">Função</th>
+      <%else%>
+        <th bgcolor="#cccccc" width = "5%">T. Serviço</th>
+        <th bgcolor="#cccccc" width = "5%">Titulação</th>
+      <%end%>
+    <%end%>
+
+
+
+  </tr>
+<%$contador = 1%>
+<%if @professor_rel_geral.present? %>
+  <% for professor in @professor_rel_geral %>
+  <tr>
+      <td width = "5%" align = "center"><%= $contador%></td>
+      <td width = "4%"><center><%=h professor.matricula %></center></td>
+      <td width = "38%"><center><%=h professor.nome %></center></td>
+      <td width = "25%"><center><%=h professor.unidade.nome%></center></td>
+          <% if professor.pontuacao_final.nil? then %>
+          <td width="5%"><%=h 0.000 %></td>
+      <%else%>
+          <td width = "5%"><center><%=h format("%.3f",professor.pontuacao_final)%></center></td>
+      <%end%>
+      <%if funcao == "Geral"%>
+        <td width = "20%"><center><%=h professor.funcao%></center></td>
+      <%else%>
+        <td width = "10%"><center><%=h professor.total_trabalhado%></center></td>
+        <td width = "10%"><center><%=h professor.total_titulacao%></center></td>
+      <%end%>
+
+  </tr>
+       <% $contador= $contador+1 %>
+  <% end %>
+<%end%>
+</table>
+<br/>
+<br/>
+<div class="botao">
+<table width="100%">
+    <tr>
+      <td align="right"><input type="Button" Value="Imprimir" onclick="Imprimir()"></input></td>
+    </tr>
+  </table>
+</div>
+<br />
+<br/>
+

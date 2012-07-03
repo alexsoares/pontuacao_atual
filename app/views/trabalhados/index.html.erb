@@ -1,0 +1,17 @@
+<div id ="conteudo">
+ <br/>
+    <%if @busca_trab.present?%>
+      <h1><%= "Valores de tempo de serviço Cadastrados para o professor: #{@busca_trab.first.professor.matricula} - #{@busca_trab.first.professor.nome}"%></h1>
+    <%= render "alterar_apagar" %>
+  <%else%>
+    <h1 style="color:red" align="center">Funcionário não possui mais tempo de serviço cadastrado!</h1>
+  <%end%>
+  <div id="index"></div>
+    <%if params[:calculo].present?%>
+      | <td><%= link_to 'Voltar', edit_acum_trab_path((params[:calculo].match(/\d+/).to_s).to_i )  %></td> |
+    <%else%>
+      | <td><%= link_to 'Voltar', new_trabalhado_path  %></td> |
+    <%end%>
+</div>
+
+

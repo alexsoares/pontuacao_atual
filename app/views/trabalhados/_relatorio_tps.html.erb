@@ -1,0 +1,136 @@
+<table width="100%" frame="box" rules="all">
+<tr><th width="100%" colspan="5" align="center"><hr/>Contagem de Tempo de Serviço  <div id="nomeprof"></div><hr/></th></tr>
+</table>
+
+
+<table border="1" width="100%" frame="box" rules="groups">
+ <table border ="1" cellpadding="1" cellspacing="1" width="100%" frame="box" rules="all" >
+   <tr style="font-size:10px">
+    <th>Ano</th>
+    <th>Dias</th>
+    <th>Unidade</th>
+    <th>Outro Emprego</th>
+    <th>Faltas Abonadas</th>
+    <th>Faltas Atestados</th>
+    <th>Faltas Justif.</th>
+    <th>Faltas Injust.</th>
+    <th>Licenças Saúde</th>
+    <th>Afast. não remun.</th>
+    <th>Outras ausências</th>
+    <th>Dias Trabalhados</th>
+    <th>Dias Efeivos</th>
+    <th>Dias Rede</th>
+    <th>Dias Unidade</th>
+    <th>Salvo</th>
+  </tr>
+<% for trabalho in @trabalho %>
+  <tr>
+    <td align="center">
+      <%= trabalho.ano %><br/>
+    </td>
+    <td align="center">
+      <%= trabalho.dias%><br/>
+    </td>
+    <td align="center">
+      <%= trabalho.unidade %><br/>
+    </td>
+    <td align="center">
+      <%= trabalho.outro_trab %> <br/>
+    </td>
+    <td align="center">
+      <%= trabalho.f_abonada %><br/>
+    </td>
+    <td align="center">
+      <%= trabalho.atestado %><br/>
+    </td>
+    <td align="center">
+      <%= trabalho.f_justif %><br/>
+    </td>
+    <td align="center">
+      <%= trabalho.f_injustif %><br/>
+    </td>
+    <td align="center">
+      <%= trabalho.lic_saude %><br/>
+    </td>
+    <td width ="5%" align="center">
+      <%= trabalho.afastamento %>
+    </td>
+    <td align="center">
+      <%= trabalho.outras_ausencias %>
+    </td>
+    <td width ="5%" align="center">
+      <%= $st_dt = trabalho.dias_trab %>
+      <% $soma_st_dt = $soma_st_dt + $st_dt %>
+    </td>
+    <td width ="5%" align="center">
+      <%= $st_de = trabalho.dias_efetivos %>
+      <% $soma_st_de = $soma_st_de + $st_de %>
+    </td>
+    <td width ="5%">
+      <%= $st_dr = trabalho.dias_rede %>
+      <% $soma_st_dr = $soma_st_dr + $st_dr %>
+    </td>
+    <td width ="5%" align="center">
+      <%= $st_du = trabalho.dias_unidade %>
+      <% $soma_st_du = $soma_st_du + $st_du %>
+    </td> 
+    <td align="center" width ="5%" colspan="2">
+      <% if trabalho.flag == true then %>
+        <%='OK' %>
+        <% $conta = 1  %>
+      <%else%>
+        <%= 'Aguardando'%>
+        <% $conta = 0  %>
+      <%end%>      
+    </td>  
+  </tr>
+<%end%>
+    <tr>
+      <td colspan="11">
+        <b>Sub-Total (Em Dias)</b>
+      </td>
+      <td align="center"><%= $total_dt_ano = Professor.sub_total_dt.to_s %></td>
+      <td align="center"><%= $total_de_ano = Professor.sub_total_de.to_s %></td>
+      <td align="center"><%= $total_dr_ano = Professor.sub_total_dr.to_s %></td>
+      <td align="center"><%= $total_du_ano = Professor.sub_total_du.to_s %></td>
+    </tr>
+
+</table>  
+</table>
+     <%  if $conta == 0 then %>
+     <table width="100%">
+     <tr>
+      <%if @two_times.present?%>
+        <%if @two_times.count > 0%>
+          <td width="100%" colspan="15" align="right">|<%= link_to  'Alterar', trabalhados_path(:professor => "QWevxZ#{session[:professor]}HnmJKt") %>|</td>
+          <%if @two_times.count == 2%>
+            <td width="100%" colspan="15" align="right"><%= link_to('Calcular', acum_trabs_path(:professor => session[:professor]), :confirm => "Realizar calculos", :title => "Calculos" ) %>|</td>
+          <%end%>
+        <%end%>        
+      <%end%>
+     </tr>
+     </table>
+     <%end%>
+
+   <div id="mensagem">
+       <br/>
+         <u>OBSERVAÇÕES:</u><br/><br/>
+         1. Digitar valores inciais, valores para ano anterior e ano atual antes de calcular.<br/>
+         2. Para calcular e salvar o Tempo de Serviço, clicar na opção <u>| Calcular |</u> no menu pricipal.<br/>
+         
+      </div>
+
+
+
+
+
+
+<% if current_user.has_role?('supervisao') or current_user.has_role?('direcao') or current_user.has_role?('admin') %>
+      <div id="mensagem">
+       <br/>
+         <u>OBSERVAÇÕES:</u><br/><br/>
+         1. CONFERIR OS DADOS ANTES DE SALVAR<br/>
+         2. SE NECESSÁRIO REALIZAR ALTERAÇÕES,CLICAR NO BOTÃO <u>ALTERAR</u><br/>
+         3. SE DADOS CORRETOS, CLICAR NO BOTÃO <u>SALVAR</u> DADOS<br/>
+      </div>
+<% end %>

@@ -1,0 +1,129 @@
+<% $subtot_perm = 0 %>
+<% $subtot_um = 0 %>
+<% $subtot_cinco = 0 %>
+<% $subtotal_titulos = 0 %>
+
+<table width="100%" frame="box" rules="all">
+
+<tr><th width="100%" colspan="6" align="center"><hr/>Títulos Permanentes<hr/></th></tr>
+
+     <tr>
+       <th>
+        Título
+       </th>
+       <th>
+        Quantidade
+       </th>
+       <th>
+        Valor do Título
+       </th>
+       <th>
+        Pontuação Obtida
+       </th>
+     </tr>
+     <% if !((@tp.nil?) or (@tp.empty?)) %>
+<%for tp in @tp%>
+
+     <tr>
+      <td align="center">
+        <%= tp.titulo.descricao %>
+      </td>
+      <td align="center">
+        <%= tp.quantidade %>
+      </td>
+      <td align="center">
+        <%= tp.valor %>
+      </td>
+      <td align="center">
+        <%= tp.pontuacao_titulo %>
+        <% $subtot_perm = $subtot_perm + (tp.pontuacao_titulo).to_f %>
+      </td>
+
+
+   </tr>
+  <%end%>
+  <%end%>
+<tr>
+  <th width="80%" colspan="4" align="left">SUB-TOTAL </th>
+  <th align="right">
+
+    <%= $subtot_perm %>
+  </th>
+</tr>
+
+</table>
+
+
+<table width="100%" frame="box" rules="all">
+
+<tr><th width="100%" colspan="6" align="center"><hr/>Títulos de Contagem Anual<hr/></th></tr>
+     <tr>
+       <th align="center">
+        Título
+       </th>
+       <th align="center">
+        Quantidade
+       </th>
+       <th align="center">
+        Valor do Título
+       </th>
+       <th align="center">
+        Pontuação Obtida
+       </th>
+     </tr>
+<% if !((@tp1.nil?) or (@tp1.empty?)) %>
+<%for tp1 in @tp1%>
+     <tr>
+      <td  align="center">
+
+        <%= tp1.titulo.descricao %>
+      </td>
+      <td  align="center">
+        <%= tp1.quantidade %>
+
+      </td>
+      <td  align="center">
+
+        <%= tp1.valor %>
+      </td>
+      <td  align="center">
+        <%= tp1.pontuacao_titulo %>
+        <% $subtot_um = $subtot_um + (tp1.pontuacao_titulo).to_f %>
+      </td>
+
+
+   </tr>
+  <%end%>
+<% end %>
+<tr>
+  <th width="80%" colspan="4" align="left">SUB-TOTAL </th>
+  <th  align="right">
+    <%= $subtot_um %>
+  </th>
+</tr>
+
+
+<% $subtotal_titulos = $subtot_um + $subtot_cinco + $subtot_perm %>
+</table>
+<br/>
+<table width="100%" frame="box" rules="groups">
+<tr>
+  <th width="100%" colspan="4" align="left">TOTAL TÍTULOS</th>
+  <th align="right">
+    <%= $subtotal_titulos %>
+  </th>
+</tr>
+     <td align="right">
+           <td colspan="15"> <td width="100%" colspan="15" align="right"><%= link_to  '|Alterar|', titulo_professors_path %></td></td>
+     </td>
+
+</table>
+
+<div id="eu">
+
+</div>
+
+
+
+
+

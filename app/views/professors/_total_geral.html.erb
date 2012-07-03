@@ -1,0 +1,49 @@
+<style media="print">
+.botao {
+display: none;
+}
+</style>
+
+<br/>
+<table width="100%" border="1" frame="box" rules="all">
+  <tr>
+    <th width="80%" align="left">
+      TOTAL GERAL
+    </th>
+    <th align="right">
+      <%$cont = 0%>
+      <!--<% @doisanos = Trabalhado.find(:all, :conditions => ['professor_id = ' + $professor,'ano_letivo = ' + $data]) %> !-->
+      <% @doisanos = Trabalhado.find_by_sql("Select * from trabalhados where professor_id = " + $professor)%>
+      <% for i in @doisanos %>
+        <% $cont = $cont + 1 %>
+      <% end %>
+
+      <% if $cont >= 2 then %>
+        <%= format("%.3f",Professor.find($professor).pontuacao_final)  %>
+      <%else%>
+        <% render :text => 'Indicações sobre procedimento de calculo não foi seguido. Favor entrar em contato com A '%>
+      <%end%>
+
+    </th>
+  </tr>
+</table>
+<br/>
+<div class="botao">
+<% $reinicializacao = 1 %>
+<%  if current_user.has_role?('planejamento')%>
+<%if $zerar == 1 then%>
+<b> Para sua segurança, selecione novamente a matricula:  </b>
+      <%= collection_select :zero, :professor_id, @professors, :id, :matricula, :include_blank => ' -- Selecione -- ' %>
+
+        <%= observe_field :zero_professor_id,
+         :with => :zero_professor_id,
+         :url => { :action => 'sel_prof_zerar' } %>
+<div id="nome_prof"></div>
+
+
+| <%= link_to_remote('Zerar Titulação',:url => { :action => "efetiva_tit"}, :confirm => 'Esta ação acarretará na perda de todos os titulos do professor. Deseja continuar?' "\n \n" 'Obs1: Neste caso toda a pontuacao por títulos deverá ser cadastrada novamente.' "\n \n" ' Obs2: A pontuação por tempo de serviço não será alterada' "\n \n" ' Obs3: Os dados pessoais do professor como: ' "\n" '      --> Matricula' "\n" '      --> Nome' "\n \n" 'Não serão alterados.', :title => 'Reinicializar dados da pontuação') %> |
+  <%= link_to_remote('Zerar Tempo de Serviço', :url => { :action => "efetiva_zerar_trabalhado"}, :confirm => 'Esta ação acarretará na perda de toda a pontuação do professor, retornando seu valor ao estado do ano anterior. Deseja continuar?' "\n \n" 'Obs .: Neste caso o tempo de serviço relativo a este ano letivo terá de ser re-cadastrado.' "\n \n" ' Obs2 .: Os dados pessoais do professor como: ' "\n" '      --> Matricula' "\n" '      --> Nome' "\n \n" 'Não serão alterados.', :title => 'Reinicializar dados da pontuação') %> |
+  <%= link_to_remote('Zerar Pontuação',:url => { :action => "efetiva"}, :confirm => 'Esta ação acarretará na perda de toda a pontuação do professor. Deseja continuar?' "\n \n" 'Obs .: Neste caso toda a pontuacao deverá ser cadastrada novamente.' "\n \n" ' Obs2 .: Os dados pessoais do professor como: ' "\n" '      --> Matricula' "\n" '      --> Nome' "\n \n" 'Não serão alterados.'"\n \n" 'Obs3 .: As fichas letivas de anos anteriores também serão apagadas.', :title => 'Reinicializar dados da pontuação') %> |
+<%end%>
+<%end%>
+</div>

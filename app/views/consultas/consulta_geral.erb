@@ -1,0 +1,60 @@
+<script Language="JavaScript">
+function Imprimir(){
+window.print();
+}
+</script>
+<style media="print">
+.botao {
+display: none;
+}
+</style>
+
+<br/>
+<br/>
+<div class="botao"><input type="Button" Value="Imprimir" onclick="Imprimir()"></div>
+<br/>
+
+<h2 align="center">Listagem de Pontuacao Geral dos Professores</h2>
+<hr width="100%">
+<br/>
+<br/>
+<div class="relatorios">
+<table border ="1" cellpadding="1" cellspacing="1" width="100%" >
+  <tr>
+    <center><th bgcolor="#cccccc" width = "7%">Matrícula</th></center>
+    <th bgcolor="#cccccc" width = "40%">Nome</th>
+    <th bgcolor="#cccccc" width = "25%">Sede</th>
+    <th bgcolor="#cccccc" width = "5%">Pontuação</th>
+    <th bgcolor="#cccccc"  width = "20%">Função</th>
+
+  </tr>
+<% for professor in @professor_rel_geral %>
+  <tr>
+    <p><td width = "7%"><center><%=h professor.matricula %></center></td>
+    <td width = "40%"><center><%=h professor.nome %></center></td>
+    <td width = "25%"><center><%=h professor.unidade.nome %></center></td>
+        <% if professor.pontuacao_final.nil? then %>
+		<td width="5%"><%=h 0.000 %></td>
+	<%else%>
+	    <td width = "5%"><center><%=h format("%.3f",professor.pontuacao_final)%></center></td>
+	<%end%>
+    <td width = "20%"><center><%=h professor.funcao%></center></td>
+ <tr/>
+<% end %>
+
+</table>
+
+<div class="botao">
+<table width="100%">
+    <tr>
+      <td align="left"><input type="Button" Value="Imprimir" onclick="Imprimir()"></td>
+    </tr>
+  </table>
+</div>
+
+<br />
+
+</div>
+<br/>
+<%= will_paginate @professor_rel_geral %>
+

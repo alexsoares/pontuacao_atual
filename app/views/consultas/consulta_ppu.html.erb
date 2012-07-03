@@ -1,0 +1,36 @@
+<style media="print">
+.botao {
+display: none;
+}
+</style>
+
+<br/>
+<br/>
+<fieldset>
+  <table rules="rows">
+    <table>
+
+<tr>
+        <td><%= label :sede_id, 'Sede: ' %>
+      <%= collection_select :p, :sede_id, @unidade_sede, :id, :nome, :include_blank => ' -- Selecione -- ' %></td>
+</tr>
+        <%= observe_field 'p_sede_id',
+         :frequency => 0.5,
+         :with => :p_sede_id,
+         #:update => "consultas",
+       :url => { :action => 'consulta_sede' } %>
+<tr>
+<td>
+     <div id="professores"></div>
+</td>
+</tr>
+
+   </table>
+   </table>
+</fieldset>
+<br/>
+
+<h1><center><div id="nome_consulta"></div></center></h1>
+ <div id="consultas"></div>
+ <div id="tempo"></div>
+

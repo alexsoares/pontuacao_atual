@@ -1,0 +1,45 @@
+<script Language="JavaScript">
+function Imprimir(){
+window.print();
+}
+</script>
+<style media="print">
+.botao {
+display: none;
+}
+</style>
+
+  <fieldset>
+   <legend><font size=4>Ações</font></legend>
+   <table border ="1" cellpadding="5" cellspacing="1" width="100%" >
+      <tr>
+        <th bgcolor="#cccccc">Login</th>
+        <th bgcolor="#cccccc">Ação</th>
+        <th bgcolor="#cccccc">Area afetada - Professor afetado</th>
+        <th bgcolor="#cccccc">Em (Data / Hora)</th>
+      </tr>
+      <% for log in @log_user %>
+        <tr>
+          <td width="16%"><center><%=h log.user.login %></center></td>
+          <td width="16%" ><center><%=h log.obs %></center></td>
+          <td width="16%" ><center><%=h log.area_afetada %></center></td>
+          <td width="16%"><center><%=h log.data %></center></td>
+                    <td width="16%"><center><%=h log.verifica_existe %></center></td>
+        </tr>
+        <tr>
+          <td bgcolor="#cccccc"><%= link_to 'Exibir', log %></td>
+        </tr>
+      <% end %>
+    </table>
+   </fieldset>
+
+
+<div class="botao">
+    <table width="100%">
+    <tr>
+      <td align="right"><input type="Button" Value="Imprimir" onclick="Imprimir()"></td>
+    </tr>
+  </table>
+
+</div>
+

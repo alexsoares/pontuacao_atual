@@ -1,0 +1,14 @@
+  <h1 align="center">Bem Vindo ao Serviço de Mensagens</h1>
+    <table border="1" width="90%" align="center">
+      <tr align="center">
+        <td width="33.3%"><%=  link_to 'Caixa de Entrada(' + ((@entrada).count).to_s + ')', entrada_mensagems_path%></td>
+        <td width="33.3%"><%=  link_to 'Lidas(' + ((@lidas).count).to_s + ')', lidas_mensagems_path%></td>
+        <td width="33.3%"><%=  link_to 'Enviadas(' + ((@saida).count).to_s + ')', saida_mensagems_path%></td>
+
+      </tr>
+      <tr>
+        <td colspan="3">
+          <div id="email1"></div>
+        </td>
+      </tr>
+    </table>

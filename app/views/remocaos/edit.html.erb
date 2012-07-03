@@ -1,0 +1,26 @@
+<br/>
+<h1>Desfazer solicitação Permuta / Remoção</h1>
+<div id="conteudo">
+<fieldset>
+<% form_for(@remocao) do |f| %>
+<% @lista_prof = Professor.find(:all, :conditions => ["id = " + @remocao.professor_id.to_s]) %>
+  <%= f.error_messages %>
+        <b>Nome: </b>        <font color="green"><div id="nome"></div></font>
+        <td><%= f.label :professor_id, 'Professor: ' %></td>
+        <td><%= f.collection_select :professor_id, @lista_prof, :id, :matricula, :include_blank => ' -- Selecione -- ' %><br/>
+
+        <td><%= f.label :remocao_efetivada, 'Efetivar?' %>
+        <%= f.check_box  :remocao_efetivada %></td><br/>
+
+        <td><%= f.label :unidade_id, 'Unidade: ' %></td>
+        <td><%= f.collection_select :unidade_id, @uni_rem, :id, :nome, :include_blank => ' -- Selecione -- ' %><br/>
+
+
+  <p>
+    <%= f.submit "Salvar", :confirm => "Verifique se os campos estão selecionados corretamente. Caso os campos estejam em branco, a solicitação de permuta / remoção do professor será cancelada." %>
+  </p>
+<% end %>
+</fieldset>
+| <%= link_to 'Exibir', @remocao %>
+| <%= link_to 'Voltar', remocaos_path %> |
+</div>

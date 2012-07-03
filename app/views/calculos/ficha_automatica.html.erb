@@ -1,0 +1,15 @@
+  <br/>
+  <br/>
+
+  <%= form_tag({ :method => 'post', :action => 'efetivar_ficha_automatica' }, :id => 'graph-unit-form')%>
+    <%= error_messages_for 'contact' %>
+   <table align="center" border="1">
+    <div class="botao">
+      <tr>
+        <th>
+          <h1>Gerar fichas automaticamente</h1>
+        </th>
+        <td><div class="botao"><%= submit_tag 'Gerar!', :message => 'Esta ação poderá levar alguns minutos' %></div></td>
+      </tr>
+    </div>
+    </table>

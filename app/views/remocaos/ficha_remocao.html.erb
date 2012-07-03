@@ -1,0 +1,75 @@
+<script Language="JavaScript">
+function Imprimir(){
+window.print();
+}
+</script>
+<style media="print">
+.botao {
+display: none;
+}
+</style>
+
+
+<div id="conteudo">
+  <div class="botao">
+    <%if params[:professor].present?%>
+      |    <%= link_to 'Voltar', remocao_sim_remocaos_path %>  |
+
+    <%else%>
+      |    <%= link_to 'Voltar', remocaos_path %>  |
+    <%end%>
+  </div>
+  <br/>
+  <fieldset>
+    <h2 align="Center"><u>   PREFEITURA MUNICIPAL DE AMERICANA</u></h2>
+    <h3 align="Center">   FICHA DE REMOÇÃO DE PROFESSOR</h3>
+    <h5 align="center"> <font size="2"> Americana <%= Time.now.strftime("%d de %B de %Y - %H:%M ") %>horas</font></h5>
+    <br/>
+    <%if @professors.present?%>
+      <%= render "remocao_dados" %>
+      <div class="botao">
+        <table width="100%">
+        <tr>
+          <td>
+           <div id="conteudo">
+             | <%= link_to 'Voltar', remocao_sim_remocaos_path %> |
+           </div>
+          </td>
+        </tr>
+        <tr>
+          <td align="right"><input type="Button" Value="Imprimir" onclick="Imprimir()"></td>
+        </tr>
+      </table>
+      </div>
+    <%else%>
+    <div class="botao">
+      <% form_remote_for :ficha, :method => :get,:loading => "$('#status').show()" , :success => "$('#status').hide()",
+        :url => {:controller => :remocaos,
+        :action => :dados_professor } do |form| %>
+        <tr>
+          <td><%= form.text_field :matricula, :size => 5 %></td
+          <td><%= submit_tag "Ficha", :name => nil %></td>
+        </tr>
+        
+      <% end %>
+    </div>
+    <div id="dados_professor"><div id='status' style='display:none;' align="center" ><%= image_tag("/stylesheets/images/loading.gif") %></div></div>
+  <div class="botao">
+      <table width="100%">
+      <tr>
+        <td>
+         <div id="conteudo">
+           | <%= link_to 'Voltar', remocaos_path %> |
+         </div>
+        </td>
+      </tr>
+      <tr>
+        <td align="right"><input type="Button" Value="Imprimir" onclick="Imprimir()"></td>
+      </tr>
+    </table>
+  <%end%>
+  </div>
+  </fieldset>
+
+</div>
+

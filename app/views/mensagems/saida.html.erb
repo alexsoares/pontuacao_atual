@@ -1,0 +1,37 @@
+<div id="conteudo">  
+  <%= button_to 'Nova Mensagem', new_mensagem_path %>
+  <br/>
+  <br/>
+  <h1 align="center" style="color:green">Caixa de Saída</h1>
+  <div class="corpo">
+  <br/>
+  <br/>
+  <br/>
+  <br/>
+  <table align="center" width="90%" border="1" frame="box" rules="all">
+    <tr bgcolor="white">
+      <th>Para</th>
+      <th>Titulo</th>
+      <th>Em</th>
+      <th colspan="2"></th>
+    </tr>
+    <%  if @mensagems.present? %>
+      <% for mensagem in @mensagems %>
+        <tr>
+          <td width="40%" align="center"><%=h User.find(mensagem.para).login %></td>
+          <td width="40%" align="center"><%=h mensagem.titulo %></td>
+          <td width="20%" align="center"><%=h mensagem.created_at.strftime("%d/%m/%Y %H:%M") %></td>
+          <td><%= link_to 'Exibir', mensagem, :class => 'botao3d' %></td>
+          <td><%= link_to 'Deletar', mensagem, :confirm => 'Tem certeza?', :method => :delete, :class => 'botao3d' %></td>
+        </tr>
+      <% end %>
+    <%else%>
+      <h1 align="center" style="color:red">Nenhuma Mensagem foi enviada</h1>
+    <%end%>
+    <%=  will_paginate @mensagems %>
+    </table>
+  </div>
+  <br />
+  <br/>
+  <%=link_to 'Voltar', :back, :class => 'botao3d' %>
+  </div>

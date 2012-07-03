@@ -1,0 +1,46 @@
+<table>
+<br/>
+    <font color="RED"size=5> Professor já cadastrado</font><br/>
+        <br/>
+        <b>Matrícula:</b>
+        <%= @verifica.matricula %><br/>
+        <b>Nome do Professor:</b>
+        <%= @verifica.nome %><br/>
+        <b>Data Ingresso:</b>
+        <%if @verifica.dt_ingresso.nil? then%>
+          <%= @verifica.dt_ingresso %><br/>
+        <%else%>
+          <%= @verifica.dt_ingresso.strftime("%d/%m/%Y") %><br/>
+        <%end%>
+        <b>Sede :</b>
+        <%= @verifica.unidade.nome %><br/>
+        <b>Endereço Res:</b>
+        <%= @verifica.endres %><br/>
+        <b>Numero:</b>
+        <%= @verifica.num %><br/>
+        <b>Bairro:</b>
+        <%= @verifica.bairro %><br/>
+        <b>Cidade:</b>
+        <%=  @verifica.cidade %><br/>
+        <b>No.de Filho:</b>
+        <%=  @verifica.n_filhos %><br/>
+
+        <b>Data de Nascimento:</b>
+          <%if @verifica.dt_nasc.nil? then %>
+            <%= @verifica.dt_nasc %><br/>
+          <%else%>
+            <%= @verifica.dt_nasc.strftime("%d/%m/%Y") %><br/>
+          <%end%>
+        <b>Jornada Semanal:</b>
+          <%= @verifica.jornada_sem%><br/>
+        <b>Telefone:</b>
+          <%= @verifica.telefone%><br/>
+        <b>Função:</b>
+          <%= @verifica.funcao %><br/>
+        <b>Observações:</b>
+        <%= @verifica.obs%><br/><br/>
+
+| <%= link_to 'Alterar', edit_professor_path(@verifica) %> 
+| <%= link_to 'Cadastrar', new_professor_path %> |
+
+</table> 

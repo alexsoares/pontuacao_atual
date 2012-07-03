@@ -1,0 +1,38 @@
+<div id="menu_principal">
+<div id="conteudo">
+
+    <h3 align="right">Efetuar Calculo Dias (Trabalhados/Efetivos/Rede e Unidade)</h3>
+
+
+  <br>
+  
+  <table width="100%" frame="box" rules="groups" border="1">
+  <%= form_tag( { :method => 'post' }, :id => 'calcula-pontuacao-form')%>
+    <%= error_messages_for 'contact' %>
+    <tr>
+      <th width="30%">
+        Selecione a Matricula desejada.
+      </th>
+      <td width="20%" align="center">
+        <%= collection_select :contact, :professor_id, @professors, :id, :matricula, :include_blank => ' -- Selecione uma matricula -- ' %>
+      </td>
+      <td width="40">
+        <div id="nome_professor"></div>
+      </td>
+    </tr>
+  </table>
+  <table>
+    <tr>
+      <td align="right" colspan="3">
+        <%= submit_tag 'Calcula Dias' %>
+      </td>
+    </tr>
+  </table>
+
+<br>
+  <br>
+    <br>
+<%= link_to_remote('Voltar', :update => "conteudo", :url => {:controller => 'professors', :action => 'executar'}) %>
+</div>
+</div>
+

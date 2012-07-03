@@ -1,0 +1,25 @@
+<br/>
+<div id="conteudo">
+<br />
+<br />
+  <fieldset>
+   <legend align="center"><font size=10>Unidade</font></legend>
+    <p>
+      <b>Nome:</b>
+      <td><%=h @unidade.nome %></td>
+    </p>
+    <p>
+      <b>Tipo:</b>
+      <td><%=h @unidade.nome_tipo %></td>
+    </p>
+    <p>
+      <b>Localização</b>
+      <td><%=h @unidade.regiao.nome %></td>
+    </p>
+  </fieldset><br/>
+
+  | <%= link_to 'Alterar', edit_unidade_path(@unidade) %> |
+  <%= link_to 'Voltar', unidades_path %> |
+
+
+</div>

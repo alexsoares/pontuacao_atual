@@ -1,0 +1,88 @@
+  <br/>
+<div class="botao">
+  <div id="conteudo">
+<table width="100%" align="center">
+    <tr>
+      <td colspan="3">
+        <h1 align="center">Opções de trabalho</h1>
+      <hr>    
+      </td>
+    </tr>
+    <br/>    
+      <tr align="center">
+        <%if logged_in?%>
+            <%if current_user.has_role?("admin") or current_user.has_role?("planejamento") %>
+              <td><%= link_to image_tag("/stylesheets/images/write.png", :size => "60x60"), lista_remocao_remocaos_path, :title => "Professores Aguardando Remocao" %><br/>Anteriores
+            <%end%>
+        <%end%>
+        </td>
+        <td><%= link_to image_tag("/stylesheets/images/solicitar_servicos.png", :size => "60x60"), new_remocao_path, {:title => 'Antes de Cadastrar a remocao de um professor, verifique na listagem abaixo se a mesma ja não foi solicitada'} %><br/>
+        Solicitar</td>
+        <td><%= link_to image_tag("/stylesheets/images/imprimir.png", :size => "60x60"), "#inline_tipo", :class =>"inline", :title => ["Imprimir fichas"]  %><br/>Imprimir Ficha</td>
+        <%if logged_in?%>
+        <td><%= link_to "Teste", "#inline_tipo", :class =>"inline", :title => ["Imprimir fichas"]  %><br/>Imprimir Ficha</td>
+        <%end%>
+      </tr>
+    </table>
+<br/>
+<br/>
+<h2 align="center">Listagem de Professores com remoção/permuta solicitada</h2>
+<br/>
+<div class="relatorios">
+<table border="1" frame="box" rules="all" width="80%" align="center">
+  <tr>
+    <th bgcolor="#cccccc">Matrícula</th>
+    <th bgcolor="#cccccc">Nome</th>
+    <th bgcolor="#cccccc">Função</th>
+    <th bgcolor="#cccccc">Pontuacao Obtida</th>
+    <th bgcolor="#cccccc">Ano Letivo</th>
+    <th bgcolor="#cccccc">Tipo</th>
+    <th bgcolor="#cccccc" colspan="2">Administração</th>
+  </tr>
+<% @remocaos_sim = Remocao.paginate(:include => :professor,:page=>params[:page],:per_page =>20, :conditions => ["status = 1 and ano_letivo = ?", Time.current.strftime("%Y")], :order => :created_at)%>
+<% for remocao in @remocaos_sim %>
+  <tr align="center">
+
+    <td><%= remocao.professor.matricula %> </td>
+    <td><%= remocao.professor.nome %> </td>
+    <td><%= truncate(remocao.professor.funcao, :length => 30, :omission => "...") %> </td>
+    <td><%= remocao.professor.pontuacao_final %> </td>
+    <td><%= remocao.ano_letivo %> </td>
+    <td>
+      <%if remocao.type_of.to_i == 1%>
+        <%= "Remoção" %>
+      <%else%>
+        <%= "Permuta" %>
+      <%end%>
+    </td>
+    <%if logged_in?%>
+      <%if current_user.has_role?("admin") or current_user.has_role?("planejamento") %>
+        <td align="center" bgcolor="white"><%= link_to image_tag("/stylesheets/images/status_red.png", :size => "15x15"), edit_remocao_path(remocao), :title => "Decisão de Remoção Pendente" %></td>
+      <%end%>
+    <%else%>
+      <td align="center" bgcolor="white"><%= image_tag("/stylesheets/images/status_red.png", :size => "15x15", :title => "Decisão de Remoção Pendente") %></td>
+    <%end%>
+    <% if remocao.type_of == 1%>
+      <% link = ficha_remocao_remocaos_path(:professor => remocao.professor.matricula, :type_of => 1) %>
+      <% kind = "remoção"%>
+    <%else%>
+      <% link = ficha_permuta_remocaos_path(:professor => remocao.professor.matricula, :type_of => 2) %>
+      <% kind = "permuta" %>
+    <%end%>
+    <td align="center" bgcolor="white"><%= link_to image_tag("/stylesheets/images/imprimir.png", :size => "15x15"), link, :title => "Imprimir ficha de #{kind}" %></td>
+  </tr>
+
+
+<% end %>
+  <tr>
+    <td colspan="8"><%= will_paginate @remocaos_sim %></td>
+  </tr>
+</table>
+<br />
+</div>
+ </div>
+<%= render "tipo_remocao"%>
+ </div>
+
+
+

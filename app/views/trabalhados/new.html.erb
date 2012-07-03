@@ -1,0 +1,81 @@
+<div id="existe"></div>
+<div id="conteudo">
+<legend><div class="button"><%= link_to('Novo', new_trabalhado_path)%></div></legend>
+<hr/>
+<fieldset>
+  <legend style="font-size: large"> Cadastro de Tempo de Serviço</legend>
+  <div id="pont_initial"></div>
+  <% form_for(@trabalhado) do |f| %>
+    <%= f.error_messages %>
+    <div id="total">
+      <div id="mensagem">
+        <br/>
+        SELECIONAR A MATRÍCULA DO PROFESSOR.
+        <br/><br/>
+      </div>
+      
+        <table width="100%" border="1">
+          <tr>
+            <td><%= f.label :professor_id, 'Professor' %></td>
+            <td><%= f.collection_select :professor_id, @professor_sede, :id, :matricula, :include_blank => ' -- Selecione -- ' %></td>
+            <td colspan="10"><div id="nomeprof"></div></td>
+          </tr>
+          <%= observe_field 'trabalhado_professor_id',
+              :frequency => 0.5,
+              #:update => "professor_id",
+              :with => :trabalhado_professor_id,
+              :url => { :action => 'sel_prof' } %>
+
+          <tr>
+            <td><%= f.label :ano, 'Ano:' %> </td>
+            <td><%= f.label :dias, 'Dias' %> </td>
+            <td><%= f.label :dias, 'Unidade' %></td>
+            <td><%= f.label :outro_trab, 'Outro Emp.' %></td>
+            <td><%= f.label :f_abonada, 'Faltas Abonadas' %></td>
+            <td><%= f.label :atestado, 'Atestado Médico' %></td>
+            <td><%= f.label :f_justif, 'Faltas Justif.' %></td>
+            <td><%= f.label :f_injustif, 'Faltas Injustif.' %></td>
+            <td><%= f.label :lic_saude, 'Licenças Saúde' %></td>
+            <td><%= f.label :afastamento, 'Afast. não Renum' %></td>
+            <td><%= f.label :outras_ausencias, 'Outras ausencias' %></td>
+          </tr>
+          <tr>
+            <td><div id="ano"><%= f.select :ano, @ano, :include_blank => '' %></div>
+              <%= observe_field 'trabalhado_ano',
+                  :frequency => 0.5,
+                  #:update => "professor_id",
+                  :with => :trabalhado_ano,
+                  :url => { :action => 'verifica_ano' } %>
+            </td>
+            <td><%= f.text_field :dias, :size => 1 %></td>
+            <td><%= f.text_field :unidade, :size => 1 %></td>
+            <td><%= f.text_field :outro_trab, :size => 1 %></td>
+            <td><%= f.text_field :f_abonada, :size => 1 %></td>
+            <td><%= f.text_field :atestado,:size => 1 %></td>
+            <td><%= f.text_field :f_justif, :size => 1 %></td>
+            <td><%= f.text_field :f_injustif, :size => 1 %></td>
+            <td><%= f.text_field :lic_saude, :size => 1 %></td>
+            <td><%= f.text_field :afastamento, :size => 1 %></td>
+            <td><%= f.text_field :outras_ausencias, :size => 1 %></td>
+          </tr>
+          <tr>
+            <td colspan="12" align="right"><%= f.submit "Cadastrar"%></td>
+          </tr>
+
+            <tr>
+              <td colspan="12">
+                
+                  <fieldset>
+                    <legend style="font-size:large">Dados cadastrados</legend>
+                    <div id="teste11"></div>
+                  </fieldset>
+                
+             </td>
+            </tr>
+          
+        </table>
+ 
+   </div>
+<% end %>
+</fieldset>
+</div>

@@ -1,0 +1,69 @@
+
+  <p>
+
+  <fieldset>
+   <legend><font size=4>Alterar de Tempo de Serviço</font></legend>
+
+
+<table border="1">
+  <tr>
+  </tr>
+
+<% for trabalho in @busca_trab %>
+
+  <tr>
+    <td align="center">
+      <b>Ano</b><br/>
+      <%= trabalho.ano %><br/>
+     </td>
+     <td align="center">
+     <b> Dias </b><br/>
+         <%= trabalho.dias%><br/>
+     </td>
+     <td align="center">
+        <b> Unidade</b><br/>
+        <%= trabalho.unidade %><br/>
+     </td>
+     <td align="center">
+        <b>O. Emprego</b><br/>
+        <%= trabalho.outro_trab %> <br/>
+     </td>
+
+     <td align="center">
+        <b>F. Abonadas</b><br/>
+        <%= trabalho.f_abonada %><br/>
+     </td>
+     <td align="center">
+        <b>F. Atestados</b><br/>
+        <%= trabalho.atestado %><br/>
+     <td align="center">
+        <b>F. Justif.</b><br/>
+        <%= trabalho.f_justif %><br/>
+     </td>
+     <td align="center">
+        <b>F. Injustif.</b><br/>
+        <%= trabalho.f_injustif %><br/>
+    </td>
+    <td align="center">
+        <b>Lic. Saúdes</b><br/>
+        <%= trabalho.lic_saude %><br/>
+    </td>
+    <td width ="10%" align="center">
+        <b>Af. não Remun.</b><br/>
+        <%= trabalho.afastamento %>
+    </td>
+  </tr>
+  <tr>
+
+    <td>| <%= link_to 'Alterar', edit_trabalhado_path(trabalho) %> | </td>
+    <td>| <%= link_to 'Apagar', trabalho, :confirm => 'Confirma?', :method => :delete %> | </td>
+  </tr>
+<% end %>
+</table>
+</fieldset>
+
+    <div id="teste"></div>
+
+
+<br />
+

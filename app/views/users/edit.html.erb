@@ -1,0 +1,34 @@
+<div id="conteudo">
+<br/>
+<fieldset><legend>Alteração de usuário</legend>
+   <%= error_messages_for :user %>
+
+       <% form_for(@user) do |f| %>
+       <p><label for="login">Usuário:</label><br/>
+       <b><%= @user.login %></b></p>
+
+       <p><label for="password">Senha:</label><br/>
+       <%= f.password_field :password %></p>
+
+       <p><label for="password_confirmation">Confirmação Senha:</label><br/>
+       <%= f.password_field :password_confirmation %></p>
+
+       <p><label for="regiao_id">Unidade:</label><br/>
+            <b><%= f.label @user.unidade.nome %></b>
+
+       <p><label for="email">Email:</label>
+       <%= f.text_field :email %></p>
+       <p><label for="layout"></label>
+       <%if @user.login == "adrie"%>
+        <%= f.select :layout,User::LAYOUT %></p>
+       <%end%>
+
+       <p><%= submit_tag 'Alterar' %></p>
+      <% end %>
+
+
+</fieldset>
+<br/>
+<%= link_to 'Voltar', root_path %>
+</div>
+

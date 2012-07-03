@@ -1,0 +1,64 @@
+<% if @professors.present? %>
+
+  <br/>
+
+  <h3><center><b>Ano:</b><%= Time.current.strftime("%Y") %></center></h3>
+
+  <% for professor in @professors %>
+  <table width="100%" >
+   <td></td>
+   <td width="60%" >
+        <b>Matrícula:<%=h professor.professor.matricula %></b><br/>
+        <b>Nome: <%=h professor.professor.nome %></b><br/>
+        <b>Data Ingresso:</b>
+            <%if professor.professor.dt_ingresso.nil? then %>
+                  <%=h professor.professor.dt_ingresso %>
+                 <%else%>
+                   <%=h professor.professor.dt_ingresso.strftime("%d/%m/%y") %>
+              <%end%>
+              <br/>
+        <b>Sede:</b><%=h professor.professor.unidade.nome%>
+     </td>
+     <td width="40%" >
+       <b>RG:</b><%=h professor.professor.RG%><br/>
+       <b>CPF: </b><%=h professor.professor.CPF %><br/>
+       <b>Função:</b><%=h professor.professor.funcao%><br/>
+     </td>
+   </table>
+
+   <br/>
+   <%= render "relatorio_tps" %>
+   <br/> <br/>
+
+  <table align="center">
+   <td>
+      <tr>
+        <td><b>Total Tempo Serviço:        </b></td><td> <%=  h professor.professor.total_trabalhado%></td>
+      </tr>
+      <tr>
+        <td><b>Total Titulação: </b></td><td><%=  h professor.professor.total_titulacao %></td>
+      <tr>
+      </tr>
+       <td><b>Total Geral:</b></td> <td><%=  h professor.professor.pontuacao_final%></td>
+      </tr>
+    </td>
+
+  </table>
+    <% end %>
+
+   <br/> <br/> <br/> <br/> <br/>
+
+
+     Americana _____/______/<%= Time.current.strftime("%Y") %>
+    <br/><br/><br/> <br/>
+
+       ________________________________________________<br/>
+            assinatura do professor<br/><br/>
+<%else%>
+<h1>Professor não solicitou a remoção</h1>
+<%end%>
+
+
+
+
+

@@ -1,0 +1,29 @@
+<h1>New correcao</h1>
+
+  <%= form_tag find_professor_correcaos_path, :method => :get%>
+    <%= error_messages_for 'contact' %>
+   <table width="100%">
+    <div class="botao">
+      <tr>
+        <td width="80%" align="right">
+          <div class="botao">
+          Professor:
+          <%= collection_select :contact,:professor,Professor.all, :id, :nome, :prompt => true %>
+          <%= submit_tag 'Filtrar', :name => nil %></div>
+        </td>
+      </tr>
+    </div>
+    </table>
+<div id="professor"></div>
+<% form_for(@correcao) do |f| %>
+  <%= f.error_messages %>
+  <p>
+    <%= f.label :valor %><br />
+    <%= f.text_field :valor %>
+  </p>
+  <p>
+    <%= f.submit 'Create' %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', correcaos_path %>

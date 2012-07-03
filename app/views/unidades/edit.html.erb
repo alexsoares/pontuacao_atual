@@ -1,0 +1,41 @@
+<div id="conteudo">
+  <br/>
+  <br/>
+    <fieldset>
+   <legend align="center"><font size=10>Unidades</font></legend>
+   <br>
+    <% form_for(@unidade) do |f| %>
+      <%= f.error_messages %>
+      <p>
+        <%= f.label :nome, 'Nome' %><br />
+        <%= f.text_field :nome %>
+      </p>
+      <p>
+        <%= f.label :tipo, 'Tipo' %><br />
+        <select id="_unidade_tipo" name="unidade[tipo]">
+          <option value="0"><%=h @unidade.nome_tipo %></option>
+          <option value="1">CRECHE</option>
+          <option value="2">EMEI</option>
+          <option value="3">CASA DA CRIANCA</option>
+          <option value="4">EMEF</option>
+          <option value="5">CIEP</option>
+          <option value="6">TEMPO DE VIVER</option>
+        </select>
+      </p>
+      <p>
+        <%= f.label :regiao_id, 'Região' %><br />
+        <%= f.collection_select :regiao_id, @regiaos, :id, :nome %>
+      </p>
+        </fieldset>
+      <br/>
+      <fieldset>
+        <p>
+          <%= f.submit "Atualizar" %>
+        </p>
+      </fieldset>
+    <% end %>
+
+      <br/>
+| <%= link_to 'Exibir', @unidade %> |
+<%= link_to 'Voltar', unidades_path %> |
+</div>

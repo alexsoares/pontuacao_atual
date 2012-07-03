@@ -1,0 +1,86 @@
+<script Language="JavaScript">
+function Imprimir(){
+window.print();
+}
+</script>
+<style media="print">
+.botao {
+display: none;
+}
+</style>
+<br/>
+<div id ="conteudo">
+  <div class="relatorios">
+<table>
+  <tr>
+  <% for professor in @professors %>
+      <table border ="1" cellpadding="1" cellspacing="1" width="100%" >
+    <tr>
+    <center><th width="10" bgcolor="#cccccc">Matrícula</th></center>
+    <th width="35%" bgcolor="#cccccc">Nome</th>
+    <th width="10%" bgcolor="#cccccc">Sede</th>
+    <th width="20%" bgcolor="#cccccc">Função</th>
+    <th width="14%" bgcolor="#cccccc">Pontos Tempo Serviço</th>
+    <th width="7%" bgcolor="#cccccc">Pontos Titulação</th>
+    <th width="7%" bgcolor="#cccccc">Pontuação Total</th>
+    <th width="10%" bgcolor="#cccccc">Jornada</th>
+    <th width="10%" bgcolor="#cccccc">Data Ingresso</th>
+   </tr>
+   <tr>
+    <p><td><center><%=h professor.matricula %></center></td>
+    <td><center><%=h professor.nome %></center></td>
+    <td><center><%=h professor.unidade.nome%></center></td>
+    <td><center><%=h professor.funcao%></center></td>
+    <td><center><%=h format("%.3f",professor.total_trabalhado)%></center></td>
+    <td><center><%=h format("%.3f",professor.total_titulacao)%></center></td>
+    <td><center><%=h format("%.3f",professor.pontuacao_final)%></center></td>
+    <td><center><%=h professor.jornada_sem%></center></td>
+        <% if professor.dt_ingresso.nil? then %>
+             <td><center><%=h professor.dt_ingresso %></center></td>
+        <%else%>
+             <td><center><%=h professor.dt_ingresso.strftime("%d/%m/%y") %></center></td>
+        <%end%>
+    </tr>
+   </table>
+  
+  <% @tp = TituloProfessor.find(:all,:joins => :titulo, :conditions => ['titulacaos.id = ? and professor_id = ? and ano_letivo = ?',$titulo,professor.id,$data]) %>
+
+  <% $contador=0%> <%$pontos=0%>
+  
+    <table border="1"align="right" width="94%" >
+      <tr>
+        <th bgcolor="#cccccc" width="35%">Graduação</th>
+        <th bgcolor="#cccccc" width="40%">Titulo</th>
+        <th bgcolor="#cccccc" width="11%">Data Conclusão</th>
+      </tr>
+  <%for tp in @tp%>
+     <tr>
+       <td align="center"><%=h tp.titulo.descricao %></td>
+       <td align="center"><%=h tp.obs%></td>
+      <td align="center"><%= tp.dt_titulo.strftime("%d/%m/%y")%></td>
+      <%$pontos= $pontos + tp.pontuacao_titulo%>
+     </tr>
+     <% $contador= $contador+1 %>
+ <%end%>
+ <tr>
+   <td colspan="3"><font color="green">Este professor possui <%=$contador%> titulo(s) cadastrado(s) totalizando <%=$pontos%> pontos</font></td>
+   </tr>
+  </table>
+<% end %>
+
+<%= will_paginate @professors %>
+
+
+</tr>
+<div class="botao">
+<table width="100%">
+    <tr>
+      <td align="right"><input type="Button" Value="Imprimir" onclick="Imprimir()"></td>
+    </tr>
+  </table>
+</div>
+<br/>
+
+</table>
+</div>
+</div>

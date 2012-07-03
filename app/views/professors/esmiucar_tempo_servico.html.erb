@@ -1,0 +1,61 @@
+<h2 align="center">Check-up Tempo de serviço</h2>
+<table border="1" align="center" class="tabelas">
+      <tr align="center">
+        <th></th>
+        <th colspan="3">Trabalhados</th>
+        <th colspan="3">Efetivos</th>
+        <th colspan="3">Rede</th>
+        <th colspan="3">Unidade</th>
+        <th>Check</th>
+      </tr>
+      <tr>
+        <th>Matricula</th>
+
+        <th>Ant Trab</th>
+        <th>Trabalhados</th>
+        <th>Acum Trab</th>
+
+        <th>Ant Efet</th>
+        <th>Efetivos</th>
+        <th>Acum Efetivos</th>
+
+        <th>Ant Rede</th>
+        <th>Rede</th>
+        <th>Acum Rede</th>
+
+        <th>Ant Unid</th>
+        <th>Unidade</th>
+        <th>Acum Unidade</th>
+        <th></th>
+      </tr>
+      <% @tempo.each do |tempo| %>
+        <%@acum_trab = AcumTrab.acum(tempo)%>
+        <%@check = Trabalhado.check(tempo,$data)%>
+      <tr align="center">
+        <td><%= tempo.matricula %></td>
+
+        <td><%= acum_ant_trab = @acum_trab.tot_acum_ant_trab %></td>
+        <td><%= atual_trab = @check.soma_trab%></td>
+        <td><%= somado_trab = @acum_trab.tot_acum_trab %> </td>
+
+        <td><%= acum_ant_efet = @acum_trab.tot_acum_ant_efet %></td>
+        <td><%= atual_efet = @check.soma_efet%></td>
+        <td><%= somado_efet = @acum_trab.tot_acum_efet %> </td>
+
+        <td><%= acum_ant_rede = @acum_trab.tot_acum_ant_rede %></td>
+        <td><%= atual_rede = @check.soma_rede%></td>
+        <td><%= somado_rede = @acum_trab.tot_acum_rede %> </td>
+
+        <td><%= acum_ant_unid = @acum_trab.tot_acum_ant_unid %></td>
+        <td><%= atual_unid = @check.soma_unid%></td>
+        <td><%= somado_unid = @acum_trab.tot_acum_unid %> </td>
+
+        <% if (((acum_ant_trab.to_i + atual_trab.to_i) == somado_trab.to_i) && ((acum_ant_efet.to_i + atual_efet.to_i) == somado_efet.to_i) && ((acum_ant_rede.to_i + atual_rede.to_i) == somado_rede.to_i) && ((acum_ant_unid.to_i + atual_unid.to_i) == somado_unid.to_i)) %>
+          <td>Ok</td>
+        <%else%>
+          <td>Problemas</td>
+        <%end%>
+      </tr>
+      <tr></tr>
+    <%end%>
+</table>

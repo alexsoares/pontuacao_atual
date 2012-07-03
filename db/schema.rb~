@@ -1,0 +1,105 @@
+# This file is auto-generated from the current state of the database. Instead of editing this file, 
+# please use the migrations feature of Active Record to incrementally modify your database, and
+# then regenerate this schema definition.
+#
+# Note that this schema.rb definition is the authoritative source for your database schema. If you need
+# to create the application database on another system, you should be using db:schema:load, not running
+# all the migrations from scratch. The latter is a flawed and unsustainable approach (the more migrations
+# you'll amass, the slower it'll run and the greater likelihood for issues).
+#
+# It's strongly recommended to check this file into your version control system.
+
+ActiveRecord::Schema.define(:version => 20090923114638) do
+
+  create_table "acum_trabs", :force => true do |t|
+    t.integer  "professor_id"
+    t.integer  "tot_acum_ant_trab", :limit => 10, :precision => 10, :scale => 0, :default => 0
+    t.integer  "tot_acum_ant_efet", :limit => 10, :precision => 10, :scale => 0, :default => 0
+    t.integer  "tot_acum_ant_rede", :limit => 10, :precision => 10, :scale => 0, :default => 0
+    t.integer  "tot_acum_ant_unid", :limit => 10, :precision => 10, :scale => 0, :default => 0
+    t.integer  "tot_acum_trab",     :limit => 10, :precision => 10, :scale => 0, :default => 0
+    t.integer  "tot_acum_efet",     :limit => 10, :precision => 10, :scale => 0, :default => 0
+    t.integer  "tot_acum_rede",     :limit => 10, :precision => 10, :scale => 0, :default => 0
+    t.integer  "tot_acum_unid",     :limit => 10, :precision => 10, :scale => 0, :default => 0
+    t.decimal  "tot_geral_trab",                  :precision => 10, :scale => 3, :default => 0.0
+    t.decimal  "tot_geral_efet",                  :precision => 10, :scale => 3, :default => 0.0
+    t.decimal  "tot_geral_rede",                  :precision => 10, :scale => 3, :default => 0.0
+    t.decimal  "tot_geral_unid",                  :precision => 10, :scale => 3, :default => 0.0
+    t.decimal  "pont_base_trab",                  :precision => 10, :scale => 3, :default => 0.0
+    t.decimal  "pont_base_efet",                  :precision => 10, :scale => 3, :default => 0.0
+    t.decimal  "pont_base_rede",                  :precision => 10, :scale => 3, :default => 0.0
+    t.decimal  "pont_base_unid",                  :precision => 10, :scale => 3, :default => 0.0
+    t.decimal  "valor_trab",                      :precision => 10, :scale => 3, :default => 0.0
+    t.decimal  "valor_efet",                      :precision => 10, :scale => 3, :default => 0.0
+    t.decimal  "valor_rede",                      :precision => 10, :scale => 3, :default => 0.0
+    t.decimal  "valor_unid",                      :precision => 10, :scale => 3, :default => 0.0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "professors", :force => true do |t|
+    t.integer  "matricula",                                                        :null => false
+    t.string   "nome",                                                             :null => false
+    t.datetime "dt_atual"
+    t.datetime "dt_ingresso"
+    t.datetime "dt_nasc"
+    t.integer  "n_filhos",                                        :default => 0
+    t.string   "sede",                                                             :null => false
+    t.integer  "jornada_sem",                                     :default => 0
+    t.string   "funcao",                                                           :null => false
+    t.string   "endres"
+    t.string   "bairro"
+    t.integer  "num"
+    t.integer  "telefone"
+    t.string   "cidade"
+    t.string   "obs"
+    t.decimal  "total_trabalhado", :precision => 10, :scale => 3, :default => 0.0
+    t.decimal  "total_titulacao",  :precision => 10, :scale => 3, :default => 0.0
+    t.decimal  "pontuacao_final",  :precision => 10, :scale => 3, :default => 0.0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "titulacaos", :force => true do |t|
+    t.string   "tipo",                                                       :null => false
+    t.string   "descricao",                                                  :null => false
+    t.string   "referencia",                                                 :null => false
+    t.decimal  "valor",      :precision => 10, :scale => 3, :default => 0.0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "titulo_professors", :force => true do |t|
+    t.integer  "titulo_id",                                                         :null => false
+    t.integer  "professor_id",                                                      :null => false
+    t.integer  "quantidade",                                      :default => 0
+    t.decimal  "pontuacao_titulo", :precision => 10, :scale => 2, :default => 0.0
+    t.decimal  "valor",            :precision => 10, :scale => 2, :default => 0.0
+    t.date     "dt_titulo"
+    t.date     "dt_validade"
+    t.boolean  "status",                                          :default => true
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "trabalhados", :force => true do |t|
+    t.integer  "professor_id",                 :null => false
+    t.integer  "ano",                          :null => false
+    t.integer  "dias",          :default => 0
+    t.integer  "unidade",       :default => 0
+    t.integer  "outro_trab",    :default => 0
+    t.integer  "f_abonada",     :default => 0
+    t.integer  "atestado",      :default => 0
+    t.integer  "f_justif",      :default => 0
+    t.integer  "f_injustif",    :default => 0
+    t.integer  "lic_saude",     :default => 0
+    t.integer  "afastamento",   :default => 0
+    t.integer  "dias_trab",     :default => 0
+    t.integer  "dias_efetivos", :default => 0
+    t.integer  "dias_rede",     :default => 0
+    t.integer  "dias_unidade",  :default => 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+end

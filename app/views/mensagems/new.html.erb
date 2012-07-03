@@ -1,0 +1,29 @@
+<div id="conteudo">
+<h1>Nova mensagem</h1>
+
+<% form_for(@mensagem) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :user_id,'De:' %>
+    <b><%= User.find(current_user.id).login %></b>
+  </p>
+  <p>
+    <%= f.label :para, 'Para: ' %>
+    <%= f.collection_select :para ,@user_para,:id,:login, :prompt => 'TODOS'%>
+  </p>
+  <p>
+    <%= f.label :titulo,'Titulo:' %>
+    <%= f.text_field :titulo %>
+  </p>
+  <p>
+    <%= f.label :texto,'Mensagem: ' %><br />
+    <%= f.text_area :texto %>
+  </p>
+  <p>
+    <%= f.submit "Enviar" %>
+  </p>
+<% end %>
+
+<%= link_to 'Voltar', mensagems_path %>
+</div>

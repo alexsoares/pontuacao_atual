@@ -1,0 +1,25 @@
+  <%$subtotal_titulos = 0%>
+  <%$subtot_perm = 0%>
+  <%$subtot_um = 0%>
+  <%$subtot_cinco = 0%>
+<div id="busca_ficha">
+  <div class="botao">
+    <table width="100%">
+      <tr>
+          <% form_tag gerar_ficha_professors_path, :method => 'get' do %>
+           <p>
+            <tr>
+                <td align="right"> Matricula:
+                 <%= text_field_tag :ficha, params[:ficha] %>
+                 <%= submit_tag "Gerar", :name => nil %></td>
+              </tr>
+           </p>
+          <% end %>
+      </tr>
+    </table>
+  </div>
+</div>
+<div id="separator"></div>
+<div id="mensagem">
+  <h2 align="center">Digite a matricula</h2>
+</div>

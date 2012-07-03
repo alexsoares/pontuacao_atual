@@ -1,0 +1,128 @@
+<%$soma_st_dt = 0%>
+<%$soma_st_de = 0%>
+<%$soma_st_dr = 0%>
+<%$soma_st_du = 0%>
+<table width="100%" frame="box" rules="all">
+<tr><th width="100%" colspan="5" align="center"><hr/>Contagem de Tempo de Serviço  <div id="nomeprof"></div><hr/></th></tr>
+</table>
+
+
+<table border="1" width="100%" frame="box" rules="groups">
+ <table border ="1" cellpadding="1" cellspacing="1" width="100%" frame="box" rules="all" >
+<tr>
+    <th>Ano</th>
+    <th>Dias</th>
+    <th>Unidade</th>
+    <th>Outro Emprego</th>
+    <th>Faltas Abonadas</th>
+    <th>Faltas Atestados</th>
+    <th>Faltas Justif.</th>
+    <th>Faltas Injust.</th>
+    <th>Licenças Saúde</th>
+    <th>Afast. não remun.</th>
+    <th>Dias Trabalhados</th>
+    <th>Dias Efeivos</th>
+    <th>Dias Rede</th>
+    <th>Dias Unidade</th>
+     <th>Salvo</th>
+  </tr>
+
+<% for trabalho in @trabalho %>
+  <tr>
+    <td>
+
+      <center> <%= trabalho.ano %><br/></center>
+    </td>
+     <td>
+
+      <center>   <%= trabalho.dias%><br/></center>
+     </td>
+     <td>
+
+        <center><%= trabalho.unidade %><br/></center>
+     </td>
+     <td>
+
+        <center><%= trabalho.outro_trab %> <br/></center>
+     </td>
+
+     <td>
+
+        <center><%= trabalho.f_abonada %><br/></center>
+     </td>
+     <td>
+
+        <center><%= trabalho.atestado %><br/></center>
+     <td>
+
+        <center><%= trabalho.f_justif %><br/></center>
+     </td>
+     <td>
+
+        <center><%= trabalho.f_injustif %><br/></center>
+    </td>
+    <td>
+
+        <center><%= trabalho.lic_saude %><br/></center>
+    </td>
+    <td width ="7%">
+
+        <center><%= trabalho.afastamento %></center>
+    </td>
+    <td width ="7%">
+
+      <center><%= $st_dt = trabalho.dias_trab %></center>
+      <% $soma_st_dt = $soma_st_dt + $st_dt %>
+    </td>
+    <td width ="7%">
+
+      <center><%= $st_de = trabalho.dias_efetivos %></center>
+      <% $soma_st_de = $soma_st_de + $st_de %>
+    </td>
+    <td width ="7%">
+
+      <center><%= $st_dr = trabalho.dias_rede %></center>
+      <% $soma_st_dr = $soma_st_dr + $st_dr %>
+
+    </td>
+    <td width ="7%">
+
+      <center><%= $st_du = trabalho.dias_unidade %></center>
+      <% $soma_st_du = $soma_st_du + $st_du %>
+    </td>
+    <td width ="7%" colspan="2">
+
+      <% if trabalho.flag == true then %>
+        <center><%='OK' %></center>
+        <% $conta = 1  %>
+      <%else%>
+        <center><%= 'Aguardando'%></center>
+        <% $conta = 0  %>
+      <%end%>
+    </td>
+
+
+
+  </tr>
+
+
+<%end%>
+    <tr>
+      <td colspan="10">
+        <b>Sub-Total (Em Dias)</b>
+      </td>
+      <td align="center"><%= $total_dt_ano = Professor.sub_total_dt.to_s %></td>
+      <td align="center"><%= $total_de_ano = Professor.sub_total_de.to_s %></td>
+      <td align="center"><%= $total_dr_ano = Professor.sub_total_dr.to_s %></td>
+      <td align="center"><%= $total_du_ano = Professor.sub_total_du.to_s %></td>
+    </tr>
+
+</table>
+</table>
+     <%  if $conta == 0 then %>
+     <table width="100%">
+     <tr>
+           <td width="100%" colspan="15" align="right">| <%= link_to  'Alterar', trabalhados_path %> |</td>
+     </tr>
+     </table>
+     <%end%>

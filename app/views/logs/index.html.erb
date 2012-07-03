@@ -1,0 +1,31 @@
+<style media="print">
+.botao {
+display: none;
+}
+</style>
+<br/>
+<div id="conteudo">
+<h2 align="right">Log's de Ação - S I S D E M A N  --  V1.5       .</h2>
+<br/>
+<br/>
+<table width="30%">
+<div class="botao">
+<fieldset>
+<div id="selecione" align="center">
+  <%= render :partial => 'selecione_usuario' %>
+</div>
+</fieldset>
+</div>
+</table>
+<br />
+<div id="log"></div>
+<div class="botao">
+    <table width="100%">
+    <tr>
+      |<%= link_to 'Voltar', root_path %>|
+    </tr>
+  </table>
+
+</div>
+
+</div>

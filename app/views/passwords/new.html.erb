@@ -1,0 +1,26 @@
+<br/>
+<br/>
+<br/>
+<br/>
+<table border="1" align="center" width="90%">
+  <tr>
+    <td>
+      <h1><center>Esqueceu a senha?</center></h1>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <% form_tag url_for(:action => 'create') do %>
+        Insira o e-mail utilizado para efetuar o cadastro
+        <%= text_field_tag :email, "", :size => 50 %>
+        <%= submit_tag 'Enviar' %>
+      <% end %>
+
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <%= link_to 'Voltar', root_path %>
+    </td>
+  </tr>
+</table>

@@ -1,0 +1,6 @@
+<%if $voltar == 0 then%>
+    <%$voltar = 0%>
+<%else%>
+  | <%= link_to 'Voltar', new_trabalhado_path %> |
+  <%$voltar = 0%>
+<%end%>

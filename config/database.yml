@@ -1,0 +1,35 @@
+production:
+  adapter: mysql
+  encoding: utf8
+  database: pontuacao_production
+  pool: 5
+  username: root
+  password: s3inf05
+  socket: /var/run/mysqld/mysqld.sock
+
+development:
+  adapter: mysql
+  encoding: utf8
+  database: pontuacao_development
+  pool: 5
+  username: root
+  password: s3inf0
+  socket: /var/run/mysqld/mysqld.sock
+
+test:
+  adapter: mysql
+  encoding: utf8
+  database: pontuacao_test
+  pool: 5
+  username: root
+  password: s3inf0
+  socket: /var/run/mysqld/mysqld.sock
+
+anterior:
+  adapter: mysql
+  encoding: utf8
+  database: bd_2009
+  pool: 5
+  username: root
+  password: s3inf0
+  socket: /var/run/mysqld/mysqld.sock

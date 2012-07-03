@@ -1,0 +1,28 @@
+<h1>Editing correcao</h1>
+
+<% form_for(@correcao) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :professor %><br />
+    <%= f.text_field :professor %>
+  </p>
+  <p>
+    <%= f.label :acum_trab %><br />
+    <%= f.text_field :acum_trab %>
+  </p>
+  <p>
+    <%= f.label :valor_ant %><br />
+    <%= f.text_field :valor_ant %>
+  </p>
+  <p>
+    <%= f.label :valor %><br />
+    <%= f.text_field :valor %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @correcao %> |
+<%= link_to 'Back', correcaos_path %>

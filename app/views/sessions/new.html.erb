@@ -1,0 +1,44 @@
+<div id="conteudo">
+<table width="100%" border="1" class="login">
+  <tr>
+    <td colspan="2" align="center">
+      <font color="red" size="4"><%= link_to "Área de Consultas", visaos_path %></font>
+    </td>
+  </tr>
+  <tr>
+     <td rowspan="2">
+       <div id="img"></div>
+     </td>
+     <td width="40%">
+       <p align="center"><font color="blue" size="3">Acesse o Pontua</font></p>
+         <% form_tag session_path do -%>
+            <p align="center"><b><label for="login">Login</label></b>
+          <%= text_field_tag 'login','',:size => 10 %><br/>
+          <b><label for="password">Senha</label></b>
+          <%= password_field_tag 'password','',:size => 10 %><br/><br/>
+
+  <!--        <%= check_box_tag 'Memorizar' %>
+          <font size="2"><b>Memorizar usuário</b></font><br/> !-->
+          <%= submit_tag 'Entrar' %></p>
+         <% end -%>
+  <br/>
+  <br/>
+      <%= link_to 'Esqueci a Senha', new_password_path%>
+     </td>
+  </tr>
+  <tr>
+   <td colspan="2" align="center">
+        <font size="2"><b>Ainda não possui senha?</b></font><br/>
+        <%= link_to 'Clique aqui', signup_path %>
+   </td>
+  </tr>
+  <tr>
+    <td colspan="2" align="center">
+      <!-- Inicio do botao do Firefox -->
+      <a href="http://br.mozdev.org/" target="_blank"><img src="http://www.mozilla.org/contribute/buttons/110x32bubble_r_pt.png" alt="Firefox" width="110" height="32" style="border-style:none;" title="Mozilla Firefox" /></a>
+      <!-- Fim do botao do Firefox -->
+    </td>
+  </tr>
+
+ </table>
+</div>

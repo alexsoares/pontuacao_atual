@@ -1,0 +1,184 @@
+<div id="calcular">
+  <fieldset>
+     <legend><font size=5> <u>Realizar cálculos</u></font></legend>
+     <br/>
+     <center>
+      <% form_for(@acum_trab) do |f| %>
+        <%= f.error_messages %>
+        <b>Professor</b>
+        <%= @acum_trab.professor.nome %><br>
+         <b>Matricula</b>
+         <%= @acum_trab.professor.matricula %><br>
+
+         <%= f.check_box :status %><br/><br/>
+         Selecionar a caixa acima-direita<br/>
+         e clicar no botão para confirmar.
+        <p>
+            <%= f.submit "Salvar" %>
+        </p>
+      </center>
+       <% end %>
+      </fieldset><br/>
+</div>
+<div id="conteudo">
+<div id="dados">
+<table width="100%" frame="box" rules="all">
+<tr><th width="100%" colspan="5" align="center"><hr/>Contagem de Tempo de Serviço  <div id="nomeprof"></div><hr/></th></tr>
+</table>
+
+
+<table border="1" width="100%" frame="box" rules="groups">
+ <table border ="1" cellpadding="1" cellspacing="1" width="100%" frame="box" rules="all" >
+<tr>
+    <th>Ano</th>
+    <th>Dias</th>
+    <th>Unidade</th>
+    <th>Outro Emprego</th>
+    <th>Faltas Abonadas</th>
+    <th>Faltas Atestados</th>
+    <th>Faltas Justif.</th>
+    <th>Faltas Injust.</th>
+    <th>Licenças Saúde</th>
+    <th>Afast. não remun.</th>
+    <th>Dias Trabalhados</th>
+    <th>Dias Efeivos</th>
+    <th>Dias Rede</th>
+    <th>Dias Unidade</th>
+     <th>Salvo</th>
+  </tr>
+
+<% for trabalho in @trabalho %>
+  <tr>
+    <td>
+
+      <center> <%= trabalho.ano %><br/></center>
+    </td>
+     <td>
+
+      <center>   <%= trabalho.dias%><br/></center>
+     </td>
+     <td>
+
+        <center><%= trabalho.unidade %><br/></center>
+     </td>
+     <td>
+
+        <center><%= trabalho.outro_trab %> <br/></center>
+     </td>
+
+     <td>
+
+        <center><%= trabalho.f_abonada %><br/></center>
+     </td>
+     <td>
+
+        <center><%= trabalho.atestado %><br/></center>
+     <td>
+
+        <center><%= trabalho.f_justif %><br/></center>
+     </td>
+     <td>
+
+        <center><%= trabalho.f_injustif %><br/></center>
+    </td>
+    <td>
+
+        <center><%= trabalho.lic_saude %><br/></center>
+    </td>
+    <td width ="7%">
+
+        <center><%= trabalho.afastamento %></center>
+    </td>
+    <td width ="7%">
+
+      <center><%=  trabalho.dias_trab %></center>
+
+    </td>
+    <td width ="7%">
+
+      <center><%= trabalho.dias_efetivos %></center>
+      
+    </td>
+    <td width ="7%">
+
+      <center><%= trabalho.dias_rede %></center>
+      
+
+    </td>
+    <td width ="7%">
+
+      <center><%= trabalho.dias_unidade %></center>
+      
+    </td>
+    <td width ="7%" colspan="2">
+
+      <% if trabalho.flag == true then %>
+        <center><%='OK' %></center>
+        <% $conta = 1  %>
+      <%else%>
+        <center><%= 'Aguardando'%></center>
+        <% $conta = 0  %>
+      <%end%>
+    </td>
+
+
+
+  </tr>
+
+
+<%end%>
+    <tr>
+      <td colspan="10">
+        <b>Sub-Total (Em Dias)</b>
+      </td>
+      <td align="center"><%= Professor.sub_total_dt.to_s %></td>
+      <td align="center"><%= Professor.sub_total_de.to_s %></td>
+      <td align="center"><%= Professor.sub_total_dr.to_s %></td>
+      <td align="center"><%= Professor.sub_total_du.to_s %></td>
+    </tr>
+
+</table>
+</table>
+     <%  if $conta == 0 then %>
+     <table width="100%">
+     <tr>
+           <td width="100%" colspan="15" align="left"><font color="rede">| <%= link_to  'Alterar', trabalhados_path(:professor => "FgTa#{session[:professor]}FrTyU", :calculo => "Ht88iI09#{params[:id]}KllOP09") %> |</font></td>
+           
+     </tr>
+     </table>
+     <%end%>
+
+<div id="pont_ini">
+  <table width="100%" frame="box" rules="all">
+    <tr><th width="100%" align="center"><hr/>Total Acumulado<hr/></th></tr>
+  </table>
+
+  <table width="100%" border="1" frame="box" rules="all" >
+  <tr>
+    <th>Acumulado Trabalhado</th>
+    <th>Acumulado Efetivo</th>
+    <th>Acumulado Unidade</th>
+    <th>Acumulado Rede</th>
+  </tr>
+    <tr>
+        <td>
+          <center> <%= @acum_trab.tot_acum_trab %></center>
+        </td>
+        <td>
+          <center>   <%= @acum_trab.tot_acum_efet%></center>
+        </td>
+        <td>
+          <center>   <%= @acum_trab.tot_acum_unid%></center>
+        </td>
+        <td>
+          <center>   <%= @acum_trab.tot_acum_rede%></center>
+        </td>
+
+    </tr>
+  </table>
+    
+</div>
+
+</div>
+      
+</div>

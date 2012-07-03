@@ -1,0 +1,32 @@
+<h2 align="center">Ainda existem <%= @status.count %> professores a efetivarem os calculos.</h2>
+<table border="1" align="center" class="relatorios" frame="box" rules="all">
+      <tr>
+        <th>Unidade:</th>
+        <th>Restante/Total</th>
+      </tr>
+      <% @unidade.each do |unidade| %>
+       <tr>
+        <td>
+          <%= unidade.nome  %>:
+          <% quantidade = 0 %>
+          <%@status.each do |status|%>
+            <% if status.professor.unidade.nome == unidade.nome%>
+
+              <% quantidade = quantidade.to_i + 1%>
+
+            <%end%>
+          <%end%>
+          <%= quantidade%><br/>
+        </td>
+        <% if quantidade == 0 %>
+          <td align="center"> <font color="blue"><%= quantidade %></font> / <b><%= Professor.total(unidade) %></b></td>
+        <%else%>
+          <td align="center"> <font color="red"><%= link_to quantidade, esmiucar_status_professors_path(:unidade => unidade) %></font> / <%= Professor.total(unidade) %></td>
+        <%end%>
+       </tr>
+      <%end%>
+      <tr>
+        <td colspan="2" align="center"><%= will_paginate @unidade %></td
+      </tr>
+
+</table>

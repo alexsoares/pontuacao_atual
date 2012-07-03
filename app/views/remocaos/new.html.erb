@@ -1,0 +1,51 @@
+<div class="tabs">
+  <div id="conteudo">
+    <ul>
+      <li><a href="#tabs-1">Remoção de professores</a></li>
+    </ul>
+    <div id="tabs-1">
+      <div id="mensagem">SELECIONE A MATRÍCULA DO PROFESSOR</div>
+      
+      <% form_for(@remocao) do |f| %>
+      <%= f.error_messages %>
+          <table width="70%" border="1" frame="box" rules="rows" align="center">
+          <tr>
+           <td>
+                <b>Nome: </b><font color="green"><div id="professor"></div></font>
+           </td>
+          </tr>
+          <tr>
+           <td>
+                <%= f.label :professor_id, 'Professor: ' %>
+                <%= f.collection_select :professor_id, @professores, :id, :matricula, :include_blank => ' -- Selecione -- ' %>
+           </td>
+           </tr>
+                <%= observe_field :remocao_professor_id,
+                   :with => :remocao_professor_id,
+                   :url => { :action => 'nome_professor' } %>
+            <tr>
+              <td>
+                <%= f.radio_button(:type_of, "1") %>Remoção
+                <%= f.radio_button(:type_of, "2") %>Permuta
+              </td>
+            </tr>
+
+
+            <tr>
+            <td>
+                <%= f.label :remocao, 'Gravar remocao?' %>
+                <%= f.check_box  :remocao %>
+                <%= f.hidden_field :status, :value => 1 %>
+            </td>
+            </tr>
+            <tr>
+            <td>
+              <div id="rem"><%= f.submit "Salvar" %></div>
+              <div id="voltar"></div>
+            </td>
+            </tr>
+            </table>
+      <% end %>
+    </div>
+  </div>
+</div>

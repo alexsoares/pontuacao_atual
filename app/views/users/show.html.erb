@@ -1,0 +1,35 @@
+<br/>
+<div id="conteudo">
+<p>
+    <h2 align="center">   Criação de Senha de Acesso    .</h2>
+<br/>
+<div id="log">
+<fieldset>
+   <%= error_messages_for :user %>
+     <h2>Usuário: <%=h @user.login %></h2>
+    <p>Adicionado em: <%= @user.created_at.to_s(:long) %></p>
+    <%$id_u = RolesUser.find_by_user_id(@user.id).role_id%>
+    <%if Role.find($id_u).name == 'admin' then%>
+      <p>Nível de acesso: ADMINISTRADOR</p>
+      <p>Descrição: Usuário administrador do sistema. Acesso total.</p>
+    <%else%>
+      <%if Role.find($id_u).name == 'supervisao' then%>
+        <p>Nível de acesso: SUPERVISAO</p>
+        <p>Descrição: Usuário pertencente a Supervisão. Direito de manipulação dos dados do sistema.</p>
+      <%else%>
+        <%if Role.find($id_u).name == 'direcao' then%>
+          <p>Nível de acesso: DIREÇÃO</p>
+          <p>Descrição: Usuário pertencente ao grupo dos(as) Diretores(as). Direito de inserçao,alteraçao e execução dos calculos.</p>
+        <%else%>
+        <p>Nível de acesso: SECRETARIOS</p>
+          <p>Descrição: Usuário pertencente ao grupo dos(as) Secretários(as). Direito apenas de cadastrar dados.</p>
+        <%end%>
+      <%end%>
+    <%end%>
+    <p>Email: <%= @user.email %></p>
+    <p>Adicionado em: <%= @user.created_at.to_s(:long) %></p>
+
+   |<%=  link_to 'Voltar', root_path%>|
+</fieldset>
+</div>
+</div>

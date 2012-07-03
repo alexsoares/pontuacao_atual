@@ -1,0 +1,160 @@
+<style media="print">
+.botao {
+display: none;
+}
+</style>
+
+
+<% $subtot_perm = 0 %>
+<% $subtot_um = 0 %>
+<% $subtot_cinco = 0 %>
+<% $subtotal_titulos = 0 %>
+
+<table width="100%" frame="box" rules="all">
+  <tr>
+    <th width="100%" colspan="7" align="center">
+      <hr/>
+      Títulos de Contagem Anual
+      <hr/>
+    </th>
+  </tr>
+  <%$numero=1%>
+  <tr>
+    <th width="25%">
+      Título
+    </th>
+    <th width="30%">
+      Descrição
+    </th>
+    <th width="10%">
+      Valor Título
+    </th>
+    <th width="10%">
+      Quantidade
+    </th>
+    <th width="10%">
+      Valor Referência
+    </th>
+    <th width="10%">
+      Pontuação Obtida
+    </th>
+    <th width="15%">
+      Validade
+    </th>
+  </tr>
+
+
+  <% if !(@tp1.empty?) %>
+    <tr>
+      <td width="25%" align="left">
+        <%= $numero %> -
+        <%= Titulacao.find_by_id(@tp1).descricao %>
+      </td>
+      <td width="30%" align="center">
+        <%= truncate(@tp1.obs,:length => 20,:omission => "...") %>
+      </td>
+      <td width="10%" align="center">
+        <%= @tp1.valor %>
+      </td>
+      <td width="10%" align="center">
+        <%= @tp1.quantidade %>
+      </td>
+      <td width="10%" align="center">
+        <%= @tp1.referencia%>
+      </td>
+      <td width="10%" align="right">
+        <%= format("%.3f",@tp1.pontuacao_titulo) %>
+      </td>
+      <td width="10%" align="center">
+        <!--<%= @tp1.status %>!-->
+      <%if @tp1.status == true then %>
+        <%= 'Válido' %>
+        <% $subtot_um = $subtot_um + (@tp1.pontuacao_titulo).to_f %>
+      <%else%>
+        <%=  'Não Valido' %>
+        <% $subtot_um = $subtot_um + 0 %>
+      <%end%>      
+      </td>
+    </tr>
+    <%$numero= $numero +1%>
+  <%end%>
+  
+  <tr>
+    <th width="80%" colspan="5" align="left">SUB-TOTAL  (Titulação Anual)</th>
+    <th  align="right" colspan="2">
+      <%= format("%.3f",$subtot_um) %>
+    </th>
+  </tr>
+
+<tr><th width="100%" colspan="6" align="center"><hr/>Títulos de Contagem Permanente<hr/></th></tr>
+
+     <%$numero=1%>
+     <tr>
+       <th width="25%">
+        Título
+       </th>
+       <th width="30%">
+        Descrição
+       </th>
+
+       <th width="10%">
+        Valor Título
+       </th>
+       <th width="10%">
+        Quantidade
+       </th>
+       <th width="10%">
+        Valor Referência
+       </th>
+       <th width="15%">
+        Pontuação Obtida
+       </th>
+       <th width="15%">
+        Validade
+       </th>
+     </tr>
+    <%for tp in @tp%>
+      <tr>
+        <td width="25%" align="left">
+          <%= $numero %> -
+          <%= Titulacao.find_by_id(tp.titulo_id).descricao %>
+        </td>
+        <td width="30%" align="center">
+          <%= truncate(tp.obs,:length => 30,:omission => "...")%>
+        </td>
+        <td width="10%" align="center">
+          <%= tp.valor%>
+        </td>
+        <td width="10%" align="center">
+          <%= tp.quantidade %>
+        </td>
+        <td width="10%" align="center">
+          <%= tp.referencia %>
+        </td>
+        <td width="10%" align="right">
+          <%= format("%.3f",tp.pontuacao_titulo) %>
+          <% $subtot_perm = $subtot_perm + (tp.pontuacao_titulo).to_f %>
+        </td>
+        <td width="15%" align="center">
+          <%= 'Válido' %>
+        </td>
+      </tr>
+      <%$numero= $numero +1%>
+    <%end%>
+    <tr>
+      <th width="80%" colspan="5" align="left">SUB-TOTAL (Titulação Permanente)</th>
+      <th align="right" colspan="2">
+        <%= format("%.3f",$subtot_perm) %>
+      </th>
+    </tr>
+    <% $subtotal_titulos = $subtot_um + $subtot_cinco + $subtot_perm %>
+    <tr>
+      <th width="80%" colspan="5" align="left">TOTAL TÍTULOS</th>
+      <th align="right" colspan="2">
+        <%= format("%.3f",$subtotal_titulos) %>
+      </th>
+    </tr>
+</table>
+
+
+

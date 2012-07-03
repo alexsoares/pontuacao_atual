@@ -1,0 +1,64 @@
+<script Language="JavaScript">
+function Imprimir(){
+window.print();
+}
+</script>
+<br/>
+<div id="conteudo">
+
+    <div class="botao">
+        <table width="100%">
+          <tr>
+            <% form_for @search do |f| %>
+              <tr>
+                <td align="right">
+                  <%= f.label :nome_like, "Região" %>
+                  <%= f.collection_select :nome_like, Regiao.all, :id, :nome, :include_blank => true%>
+                </td>
+                <td align="center" colspan="2">
+                  <%= f.submit "Buscar" %>
+                </td>
+              </tr>
+            <% end %>
+          </tr>
+        </table>
+    </div>
+
+
+<br/>
+<div class="botao">
+  <input type="Button" Value="Imprimir" onclick="Imprimir()">
+   <br/>
+  <br/>
+</div>
+<div class="relatorios">
+  <fieldset>
+   <legend><font size=4>Regiões</font></legend>
+    <table border ="1" cellpadding="5" cellspacing="1" width="100%" >
+      <tr>
+        <td colspan="5">
+          <h1 align="center">Relatório de Regiões</h1>
+        </td>
+      </tr>
+      <tr>
+        <th bgcolor="#cccccc" colspan="5"><%= sortable(params[:search],"nome") %></th>
+      </tr>
+
+      <% for regiao in @regiaos %>
+       <tr>
+        <td colspan="2" width="85%"><%=h regiao.nome %></td>
+        <div class="botao">
+          <td bgcolor="#cccccc" width="5%"><%= link_to 'Exibir', regiao, :class => 'botao3d' %></td>
+          <td bgcolor="#cccccc"width="5%"><%= link_to 'Alterar', edit_regiao_path(regiao), :class => 'botao3d' %></td>
+          <td bgcolor="#cccccc"width="5%"><%= link_to 'Apagar', regiao, :confirm => 'Tem certeza?', :method => :delete, :class => 'botao3d' %></td>
+        </div>
+       </tr>
+      <% end %>
+    </table>
+   </fieldset>
+  
+<div class="botao">
+<input type="Button" Value="Imprimir" onclick="Imprimir()">
+</div>
+</div>
+</div>

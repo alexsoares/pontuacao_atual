@@ -1,0 +1,46 @@
+<table class="tabelas" border="1" align="center">
+      <% @titulo.each do |check_professor| %>
+        <% @titulos = TituloProfessor.check_titulos($data,check_professor) %>
+          <tr>
+            <th>
+              Matricula
+            </th>
+            <th>
+              Soma dos titulos
+            </th>
+            <th>
+              Pontuacao_titulacao
+            </th>
+            <th>
+              Status
+            </th>
+          </tr>
+          <tr>
+            <td>
+              <%= check_professor.matricula %>
+            </td>
+            <td>
+              <%= soma_pont_titulo = @titulos.soma_pont_titulo %>
+              <% if soma_pont_titulo.nil? %>
+                <% soma_pont_titulo = 0 %>
+                <%= soma_pont_titulo = format("%.3f",soma_pont_titulo)%>
+              <%end%>
+            </td>
+            <td>
+              <%= @titulos.total_titulacao %>
+            </td>
+
+              <% if soma_pont_titulo == @titulos.total_titulacao %>
+              <td>
+                OK
+              </td>
+            <%else%>
+              <td>
+                Problemas
+              </td>
+            <%end%>
+          </tr>
+      <%end%>
+</table>
+<%= will_paginate @titulo %>
+

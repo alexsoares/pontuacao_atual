@@ -1,0 +1,30 @@
+<div id="conteudo">
+  <br/>
+  <br/>
+
+  <fieldset>
+   <legend align="center"><font size=10>Região</font></legend>
+   <% form_for(@regiao) do |f| %>
+     <%= f.error_messages %>
+       <p>
+
+         <%= f.label :nome, 'Nome' %><br />
+         <%= f.text_field :nome %>
+       </p>
+  </fieldset>
+  <br/>
+         <fieldset>
+           <p>
+           <%= f.submit "Atualizar" %>
+           <p/>
+         </fieldset>
+
+
+   <% end %>
+
+  <br/>
+   | <%= link_to 'Exibir', @regiao %> |
+   <%= link_to 'Voltar', regiaos_path %> |
+
+</div>
+

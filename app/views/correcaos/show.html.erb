@@ -1,0 +1,23 @@
+<p>
+  <b>Professor:</b>
+  <%=h @correcao.professor %>
+</p>
+
+<p>
+  <b>Acum trab:</b>
+  <%=h @correcao.acum_trab %>
+</p>
+
+<p>
+  <b>Valor ant:</b>
+  <%=h @correcao.valor_ant %>
+</p>
+
+<p>
+  <b>Valor:</b>
+  <%=h @correcao.valor %>
+</p>
+
+
+<%= link_to 'Edit', edit_correcao_path(@correcao) %> |
+<%= link_to 'Back', correcaos_path %>

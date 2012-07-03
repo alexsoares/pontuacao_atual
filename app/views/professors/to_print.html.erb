@@ -1,0 +1,50 @@
+<div id="conteudo">
+<div class="botao">
+   <input type="Button" Value="Imprimir" onclick="Imprimir()">
+   <br/>
+  <br/>
+</div>
+   <table border ="1" class="tabelas" width="100%">
+      <tr>
+        <td colspan="14">
+          <h1 align="center">Relatório de Professores</h1>
+        </td>
+      </tr>
+    <tr>
+      <th colspan="3" bgcolor="#cccccc">Nome</th>
+      <th colspan="1" bgcolor="#cccccc">Matrícula</th>
+      <th colspan="2" bgcolor="#cccccc">Data Ingresso</th>
+      <th colspan="1" bgcolor="#cccccc">Sede</th>
+      <th colspan="3" bgcolor="#cccccc">Função</th>
+    </tr>
+
+<% for professor in @to_print %>
+  <tr>
+    <td colspan="3"><center><%=h professor.nome.upcase %></center></td>
+    <td colspan="1"><center><%=h professor.matricula %></center></td>
+    <%if professor.dt_ingresso.nil? then %>
+      <td colspan="2"><center><%=h professor.dt_ingresso %></center></td>
+    <%else%>
+      <td colspan="2"><center><%=h professor.dt_ingresso.strftime("%d/%m/%y") %></center></td>
+    <%end%>
+    <td colspan="1"><center><%=h professor.unidade.nome %></center></td>
+    <td colspan="3"><center><%=h professor.funcao %></center></td>
+  </tr>
+<% end %>
+
+
+    </table>
+
+  
+ <br />
+   <b><%=  @to_print.count %> registros encontrados nesta pagina</b>
+
+
+  <div class="botao">
+    <br/>
+    <input type="Button" Value="Imprimir" onclick="Imprimir()">
+  </div>
+  <br/>
+  <br/>
+  </div>
+

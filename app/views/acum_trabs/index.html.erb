@@ -1,0 +1,60 @@
+
+  <div id="busca_ficha">
+    <div class="botao">
+    <table width="100%">
+      <tr>
+          <% form_tag acum_trabs_path, :method => 'get' do %>
+           <p>
+             <td width="79%"></td>
+              <td width="21%" align="left"><b><%= label :search, "Matricula" %><br/></b></td>
+              <tr>
+                <td colspan="2" align="right"><%= text_field_tag :search, params[:search] %>
+                <%= submit_tag "Filtrar", :name => nil %></td>
+              </tr>
+           </p>
+          <% end %>
+      </tr>
+    </table>
+    </div>
+    </div>
+<div id="conteudo">
+  <br/>
+  <br/>
+  <fieldset>
+     <legend><font size=5> <u>Professores aguardando efetivação dos cálculos</u></font></legend>
+     <br/>
+     <table border="2" align="center" class="tabelas">
+        <tr>
+        </tr>
+        <tr>
+          <th>Matricula</th>
+          <th>Professor</th>
+          <th>Sede</th>
+          <th></th>
+        </tr>
+      
+      <% for acum_trab in @listagem %>
+        <% @verify = AcumTrab.verify(acum_trab.professor_id,$data) %>
+        <%  $contador = 0%>
+        <%for flag in @verify%>
+            <% $contador = $contador + 1 %>
+        <%end%>
+        <tr>
+          <td><%= acum_trab.professor.matricula %></td>
+          <td><%= acum_trab.professor.nome %></td>
+          <td><%= acum_trab.professor.unidade.nome %></td>
+          <%if $contador == 2 then%>
+            <td><%= link_to 'Salvar', edit_acum_trab_path(acum_trab), :class => 'botao3d' %></td>
+          <%else%>
+             <td>Aguardando preenchimento </td>
+          <%end%>
+        <%end%>        
+        </tr>
+    </table>    
+  </fieldset>
+  <br />
+  <%= will_paginate @listagem %>
+  Existem <b><%=  @listagem.count %></b> professores disponiveis para este usuário.
+</div>
+
+

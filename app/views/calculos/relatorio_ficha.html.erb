@@ -1,0 +1,73 @@
+	<script src="http://cdn.jquerytools.org/1.2.5/full/jquery.tools.min.js"></script>
+
+
+  <%  unless params[:year].nil? %>
+    <div class="botao">
+      <div class="separator">
+        <table width="100%">
+          <% form_tag relatorio_ficha_path, :method => 'get' do %>
+            <p>
+              <tr>
+                <td align="right"> Matricula:
+                  <%= text_field_tag :search, params[:search] %>
+                  <%= hidden_field_tag(:year, params[:year]) %>
+                  <%= submit_tag "Filtrar", :name => nil%>
+                </td>
+              </tr>
+            </p>
+          <% end %>
+        </table>
+      </div>
+    </div>
+<br/>
+<br/>
+<br/>
+<br/>
+<h2 align="center">Professores que possuem fichas geradas para <%= params[:year]%></h2>
+
+     <table border="1" class="tabelas" align="center" rules="all" frame="box">
+        <tr>
+          <th>Matricula</th>
+          <th>Professor</th>
+          <th>Sede</th>
+          <th></th>
+        </tr>
+
+          <% @professor_com_ficha.each do |ficha| %>
+            <tr>
+              <td><%=h ficha.professor.matricula %></td>
+              <td><%=h ficha.professor.nome %></td>
+              <td><%=h ficha.professor.unidade.nome %></td>
+              <%  @verifica_existencia = Trabalhado.find_by_professor_id(ficha.professor, :conditions => ["ano_letivo = ?", params[:year]]) %>
+              <%unless @verifica_existencia.nil?%>
+                <td><%= link_to 'Visualizar', [ficha.professor,ficha] %></td>
+                <% if (current_user.has_role?('admin'))  or (current_user.has_role?('planejamento'))%>
+                  <td><%= link_to 'Apagar', [ficha.professor,ficha], :confirm => 'Confirma?', :method => :delete, :class =>'botao3d' %></td>
+                <%end%>
+              <%else%>
+                <td id="demo" colspan="2" align="center"><a title="Os valores foram corrigidos, portanto não possui ficha para este respectivo ano"><b>Sem ficha</b></a></td>
+              <%end%>
+            </tr>
+          <%end%>
+          <tr>
+            <td colspan="5" align="center">
+              <%= will_paginate @professor_com_ficha %>
+            </td>
+          </tr>
+    </table>
+    <%else%>
+     <table border="1" class="tabelas" align="center" rules="all" frame="box">
+        <tr>
+          <th colspan="2">Ano</th>
+        </tr>
+        <tr>
+          <% @list_year.each do |year| %>
+              <td><%= link_to year.ano_letivo, relatorio_ficha_path(:year => year.ano_letivo) %></td>
+          <%end%>
+        </tr>
+     </table>
+    <%end%>
+
+<script>
+$("#demo a[title]").tooltip();
+</script>

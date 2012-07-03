@@ -1,0 +1,15 @@
+#ficha{
+    float:right;
+    height:500px;
+    width:950px;
+    background-color:white;
+}
+
+#principal{
+    float:right;
+    height:1250px;
+    width:950px;
+    background-image:url(Imagens/body.jpg);
+    background-color:gray;
+    font-size:10px;
+}

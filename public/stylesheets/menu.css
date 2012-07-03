@@ -1,0 +1,76 @@
+/* ================================================================
+This copyright notice must be kept untouched in the stylesheet at
+all times.
+
+The original version of this stylesheet and the associated (x)html
+is available at http://www.cssplay.co.uk/menus/pro_drop6.html
+Copyright (c) 2005-2007 Stu Nicholls. All rights reserved.
+This stylesheet and the associated (x)html may be modified in any
+way to fit your requirements.
+=================================================================== */
+#linha{
+    background-color:gray;
+    height:20px;
+    width:950px;
+    margin-left:0;
+}
+.preload1 {background: url(Imagens/menu/six_0a.gif);}
+.preload2 {background: url(Imagens/menu/six_1a.gif);}
+
+#nav {padding:0; margin-left:0; list-style:none; height:38px; width:950px; background:#fff url(Imagens/menu/six_0.gif) repeat-x; position:relative; z-index:200; font-family:arial, verdana, sans-serif;}
+#nav li.top {display:block; float:left;}
+#nav li a.top_link {display:block; float:left; height:35px; line-height:33px; color:#ccc; text-decoration:none; font-size:11px; font-weight:bold; padding:0 0 0 12px; cursor:pointer;background: url(Imagens/menu/six_0.gif);}
+#nav li a.top_link span {float:left; display:block; padding:0 24px 0 12px; height:35px; background: url(Imagens/menu/six_0.gif) right top no-repeat;}
+#nav li a.top_link span.down {float:left; display:block; padding:0 24px 0 12px; height:35px; background: url(Imagens/menu/six_0a.gif) no-repeat right top;}
+
+#nav li:hover a.top_link,
+#nav a.top_link:hover
+{color:#fff; background: url(Imagens/menu/six_1.gif) no-repeat;}
+#nav li:hover a.top_link span,
+#nav a.top_link:hover span
+{background:url(Imagens/menu/six_1.gif) no-repeat right top;}
+#nav li:hover a.top_link span.down,
+#nav a.top_link:hover span.downs
+{background:url(Imagens/menu/six_1a.gif) no-repeat top; padding-bottom:3px;}
+
+#nav table {border-collapse:collapse; padding:0; margin:0; position:absolute; left:0; top:0;}
+
+#nav li:hover {position:relative; z-index:200;}
+#nav a:hover {position:relative; white-space:normal; z-index:200;}
+/*Fundo menu sem seta*/
+#nav :hover ul.sub
+{left:1px; top:38px; background: #356998; padding:7px; border:1px solid #0b4d97; white-space:nowrap; width:125px; height:auto; z-index:300;}
+#nav :hover ul.sub li
+{display:block; height:20px; position:relative; float:left; width:90px; font-weight:normal;}
+#nav :hover ul.sub li a
+{display:block; font-size:11px; height:18px; width:115px; line-height:18px; text-indent:5px; color:#000; text-decoration:none;border:1px solid #356998;}
+#nav li ul.sub li a.fly
+{background:#356998 url(Imagens/menu/arrow.gif) 80px 6px no-repeat;}
+#nav :hover ul.sub li a:hover
+{background:#3f96a9; color:#fff; border-color:#fff;}
+#nav :hover ul.sub li a.fly:hover
+{background:#3f96a9 url(Imagens/menu/arrow_over.gif) 80px 6px no-repeat; color:#fff;}
+
+#nav li b {display:block; font-size:11px; height:18px; width:88px; line-height:18px; margin-bottom:3px; text-indent:6px; color:#fdfdfd; border-bottom:1px solid #fdfdfd; cursor:default;}
+
+#nav a:hover a:hover ul,
+#nav a:hover a:hover a:hover ul,
+#nav a:hover a:hover a:hover a:hover ul,
+#nav a:hover a:hover a:hover a:hover a:hover ul
+{left:89px; top:-4px; background: #356998; padding:3px; border:1px solid #0b4d97; white-space:nowrap; width:90px; z-index:400; height:auto;}
+
+#nav ul,
+#nav a:hover ul ul,
+#nav a:hover a:hover ul ul,
+#nav a:hover a:hover a:hover ul ul,
+#nav a:hover a:hover a:hover a:hover ul ul
+{position:absolute; left:-9999px; top:-9999px; width:0; height:0; margin:0; padding:0; list-style:none;}
+
+#nav li:hover li:hover > ul
+{left:105px; top:-4px; background: #356998; padding:8px; border:1px solid #0b4d97; white-space:nowrap; width:115px; z-index:400; height:auto;}
+#nav li:hover > ul ul
+{position:absolute; left:-9999px; top:-9999px; width:0; height:0; margin:0; padding:0; list-style:none;}
+#nav li:hover li:hover > a.fly
+{background:blue url(Imagens/menu/arrow_over.gif) 80px 6px no-repeat; color:#fff; border-color:#fff;}
+#nav li:hover li:hover > li a.fly
+{background:#356998 url(Imagens/menu/arrow.gif) 80px 6px no-repeat; color:#000; border-color:#356998;}

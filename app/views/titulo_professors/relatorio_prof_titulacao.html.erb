@@ -1,0 +1,84 @@
+<div id="conteudo">
+<style media="print">
+.botao {
+display: none;
+}
+</style>
+<br/>
+<br/>
+<hr/>
+<div class="botao">
+  <%= form_tag  relatorio_prof_titulacao_titulo_professors_path, :method => 'get'%>
+    <%= error_messages_for 'contact' %>
+   <table width="100%">
+    <div class="botao">
+      <tr>
+        <td width="20%" align="right">
+          Inverter consulta
+          <%= check_box_tag 'accept' %>
+        </td>
+        <td width="80%" align="right">
+          <div class="botao">
+          Titulo:
+          <%= collection_select :titulo_id, :titulo_id, Titulacao.all, :id, :descricao, :prompt => true%>
+          <%= submit_tag 'Filtrar', :name => nil %></div>
+        </td>
+      </tr>
+    </div>
+    </table>
+</div>
+<hr/>
+<br/>
+<br/>
+<div id="contador"></div>
+<div class="botao">
+  <input type="Button" Value="Imprimir" onclick="Imprimir()">
+</div>
+<div class="relatorios">
+<table border ="1" cellpadding="1" cellspacing="1" width="100%" frame="box" rules="all">
+    <tr style="font-size:12px">
+     <br/>
+
+        <th bgcolor="gray">Matricula</th>
+        <th bgcolor="gray">Nome</th>
+        <th bgcolor="gray">Titulo</th>
+        <th bgcolor="gray">Descrição</th>
+        <th bgcolor="gray">Pontuação Obitida</th>
+        <th bgcolor="gray">Pontuação Final</th>
+    </tr>
+    <%if  @relatorio_tit_prof == "Selecione um titulo para filtragem"%>
+      <center><b><%= @relatorio_tit_prof %></b></center>
+      <br/>
+    <%else%>
+      <!-- rtp = relatorio titulo professor !-->
+      <%if !(params[:accept]).present? %>
+        <h3 align="center">Professores que possuem o Titulo de: <%= Titulacao.find(params[:titulo_id][:titulo_id]).descricao %></h3>
+      <%else%>
+        <h3 align="center">Professores que NÃO possuem o Titulo de: <%= Titulacao.find(params[:titulo_id][:titulo_id]).descricao %></h3>
+      <%end%>
+      <% for rtp in @relatorio_tit_prof %>
+        <tr>
+          <td><center><%=h rtp.professor.matricula %></center></td>
+          <td><center><%=h rtp.professor.nome %></center></td>
+          <td><center><%=h Titulacao.find(rtp.titulo_id).descricao %></center></td>
+          <td><center><%=h rtp.obs %></center></td>
+          <td><center><%=h rtp.pontuacao_titulo %></center></td>
+          <td><center><%=h rtp.professor.pontuacao_final %></center></td>
+        </tr>
+        <tr>
+        </tr>
+    <% end %>
+<b><%= @relatorio_tit_prof.count %> registros encontrados.</b>
+<br/>
+<%= will_paginate @relatorio_tit_prof %>
+<%end%>
+
+</table>
+<br/>
+
+<div class="botao">
+  <input type="Button" Value="Imprimir" onclick="Imprimir()">
+</div>
+</div>
+</div>
+

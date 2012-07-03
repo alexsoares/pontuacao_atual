@@ -1,0 +1,20 @@
+	<div style='display:none'>
+		<div id='inline_tipo' style='padding:10px; background:#EEE9E9;'>          
+          <% form_remote_for(:ficha,:url => { :action => 'select_type' }) do |f|%>
+            <%= error_messages_for 'select_type' %>
+            <table>
+              <h2>Escolha o tipo de ficha</h2>
+              <tr>
+                <th width="30%">
+                  <div class="botao">Tipo de ficha:</div>
+                </th>
+                <td width="20%" align="center"><%= radio_button_tag(:type_of, "1", :checked => true) %>Remoção</td>
+                <td width="20%" align="center"><%= radio_button_tag(:type_of, "2") %>Permuta                </td>
+                <td><div class="botao"><%= submit_tag 'Selecionar'  %></div></td>
+              </tr>
+            </table>
+          <%end%>
+          <hr>
+          <div id="solicitados"></div>
+        </div>
+	</div>

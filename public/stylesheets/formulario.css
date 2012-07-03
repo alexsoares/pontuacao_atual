@@ -1,0 +1,107 @@
+.sombra {
+    position:absolute;
+    padding-top:5px;
+    background-color:gray
+}
+.formulario {
+   position:relative;
+   text-align:center;
+   border: 1px solid black;
+   width: 710px;
+   left: 0px;
+   top: 0px;
+   background-color:white;
+
+}
+.formulario .form_title {
+
+   background-color: blue;
+   border-bottom: 1px solid black;
+   font-weight: bold;
+   color: #ffffff;
+   padding: 5px;
+}
+
+.formulario .form_cab {
+
+   background-color: orange;
+   border-bottom: 1px solid black;
+   font-weight: bold;
+   color: #ffffff;
+   padding: 5px;
+}
+
+
+
+.formulario .form_body {
+   padding-top:0px;
+   background-color: white;
+   font-weight: bold;
+   text-align:justify;
+   color: black;
+   padding-left:5px;
+   padding-right:5px;
+   padding-bottom:10px;
+   border: 1px solid black;
+}
+
+.formulario .form_cabecalho {
+   padding-top:0px;
+   background-color: white;
+}
+
+#left{
+   padding-top:0px;
+   background-color: white;
+
+    float:left;
+    width:100px;
+}
+#right{
+       padding-top:0px;
+   background-color: white;
+
+    float:right;
+    width:300px;
+}
+
+
+.formulario .form_rodape {
+   padding-top:82px;
+   background-color: white;
+   font-weight: bold;
+   text-align:center;
+   color: black;
+   padding-left:5px;
+   padding-right:5px;
+   padding-bottom:99px;
+}
+
+
+.formulario .enquete {
+   padding:10px;
+   text-align:justify;
+   width:500px;
+   margin: 5px;
+   border: 1px solid black;
+   list-style:none;
+
+}
+
+.body_page {
+    font-size:12px;
+    font-style:italic;
+    width:500px;
+}
+
+.body_page #titulo {
+    position:absolute;
+    left: 95px;
+    top: 150px;
+    background-color:orange;
+    color:white;
+    height:30px;
+	width:945px;
+
+
+}

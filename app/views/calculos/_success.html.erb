@@ -1,0 +1,7 @@
+<h1 align="center">Procedimento realizado com sucesso</h1>
+<h2 align="center">A pontuação obtida com titulos anuais foram emovidas da pontuação final.</h2>
+<h3 align="center">Sistema preparado para iniciar novo ano de contagem</h3>
+
+<center><b><%= @titulos.present? ? @titulos.count : 0 %></b> Titulos foram invalidados.</center><br/>
+<%= link_to "Voltar", arrumar_titulos_path, :class => "botao3d" %>
+

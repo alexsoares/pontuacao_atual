@@ -1,0 +1,159 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+    <title>PONTUAÇÃO DOS PROFESSORES : <%= controller.action_name %></title>
+    <%= stylesheet_link_tag 'scaffold','pontuacao','msg','menu', :cache => true %>
+    <%= stylesheet_link_tag 'impressao', :media => "print" %>
+    <%= javascript_include_tag :defaults,'msg.js', :cache => true %>
+
+</head>
+
+<body>
+<style media="print">
+.botao {
+display: none;
+}
+</style>
+<script Language="JavaScript">
+function Imprimir(){
+window.print();
+}
+</script>
+<div class="botao">
+  <% unless current_announcement.empty? %>
+    <div id="announcement">
+        <p><h4>Quadro de Avisos</h4></p>
+        <div id="color"  align="center">
+          <%for announcement in current_announcement %>
+            <p><%= announcement.message %></p>
+          <%end%>
+        </div>
+        <%= link_to_remote("Ocultar esta mensagem", :url => {:controller => 'javascripts', :action => 'hide_announcement'}) %>
+
+    </div>
+  <%end%>
+<div id="alinha">
+<!-- HEADER -->
+          <p style="color: red"><%= flash[:notice] %></p>
+          <div id="topo">
+          </div>
+          <div id="linha">
+          <%if logged_in? then%>
+            <td width="100%" align="right">
+            <font size="4" color="green"><%= link_to h(current_user.login.capitalize), user_path(current_user) %> - <%= link_to 'Edit Profile', edit_user_path(current_user) %></font>
+          <%else%>
+            <td><%= link_to '|Entrar|', professors_path %></td>
+          <%end%>
+          </div>
+<!-- FIM HEADER -->
+<!-- MENU-->
+            <span class="preload1"></span>
+            <span class="preload2"></span>
+            <ul id="nav">
+                    <li class="top"><a href="#nogo53" id="arquivo" class="top_link"><span class="down">Arquivo</span></a>
+                      <ul class="sub">
+                        <li> <%= link_to 'Início' , root_path %></li>
+                        <li><%= link_to 'Sair', logout_path,:confirm => "Tem certeza que deseja fazer logout?" %></li>
+                        <li> <%= link_to 'Consulta' , visaos_path %></li>
+                      </ul>
+                    </li>
+                    <li class="top"><a href="#nogo27" id="executar" class="top_link"><span class="down">Executar</span></a>
+                    <ul class="sub">
+                        <li><a href="#nogo29" class="fly">Pontuação</a>
+                          <ul>
+                            <li><%= link_to_remote('Pontuação', :url => { :action => "relato_prof", :controller => "professors"}) %></li>
+                          </ul>
+                        </li>
+                        <%  if current_user.has_role?('direcao') or (current_user.has_role?('supervisao')) or (current_user.has_role?('admin'))  or (current_user.has_role?('planejamento'))%>
+                          <li><a href="#nogo29" class="fly">Consultas</a>
+                            <ul>
+                              <%  if current_user.has_role?('direcao') or (current_user.has_role?('supervisao')) or (current_user.has_role?('admin')) or current_user.has_role?('planejamento') %>
+                                <li><%= link_to 'Profº Individual', consulta_ppu_consulta_path%></li>
+                                <li><%= link_to_remote('Unidade', :url => {  :controller => "consultas", :action => "consulta_pu"}) %></li>
+                                <li><%= link_to 'Titulação', consulta_titulo_consulta_path %></li>
+                                <li><%= link_to_remote('Geral', :url => { :controller => "consultas", :action => "consulta_geral"}) %></li>
+                              <%end%>
+                            </ul>
+                          </li>
+                        <%end%>
+                        <li><a href="#nogo29" class="fly">Remoção</a>
+                          <ul>
+                            <li><%= link_to 'Solicitar', new_remocao_path, {:title => 'Antes de Cadastrar a remocao de um professor, verifique na listagem ao lado se a mesma ja não esta criada'} %></li>
+                            <% if current_user.has_role?('admin') or current_user.has_role?('supervisao') or current_user.has_role?('planejamento') then%>
+                              <li><%= link_to_remote('Aguardando',:update => "contents", :url => { :controller => "remocaos",:action => "remocao_sim"}) %></li>
+                            <%end%>
+                            <li><%= link_to_remote('Solicitada',:update => "contents", :url => { :action => "lista_remocao"}) %></li>
+                            <%  if current_user.has_role?('admin') or current_user.has_role?('supervisao') or current_user.has_role?('direcao') or current_user.has_role?('planejamento') then%>
+                              <li><%= link_to_remote('Ficha', :url => { :action => "relato_remocao"}) %></li>
+                            <%end%>
+                         </ul>
+                       </li>
+                       <li><b>Msg</b></li>
+                       <li> <%= link_to 'Mensagens' , mensagems_path %></li>
+                       <li><b>Fichas</b></li>
+                       <li><%= link_to "Listagem fichas", relatorio_ficha_path %></li>
+
+                    </ul>
+                  </li>
+
+                <%  if current_user.has_role?('admin') or current_user.has_role?('supervisao') or current_user.has_role?('planejamento') then%>
+                  <li class="top"><a href="#nogo22" id="config" class="top_link"><span class="down">Configuração</span></a>
+                    <ul class="sub">
+                      <li><b>Gerencial</b></li>
+                      <li><%= link_to 'Verificar Log', logs_path %></li>
+                      <li><%= link_to 'Checar pontuação', check_professors_path %></li>
+                      <%  if current_user.has_role?('admin') then%>
+                        <li><%= link_to_remote('Usuários', :url => { :action => "gen_user", :controller => 'home'}) %></li>
+                        <li><%= link_to 'Anuncios', announcements_path %></li>
+                        <li><b>Anual</b></li>
+                        <li><%= link_to('Novo Ano', iniciar_ano_path) %></li>
+                      <%end%>
+                    </ul>
+                  </li>
+                <%end%>
+                <li class="top"><a href="#nogo2" id="relatorios" class="top_link"><span class="down">Relatórios</span></a>
+                <ul class="sub">
+                  <li><b>Professores</b></li>
+                    <li><a href="#nogo29" class="fly">Imprimir</a>
+                    <ul>
+                      <li><%= link_to "Em video", professors_path %></li>
+                      <li><%= link_to "Via impressora", to_print_professors_path %></li>
+                      <li><%= link_to "Em disco (PDF)", to_print_professors_path(:format => "pdf") %></li>
+                    </ul>
+                    </li>
+                    <li><%= link_to "Função", relatorio_por_funcao_path %></li>
+                    <li><a href="#nogo29" class="fly">Titulação</a>
+                    <ul>
+                      <li><%= link_to "Invalidados", relatorio_titulos_anuais_invalidos_titulo_professors_path %></li>
+                      <li><%= link_to "Titulação", relatorio_prof_titulacao_titulo_professors_path %></li>
+                      <li><%= link_to "Por descrição", relatorio_por_descricao_titulo_titulo_professors_path %></li>
+                    </ul>
+                  </li>
+          	      <li><b>Secundários</b></li>
+                  <%if current_user.has_role?('admin') or current_user.has_role?('supervisao') or current_user.has_role?('planejamento') then%>
+                    <li><%= link_to "Títulos", titulacaos_path %></li>
+                    <li><%= link_to "Unidades", unidades_path %></li>
+                    <li><%= link_to "Região", regiaos_path %></li>
+                  <%end%>
+                </ul>
+              </li>
+            </ul>
+
+<!-- FIM MENU -->
+</div>
+</div>
+    <div id="contents">
+      <div id="header">
+      </div>
+      <div id="menu">
+      </div>
+      <div id="principal">
+        <%= yield  %>
+      </div>
+    </div>
+</body>
+</html>
+
+
+

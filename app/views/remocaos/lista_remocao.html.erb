@@ -1,0 +1,37 @@
+<div id="conteudo">
+<div class="relatorios">
+<table>
+    <th bgcolor="#cccccc">Matrícula</th>
+    <th bgcolor="#cccccc">Nome</th>
+    <th bgcolor="#cccccc">Status</th>
+    <th bgcolor="#cccccc">Ano Letivo</th>
+<% @remocaos = Remocao.find(:all) %>
+<% for remocao in @remocaos %>
+  <tr>
+    <td><%= Professor.find(remocao.professor_id).matricula %> </td>
+    <td><%= Professor.find(remocao.professor_id).nome %> </td>
+    <% if remocao.remocao_efetivada == false then %>
+      <td>Pedido negado para este ano letivo.</td>
+      <%else%>
+        <% if remocao.remocao_efetivada == true then %>
+          <td>Professor Realocado.</td>
+        <% else %>
+          <% if remocao.remocao_efetivada == nil or remocao.remocao_efetivada == false  then %>
+            <td>Aguardando decisão.</td>
+            <% if (current_user.regiao_id == 52 or current_user.regiao_id == 54) then  %>
+              <td> <%= link_to 'Exibir', remocao %></td>
+            <%end%>
+          <%else%>
+            <td>Finalizado.</td>
+          <%end%>
+        <%end%>
+    <%end%>
+    <td><%= remocao.ano_letivo %> </td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+<div class="botao3d"> <%= link_to 'Voltar', remocaos_path %></div>
+</div>
+</div>

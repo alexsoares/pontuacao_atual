@@ -1,0 +1,66 @@
+<style media="print">
+.botao {
+display: none;
+}
+</style>
+<br/>
+<br/>
+<% for professor in @professors %>
+<table  width="100%" border="1" frame="box" rules="groups">
+  <tr>
+    <td width="34%">
+        <b>Matrícula:
+          <%=h professor.matricula %><br/>
+        <b>Nome:</b>
+          <%=h professor.nome %></b><br/>
+        <b>Data Ingresso:</b>
+            <%if professor.dt_ingresso.nil? then %>
+              <%=h professor.dt_ingresso %><br/>
+            <%else%>
+              <%=h professor.dt_ingresso.strftime("%d/%m/%y") %><br/>
+            <%end%>
+        <b>sede:</b>
+          <%=h professor.unidade.nome%><br/>
+        <b>Endereco:</b>
+          <%=h professor.endres%>
+        <b>No. </b>
+          <%=h professor.num %><br/>
+        <b>Bairro:</b>
+          <%=h professor.bairro%><br/>
+        <b>Formação apr. concurso</b>
+          <%=h professor.entrada_concurso %>
+        <b>Observações:</b>
+          <%=h professor.obs %><br/>
+
+    </td>
+    <td width="34%">
+       <b>Ano:</b>
+          <%= $data %>
+
+     <br/><br/>
+      <b>Data Nascimento:</b>
+    <% if professor.dt_nasc.nil? then %>
+      <%=h professor.dt_nasc %><br/>
+    <%else%>
+      <%=h professor.dt_nasc.strftime("%d/%m/%y") %><br/>
+    <%end%>
+
+       <b>Jornada Semanal:</b>
+          <%=h professor.jornada_sem%><br/><br/>
+       <b>Telefone:</b>
+          <%=h professor.telefone%><br/><br/>
+    </td>
+   <td >
+         <br/>
+         <b>No. Filhos:</b>
+          <%=h professor.n_filhos%> <br/>
+        <b>Função:</b>
+          <%=h professor.funcao%> <br/><br/>
+       <b>Cidade:</b>
+          <%=h professor.cidade%><br/>
+
+   </td>
+ </tr>
+ <br/>
+</table>
+<% end %>

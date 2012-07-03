@@ -1,0 +1,9 @@
+<div id ="inicio_ano">
+  <table border="1" width="100%">
+  <th align="center" colspan="2" bgcolor="red"  style="color:white">Iniciar ano letivo?</th>
+  <tr>
+  <td align="center">| <%= link_to_remote('SIM', :url => { :action => "efetivar_iniciar_ano"}) %> |</td>
+  <td align="center">| <%= link_to 'NÃO', root_path %> |</td>
+  </tr>
+  </table>
+</div>

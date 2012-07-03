@@ -1,0 +1,28 @@
+<br/>
+<div id="conteudo">
+ <% form_for(@regiao) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+  <fieldset>
+   <legend><font size=4>Região</font></legend>
+    <br/>
+    <br/>
+    <h1 align="right">Cadastro de Regiões</h1>
+   <p>
+   <%= f.label :nome, 'Nome' %><br />
+    <%= f.text_field :nome %>
+   </p>
+   </fieldset>
+  </p>
+  <p>
+   <fieldset>
+     <p>
+    <%= f.submit "Cadastrar" %>
+    </p>
+   </fieldset>
+  </p>
+<% end %>
+<br/>
+| <%= link_to 'Voltar', regiaos_path %> |
+</div>

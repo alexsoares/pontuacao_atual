@@ -1,0 +1,78 @@
+<div id="conteudo">
+<style media="print">
+.botao {
+display: none;
+}
+</style>
+<br/>
+<br/>
+<hr/>
+<div class="botao">
+  <%= form_tag relatorio_por_descricao_titulo_titulo_professors_path, :method => :get%>
+    
+   <table width="100%">
+    <div class="botao">
+      <tr>
+        <td width="80%" align="right">
+          <div class="botao">
+          Titulo:
+          <%= text_field_tag(:titulo) %>
+          <%= submit_tag 'Filtrar' %></div>
+        </td>
+      </tr>
+    </div>
+    </table>
+</div>
+<hr/>
+<br/>
+<br/>
+<div id="contador"></div>
+<div class="botao">
+  <input type="Button" Value="Imprimir" onclick="Imprimir()">
+</div>
+
+<div class="relatorios">
+<table border ="1" cellpadding="1" cellspacing="1" width="100%" frame="box" rules="all">
+    <tr style="font-size:12px">
+     <br/>
+
+        <th bgcolor="gray">Matricula</th>
+        <th bgcolor="gray">Nome</th>
+        <th bgcolor="gray">Titulo</th>
+        <th bgcolor="gray">Descrição</th>
+        <th bgcolor="gray">Pontuação Obitida</th>
+        <th bgcolor="gray">Pontuação Final</th>
+    </tr>
+    <%if  @relatorio_por_descricao_titulo == "Descreva o titulo para filtragem"%>
+      <center><b><%= @relatorio_por_descricao_titulo %></b></center>
+      <br/>
+    <%else%>
+      <% for rtp in @relatorio_por_descricao_titulo %>
+        <tr>
+          <td><center><%=h rtp.professor.matricula %></center></td>
+          <td><center><%=h rtp.professor.nome %></center></td>
+          <td><center><%=h Titulacao.find(rtp.titulo_id).descricao %></center></td>
+          <td><center><%=h rtp.obs %></center></td>
+          <td><center><%=h rtp.pontuacao_titulo %></center></td>
+          <td><center><%=h rtp.professor.pontuacao_final %></center></td>
+        </tr>
+        <tr>
+        </tr>
+
+    <% end %>
+    <%= will_paginate @relatorio_por_descricao_titulo %>
+  <%end%>
+
+</table>
+<br/>
+
+<%if !(@relatorio_por_descricao_titulo == "Descreva o titulo para filtragem")%>
+  <b><%= @relatorio_por_descricao_titulo.count() %> registros encontrados.</b>
+<%end%>
+<br/>
+<div class="botao">
+  <input type="Button" Value="Imprimir" onclick="Imprimir()">
+</div>
+</div>
+</div>
+
