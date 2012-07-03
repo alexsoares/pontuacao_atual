@@ -1,8 +1,8 @@
 set :application, "187.35.111.69"
-set :repository, "git://github.com/alexsoares/con_pon.git"
+set :repository, "git://github.com/alexsoares/pontuacao_atual.git"
 set :user, "servidor"
 set :use_sudo, false
-set :deploy_to, "/home/#{user}/pontuacao.seducpma.com"
+set :deploy_to, "/home/#{user}/test.pontuacao.seducpma.com"
 
 set :scm, :git
 # Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`

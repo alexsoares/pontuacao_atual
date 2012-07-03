@@ -1,0 +1,17 @@
+DEPRECATION WARNING: require "activesupport" is deprecated and will be removed in Rails 3. Use require "active_support" instead.. (called from /home/analistas/pontuacao_atual/vendor/rails/activesupport/lib/activesupport.rb:2)
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing HomeController#index (for 127.0.0.1 at 2012-07-03 12:32:27) [GET]
+Redirected to http://localhost:3000/sessao/nova
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 16ms (DB: 0) | 302 Found [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2012-07-03 12:32:27) [GET]
+Rendering template within layouts/login
+Rendering sessions/new
+Completed in 63ms (View: 56, DB: 0) | 200 OK [http://localhost/sessao/nova]
