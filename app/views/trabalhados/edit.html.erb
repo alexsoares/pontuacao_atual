@@ -3,60 +3,62 @@
   <br/>
    <fieldset>
       <legend><font size=4>Alteração Tempo Trabalhado</font></legend>
-<% form_for(@trabalhado) do |f| %>
-  <%= f.error_messages %>
-
-<table>
-  <tr>
-      <td><%= f.label :professor_id, 'Professor' %></td>
-      <td><%= f.collection_select :professor_id, @professors, :id, :nome ,:include_blank => ' -- Selecione -- ' %></td>
-  </tr>
-  <tr>
-      <td><%= f.label :ano, 'Ano' %>
-      <td><%= f.text_field :ano, :size => 5  %></td>
-  </tr>
-  <tr>
-      <td><%= f.label :dias, 'Dias' %></td>
-      <td><%= f.text_field :dias, :size => 5  %></td>
-  </tr>
-  <tr>
-      <td><%= f.label :unidade, 'Unidade' %></td>
-      <td><%= f.text_field :unidade, :size => 5  %></td>
-  </tr>
-  <tr>
-      <td><%= f.label :outro_trab, 'Outro Trabalho' %></td>
-      <td><%= f.text_field :outro_trab, :size => 5  %></td>
-  </tr>
-  <tr>
-      <td><%= f.label :f_abonada, 'Faltas Abonadas' %></td>
-      <td><%= f.text_field :f_abonada, :size => 5  %></td>
-  </tr>
-  <tr>
-      <td><%= f.label :atestado, 'Atestados' %>
-      <td><%= f.text_field :atestado, :size => 5  %></td>
-  </tr>
-  <tr>
-      <td><%= f.label :f_justif, 'Faltas Justificadas' %></td>
-      <td><%= f.text_field :f_justif, :size => 5  %></td>
-  </tr>
-  <tr>
-      <td><%= f.label :f_injustif, 'Faltas Injustificadas' %></td>
-      <td><%= f.text_field :f_injustif, :size => 5  %></td>
-  </tr>
-  <tr>
-      <td><%= f.label :lic_saude, 'Licença Saúde' %></td>
-      <td><%= f.text_field :lic_saude, :size => 5  %></td>
-   </tr>
-   <tr>
-      <td><%= f.label :afastamento, 'Afastamentos' %></td>
-      <td><%= f.text_field :afastamento, :size => 5  %></td>
-      
-  </table>
-
-   <fieldset>
-     <%= f.submit "Salvar" %>
+        <% form_for(@trabalhado) do |f| %>
+          <%= f.error_messages %>
+          <table>
+            <tr>
+                <td><%= f.label :professor_id, 'Professor' %></td>
+                <td><%= f.collection_select :professor_id, @professors, :id, :nome ,:include_blank => ' -- Selecione -- ' %></td>
+            </tr>
+            <tr>
+                <td><%= f.label :ano, 'Ano' %></td>
+                <td><%= f.text_field :ano, :size => 5  %></td>
+            </tr>
+            <tr>
+                <td><%= f.label :dias, 'Dias' %></td>
+                <td><%= f.text_field :dias, :size => 5  %></td>
+            </tr>
+            <tr>
+                <td><%= f.label :unidade, 'Unidade' %></td>
+                <td><%= f.text_field :unidade, :size => 5  %></td>
+            </tr>
+            <tr>
+                <td><%= f.label :outro_trab, 'Outro Trabalho' %></td>
+                <td><%= f.text_field :outro_trab, :size => 5  %></td>
+            </tr>
+            <tr>
+                <td><%= f.label :f_abonada, 'Faltas Abonadas' %></td>
+                <td><%= f.text_field :f_abonada, :size => 5  %></td>
+            </tr>
+            <tr>
+                <td><%= f.label :atestado, 'Atestados' %></td>
+                <td><%= f.text_field :atestado, :size => 5  %></td>
+            </tr>
+            <tr>
+                <td><%= f.label :f_justif, 'Faltas Justificadas' %></td>
+                <td><%= f.text_field :f_justif, :size => 5  %></td>
+            </tr>
+            <tr>
+                <td><%= f.label :f_injustif, 'Faltas Injustificadas' %></td>
+                <td><%= f.text_field :f_injustif, :size => 5  %></td>
+            </tr>
+            <tr>
+                <td><%= f.label :lic_saude, 'Licença Saúde' %></td>
+                <td><%= f.text_field :lic_saude, :size => 5  %></td>
+            </tr>
+            <tr>
+                <td><%= f.label :afastamento, 'Afastamentos' %></td>
+                <td><%= f.text_field :afastamento, :size => 5  %></td>
+            </tr>
+            <tr>
+                <td><%= f.label :outras_ausencias, 'Outras Ausências' %></td>
+                <td><%= f.text_field :outras_ausencias, :size => 5  %></td>
+            </tr>
+          </table>
+          <fieldset>
+            <%= f.submit "Salvar" %>
+          </fieldset>
+     <% end %>
    </fieldset>
-   </fieldset>
-<% end %>
-| <%= link_to 'Voltar', trabalhados_path %> |
-</div>
+   <%= link_to 'Voltar', trabalhados_path, :class => "button" %>
+   </div>

@@ -8,9 +8,9 @@
   <%end%>
   <div id="index"></div>
     <%if params[:calculo].present?%>
-      | <td><%= link_to 'Voltar', edit_acum_trab_path((params[:calculo].match(/\d+/).to_s).to_i )  %></td> |
+      <td><%= link_to 'Voltar', edit_acum_trab_path((params[:calculo].match(/\d+/).to_s).to_i ), :class => "button"  %></td>
     <%else%>
-      | <td><%= link_to 'Voltar', new_trabalhado_path  %></td> |
+      <td><%= link_to 'Voltar', new_trabalhado_path, :class => "button"  %></td>
     <%end%>
 </div>
 
