@@ -37,7 +37,7 @@ helper_method :sort_column, :sort_direction
           @professors = @search.paginate(:all,:page=>params[:page],:per_page =>15, :include => 'unidade', :order => sort_column + " " + sort_direction)
         else
           @search = Professor.search(params[:search])
-          @professors = @search.paginate(:page=>params[:page],:per_page =>15, :conditions => ['sede_id = ' + current_user.regiao_id.to_s + ' or sede_id = 54'], :order => sort_column + " " + sort_direction, :include => "unidade", :order => sort_column + " " + sort_direction)
+          @professors = @search.paginate(:page=>params[:page],:per_page =>15, :conditions => ['sede_id = ' + current_user.regiao_id.to_s + ' or sede_id = 54'], :order => sort_column + " " + sort_direction, :include => "unidade")
         end
       else
         if current_user.regiao_id == 53 or current_user.regiao_id == 52 then

@@ -7,15 +7,11 @@ class TituloProfessor < ActiveRecord::Base
   validate :existe_config
   belongs_to :professor
   belongs_to :titulo, :class_name => 'Titulacao', :foreign_key => "titulo_id"
-  attr_accessor :user, :current, :begin_period, :end_period
+  attr_accessor :user, :current, :begin_period, :end_period, :soma
   
   before_save :verifica_tipo_titulo, :verifica_valor_titulos
   before_destroy :atualiza_valor_total_apos_delecao
   
-
-
-
-
   def existe_config
     @existe = Configuration.find_by_user_id(self.user)
     if @existe.present?
@@ -26,6 +22,22 @@ class TituloProfessor < ActiveRecord::Base
       Date.current
     end
   end
+
+  def distancia_p
+    self.tipo_curso
+  end
+
+
+
+  def valores_a_distancia(professor,ano_letivo)
+    titulos_distancia = TituloProfessor.find(:all, :conditions => ['professor_id = ? and tipo_curso = 0 and ano_letivo = ? and validade = 0 and titulo_id in (6,7,8)',professor,ano_letivo], :select => [:pontuacao_titulo])
+    somatoria = 0
+    titulos_distancia.each do |z|
+      somatoria = somatoria + z.pontuacao_titulo
+    end
+    somatoria
+  end
+
 protected
   def verify_qtd?
     if !(self.tipo_curso == true) and self.titulo_id == 7
@@ -66,17 +78,19 @@ protected
            #self.dt_titulo = (DTA.strftime("%Y").to_i).to_s + "-06-30"
            self.dt_validade = ((existe_config.strftime("%Y").to_i)).to_s + self.end_period.to_s
            #self.dt_validade = "2010"
+
            if self.tipo_curso == false
-             if self.quantidade > 180
-               self.pontuacao_titulo = 180 * self.valor
-               self.quantidade = 180
-             else
+#             t = valores_a_distancia(self.professor_id, self.ano_letivo)
+             self.soma = (@titulacao.valor * self.quantidade) + valores_a_distancia(self.professor_id, self.ano_letivo)
+             if self.soma <= 0.180
               self.pontuacao_titulo = self.quantidade * self.valor
+             else
+               self.pontuacao_titulo = 0.180
              end
            else
              self.pontuacao_titulo = self.quantidade * self.valor
            end
-          if (self.dt_titulo.to_s > (existe_config.strftime("%Y").to_s + self.end_period.to_s)) or (self.dt_titulo.to_s < (existe_config.strftime("%Y").to_i - 1).to_s + self.begin_period.to_s)
+           if (self.dt_titulo.to_s > (existe_config.strftime("%Y").to_s + self.end_period.to_s)) or (self.dt_titulo.to_s < (existe_config.strftime("%Y").to_i - 1).to_s + self.begin_period.to_s)
              self.status = 0	     
            else
              @atualiza_professor.total_titulacao = @atualiza_professor.total_titulacao + self.pontuacao_titulo
@@ -133,7 +147,6 @@ protected
     end
 
   end
-
   def self.check_titulos(ano_letivo,professor)
    find_by_professor_id(professor,:joins => :professor, :select => "professors.total_titulacao as total_titulacao, professors.total_trabalhado as total_trabalhado, professors.pontuacao_final as pontuacao_final, sum(pontuacao_titulo) as soma_pont_titulo", :conditions => ["(titulo_id in (1,2,3,4,5) or ( ano_letivo = ? and status = 1))",ano_letivo])
   end
