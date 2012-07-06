@@ -85,7 +85,7 @@ protected
              if self.soma <= 0.180
               self.pontuacao_titulo = self.quantidade * self.valor
              else
-               self.pontuacao_titulo = 0.180
+               self.pontuacao_titulo = 0
              end
            else
              self.pontuacao_titulo = self.quantidade * self.valor

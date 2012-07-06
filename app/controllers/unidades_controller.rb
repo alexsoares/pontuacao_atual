@@ -99,7 +99,7 @@ class UnidadesController < ApplicationController
     @unidade = Unidade.find(params[:id])
               @atualiza_log = Log.new
               @atualiza_log.user_id = current_user.id
-              @atualiza_log.obs = "Exclusão da unidade " + @unidade.nome + " " + @unidade.id
+              @atualiza_log.obs = "Exclusão da unidade " + @unidade.nome + " " + @unidade.id.to_s
               @atualiza_log.data = (Time.now().strftime("%d/%m/%y %H:%M")).to_s
               @atualiza_log.unidade_id = @unidade.id
             @atualiza_log.save

@@ -23,13 +23,13 @@
                <tr>
                  <td colspan="2">
                   <div id="valor"></div>
-                  <div id="tipo_titulo"><%= f.check_box(:tipo_curso, :disabled => false, :checked => true)  %> Presencial?</div>
+                  <div id="tipo_titulo"></div>
                  </td>
                </tr>
              </td>
           </tr>
           <tr>
-           <td><%= f.label :obs, 'Descrição:' %>
+           <td><%= f.label :obs, 'Descrição:' %></td>
            <td><%= f.text_area :obs, :size => "50x1"   %></td>
           </tr>
 
