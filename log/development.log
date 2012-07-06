@@ -15218,3 +15218,110 @@ Rendered professors/_totaliza_titulo (23.0ms)
 Rendered professors/_total_geral (13.6ms)
 Rendered professors/_exibicao_pontuatempservico (63.7ms)
 Completed in 1306ms (View: 70, DB: 37) | 200 OK [http://localhost/professors/dados_professor]
+  [4;35;1mSQL (46.5ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (1.2ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing TituloProfessorsController#new (for 127.0.0.1 at 2012-07-06 10:00:34) [GET]
+  [4;35;1mTitulacao Load (37.2ms)[0m   [0mSELECT * FROM `titulacaos` [0m
+  [4;36;1mProfessor Load (4.0ms)[0m   [0;1mSELECT * FROM `professors` ORDER BY matricula ASC[0m
+  [4;35;1mUser Columns (61.6ms)[0m   [0mSHOW FIELDS FROM `users`[0m
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [4;35;1mProfessor Load (3.6ms)[0m   [0mSELECT * FROM `professors` ORDER BY matricula[0m
+  [4;36;1mTituloProfessor Columns (2.0ms)[0m   [0;1mSHOW FIELDS FROM `titulo_professors`[0m
+Rendering template within layouts/application
+Rendering titulo_professors/new
+  [4;35;1mProfessor Columns (2.9ms)[0m   [0mSHOW FIELDS FROM `professors`[0m
+  [4;36;1mTitulacao Columns (3.4ms)[0m   [0;1mSHOW FIELDS FROM `titulacaos`[0m
+Rendered titulo_professors/_form (356.0ms)
+  [4;35;1mAnnouncement Load (51.6ms)[0m   [0mSELECT * FROM `announcements` WHERE (starts_at <= now() AND ends_at >= now()) [0m
+  [4;36;1mroles_users Columns (1.1ms)[0m   [0;1mSHOW FIELDS FROM `roles_users`[0m
+  [4;35;1mRole Load (0.1ms)[0m   [0mSELECT * FROM `roles` INNER JOIN `roles_users` ON `roles`.id = `roles_users`.role_id WHERE (`roles_users`.user_id = 1 ) [0m
+  [4;36;1mRole Columns (1.0ms)[0m   [0;1mSHOW FIELDS FROM `roles`[0m
+Completed in 945ms (View: 442, DB: 216) | 200 OK [http://localhost/titulo_professors/new]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing TituloProfessorsController#sel_prof (for 127.0.0.1 at 2012-07-06 10:00:40) [POST]
+  Parameters: {"titulo_professor_professor_id"=>"876", "authenticity_token"=>"nWDq/rgKO4Vf0dU8kxKOt0VRsAF+A0E3nb4PvL3Fy5Q="}
+  [4;35;1mTitulacao Load (0.2ms)[0m   [0mSELECT * FROM `titulacaos` [0m
+  [4;36;1mProfessor Load (3.6ms)[0m   [0;1mSELECT * FROM `professors` ORDER BY matricula ASC[0m
+  [4;35;1mUser Columns (1.4ms)[0m   [0mSHOW FIELDS FROM `users`[0m
+  [4;36;1mUser Load (0.1ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [4;35;1mProfessor Load (2.6ms)[0m   [0mSELECT * FROM `professors` ORDER BY matricula[0m
+  [4;36;1mProfessor Columns (3.1ms)[0m   [0;1mSHOW FIELDS FROM `professors`[0m
+  [4;35;1mProfessor Load (0.2ms)[0m   [0mSELECT * FROM `professors` WHERE (`professors`.`id` = 876) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `professors` WHERE (`professors`.`id` = 876) [0m
+  [4;35;1mTituloProfessor Load (0.2ms)[0m   [0mSELECT * FROM titulo_professors tp inner join titulacaos t on tp.titulo_id=t.id where tp.professor_id=876 and t.tipo = 'PERMANENTE'[0m
+  [4;36;1mTituloProfessor Load (15.6ms)[0m   [0;1mSELECT * FROM titulo_professors tp inner join titulacaos t on tp.titulo_id=t.id where tp.professor_id=876 and t.tipo = 'ANUAL'[0m
+  [4;35;1mTituloProfessor Load (0.4ms)[0m   [0mSELECT * FROM titulo_professors tp inner join titulacaos t on tp.titulo_id=t.id where tp.professor_id=876 and t.tipo = '5 ANOS'[0m
+  [4;36;1mTituloProfessor Columns (1.9ms)[0m   [0;1mSHOW FIELDS FROM `titulo_professors`[0m
+  [4;35;1mTitulacao Columns (1.6ms)[0m   [0mSHOW FIELDS FROM `titulacaos`[0m
+  [4;36;1mTitulacao Load (0.2ms)[0m   [0;1mSELECT * FROM `titulacaos` WHERE (`titulacaos`.`id` = 1) LIMIT 1[0m
+  [4;35;1mTitulacao Load (0.2ms)[0m   [0mSELECT * FROM `titulacaos` WHERE (`titulacaos`.`id` = 2) LIMIT 1[0m
+  [4;36;1mTitulacao Load (0.1ms)[0m   [0;1mSELECT * FROM `titulacaos` WHERE (`titulacaos`.`id` = 5) LIMIT 1[0m
+  [4;35;1mTitulacao Load (0.1ms)[0m   [0mSELECT * FROM `titulacaos` WHERE (`titulacaos`.`id` = 8) LIMIT 1[0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `titulacaos` WHERE (`titulacaos`.`id` = 8) LIMIT 1[0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM `titulacaos` WHERE (`titulacaos`.`id` = 8) LIMIT 1[0m
+Rendered titulo_professors/_mostrar_pont_titulos (33.9ms)
+Completed in 731ms (View: 40, DB: 32) | 200 OK [http://localhost/titulo_professors/sel_prof]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing TituloProfessorsController#guarda_valor (for 127.0.0.1 at 2012-07-06 10:00:46) [POST]
+  Parameters: {"titulo_professor_titulo_id"=>"8", "authenticity_token"=>"nWDq/rgKO4Vf0dU8kxKOt0VRsAF+A0E3nb4PvL3Fy5Q="}
+  [4;36;1mTitulacao Load (0.2ms)[0m   [0;1mSELECT * FROM `titulacaos` [0m
+  [4;35;1mProfessor Load (2.6ms)[0m   [0mSELECT * FROM `professors` ORDER BY matricula ASC[0m
+  [4;36;1mUser Columns (1.5ms)[0m   [0;1mSHOW FIELDS FROM `users`[0m
+  [4;35;1mUser Load (0.1ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [4;36;1mProfessor Load (2.6ms)[0m   [0;1mSELECT * FROM `professors` ORDER BY matricula[0m
+  [4;35;1mTitulacao Columns (1.3ms)[0m   [0mSHOW FIELDS FROM `titulacaos`[0m
+  [4;36;1mTitulacao Load (0.1ms)[0m   [0;1mSELECT * FROM `titulacaos` WHERE (`titulacaos`.`id` = '8') LIMIT 1[0m
+Completed in 216ms (View: 2, DB: 9) | 200 OK [http://localhost/titulo_professors/guarda_valor]
+  [4;35;1mSQL (0.2ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing TituloProfessorsController#create (for 127.0.0.1 at 2012-07-06 10:07:28) [POST]
+  Parameters: {"commit"=>"Salvar", "titulo_professor"=>{"dt_titulo"=>"09-05-2012", "professor_id"=>"876", "obs"=>"sss", "quantidade"=>"1", "titulo_id"=>"8", "tipo_curso"=>"1"}, "authenticity_token"=>"nWDq/rgKO4Vf0dU8kxKOt0VRsAF+A0E3nb4PvL3Fy5Q="}
+  [4;35;1mTitulacao Load (0.2ms)[0m   [0mSELECT * FROM `titulacaos` [0m
+  [4;36;1mProfessor Load (3.6ms)[0m   [0;1mSELECT * FROM `professors` ORDER BY matricula ASC[0m
+  [4;35;1mUser Columns (1.8ms)[0m   [0mSHOW FIELDS FROM `users`[0m
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [4;35;1mProfessor Load (3.6ms)[0m   [0mSELECT * FROM `professors` ORDER BY matricula[0m
+  [4;36;1mTituloProfessor Columns (1.9ms)[0m   [0;1mSHOW FIELDS FROM `titulo_professors`[0m
+  [4;35;1mLog Columns (1.7ms)[0m   [0mSHOW FIELDS FROM `logs`[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLog Create (0.8ms)[0m   [0mINSERT INTO `logs` (`regiao_id`, `trabalhado_id`, `professor_id`, `unidade_id`, `titulacao_id`, `remocao_id`, `obs`, `updated_at`, `data`, `acumtrab_id`, `created_at`, `user_id`) VALUES(NULL, NULL, 876, NULL, NULL, NULL, 'Cadastrado Titulo do professor.', '2012-07-06 10:07:28', '06/07/12 10:07', NULL, '2012-07-06 10:07:28', 1)[0m
+  [4;36;1mSQL (82.5ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mBEGIN[0m
+  [4;36;1mConfiguration Columns (1.4ms)[0m   [0;1mSHOW FIELDS FROM `configurations`[0m
+  [4;35;1mConfiguration Load (0.2ms)[0m   [0mSELECT * FROM `configurations` WHERE (`configurations`.`user_id` = 1) LIMIT 1[0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `configurations` WHERE (`configurations`.`user_id` = 1) LIMIT 1[0m
+  [4;35;1mTitulacao Columns (1.3ms)[0m   [0mSHOW FIELDS FROM `titulacaos`[0m
+  [4;36;1mTitulacao Load (0.1ms)[0m   [0;1mSELECT * FROM `titulacaos` WHERE (`titulacaos`.`id` = 8) [0m
+  [4;35;1mProfessor Columns (2.9ms)[0m   [0mSHOW FIELDS FROM `professors`[0m
+  [4;36;1mProfessor Load (0.5ms)[0m   [0;1mSELECT * FROM `professors` WHERE (`professors`.`id` = 876) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM `configurations` WHERE (`configurations`.`user_id` = 1) LIMIT 1[0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `configurations` WHERE (`configurations`.`user_id` = 1) LIMIT 1[0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM `configurations` WHERE (`configurations`.`user_id` = 1) LIMIT 1[0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `configurations` WHERE (`configurations`.`user_id` = 1) LIMIT 1[0m
+  [4;35;1mProfessor Load (16.7ms)[0m   [0mSELECT `professors`.id FROM `professors` WHERE (`professors`.`matricula` = 8437 AND `professors`.id <> 876) LIMIT 1[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mROLLBACK[0m
+
+NoMethodError (undefined method `muisculizar' for #<Professor:0xb2d42c74>):
+  app/models/titulo_professor.rb:97:in `verifica_valor_titulos'
+  app/controllers/titulo_professors_controller.rb:125:in `create'
+  app/controllers/titulo_professors_controller.rb:124:in `create'
+  pdfkit (0.5.2) lib/pdfkit/middleware.rb:16:in `call'
+  /usr/lib/ruby/gems/1.8/gems/ruby-debug-ide-0.4.9/lib/ruby-debug-ide.rb:109:in `debug_load'
+  /usr/lib/ruby/gems/1.8/gems/ruby-debug-ide-0.4.9/lib/ruby-debug-ide.rb:109:in `debug_program'
+  /usr/lib/ruby/gems/1.8/gems/ruby-debug-ide-0.4.9/bin/rdebug-ide:87
+  /usr/bin/rdebug-ide:19:in `load'
+  /usr/bin/rdebug-ide:19
+
+Rendered rescues/_trace (379.3ms)
+Rendered rescues/_request_and_response (14.1ms)
+Rendering rescues/layout (internal_server_error)
