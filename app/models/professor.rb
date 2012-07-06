@@ -5,6 +5,7 @@ has_many :trabalhados, :dependent => :destroy
 has_many :fichas, :dependent => :destroy
 has_many :titulo_professors
 has_many :remocaos, :dependent => :destroy
+before_save :muisculizar
 validates_presence_of :matricula, :message => ' -  MATRÍCULA - PREENCHIMENTO OBRIGATÓRIO'
 validates_presence_of :nome, :message => ' -  NOME - PREENCHIMENTO OBRIGATÓRIO'
 validates_presence_of :funcao, :message => ' -  FUNÇÃO - PREENCHIMENTO OBRIGATÓRIO'
@@ -14,7 +15,8 @@ validates_numericality_of :INEP, :only_integer => true, :message =>  ' - SOMENTE
 validates_numericality_of :RD, :only_integer => true, :message =>  ' - SOMENTE NÚMEROS'
 validates_uniqueness_of :matricula, :message => ' - PROFESSOR JA CADASTRADO'
 Curso = ['Sem Magistério / Pedagogia','Magistério - Nível Médio','Pedagogia / Normal Superior','Licenciatura em Artes','Licenciatura em Educação Física','Licenciatura em Letras - Português','Licenciatura em Letras - Inglês','Licenciatura em Matemática','Licenciatura em História','Licenciatura em Geografia','Licenciatura em Ciências / Biologia']
-  def before_save
+
+  def maiusculizar
     self.pontuacao_final = (self.total_trabalhado + self.total_titulacao)
     self.nome.upcase!
     self.endres.upcase!
