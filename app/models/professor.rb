@@ -13,7 +13,7 @@ validates_presence_of :sede_id, :message => ' -  SEDE - PREENCHIMENTO OBRIGATÓR
 validates_numericality_of :INEP, :only_integer => true, :message =>  ' - SOMENTE NÚMEROS'
 validates_numericality_of :RD, :only_integer => true, :message =>  ' - SOMENTE NÚMEROS'
 validates_uniqueness_of :matricula, :message => ' - PROFESSOR JA CADASTRADO'
-Curso = ['Sem Magistério / Pedagogia','Magistério','Pedagogia / Normal Superior','Licenciatura em Artes','Licenciatura em Educação Física','Licenciatura em Letras - Português','Licenciatura em Letras - Inglês','Licenciatura em Matemática','Licenciatura em História','Licenciatura em Geografia','Licenciatura em Ciências / Biologia']
+Curso = ['Sem Magistério / Pedagogia','Magistério - Nível Médio','Pedagogia / Normal Superior','Licenciatura em Artes','Licenciatura em Educação Física','Licenciatura em Letras - Português','Licenciatura em Letras - Inglês','Licenciatura em Matemática','Licenciatura em História','Licenciatura em Geografia','Licenciatura em Ciências / Biologia']
   def before_save
     self.pontuacao_final = (self.total_trabalhado + self.total_titulacao)
     self.nome.upcase!
