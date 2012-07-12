@@ -1,4 +1,5 @@
 <% distancia = 0 %>
+<% contador = 0 %>
 <% $subtot_perm = 0 %>
 <% $subtot_um = 0 %>
 <% $subtot_cinco = 0 %>
@@ -377,6 +378,11 @@
         <%if tp1.status == true then %>
           <% teste = tp1.valores_a_distancia(tp1.professor_id, $data) %>
           <% unless tp1.distancia_p %>
+              <%if contador == 1%>
+                <%distancia = distancia + teste%>
+              <%end%>
+              <% contador = contador + 1%>
+
               <%distancia = distancia + teste%>
           <%else%>
               <% $subtot_um = $subtot_um + (tp1.pontuacao_titulo).to_f %>

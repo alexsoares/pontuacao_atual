@@ -20,12 +20,12 @@
   </div>
 
     <div class="botao">
-      <input type="Button" Value="Imprimir" onclick="Imprimir()">
+      <input type="Button" Value="Imprimir" onclick="Imprimir()"></input>
       <br/>
       <br/>
     </div>
     <fieldset>
-      <legend><font size=5>Professor</font></legend>
+      <legend style="font-size: x-large">Professor</legend>
       <table border ="1" class="tabelas" >
         <tr>
           <td colspan="14">
@@ -42,21 +42,21 @@
         </tr>
         <% for professor in @professors %>
           <tr>
-            <td colspan="3"><center><%=h professor.nome.upcase %></center></td>
-            <td colspan="1"><center><%=h professor.matricula %></center></td>
+            <td colspan="3" align="center"><%=h professor.nome.upcase %></td>
+            <td colspan="1" align="center"><%=h professor.matricula %></td>
             <%if professor.dt_ingresso.nil? then %>
-              <td colspan="2"><center><%=h professor.dt_ingresso %></center></td>
+              <td colspan="2" align="center"><%=h professor.dt_ingresso %></td>
             <%else%>
-              <td colspan="2"><center><%=h professor.dt_ingresso.strftime("%d/%m/%y") %></center></td>
+              <td colspan="2" align="center"><%=h professor.dt_ingresso.strftime("%d/%m/%y") %></td>
             <%end%>
-            <td colspan="1"><center><%=h professor.unidade.nome %></center></td>
-            <td colspan="3"><center><%=h professor.funcao %></center></td>
-              <td class="botao"><%= link_to 'Ficha', professor_fichas_path(professor),:class=>"botao3d" %></td>
-              <td class="botao"><%= link_to 'Exibir', professor,:class=>"botao3d" %></td>
-              <td class="botao"><%= link_to 'Alterar', edit_professor_path(professor),:class=>"botao3d" %></td>
-              <%  if current_user.has_role?('admin') or current_user.has_role?('supervisao') or current_user.has_role?('planejamento') then%>
-                <td class="botao"><%= link_to 'Apagar', professor, :confirm => 'Tem certeza?', :method => :delete,:class=>"botao3d" %></td>
-              <%end%>
+            <td colspan="1" align="center"><%=h professor.unidade.nome %></td>
+            <td colspan="3" align="center"><%=h professor.funcao %></td>
+            <td class="botao"><%= link_to 'Ficha', professor_fichas_path(professor),:class=>"button" %></td>
+            <td class="botao"><%= link_to 'Exibir', professor,:class=>"button" %></td>
+            <td class="botao"><%= link_to 'Alterar', edit_professor_path(professor),:class=>"button" %></td>
+            <%  if current_user.has_role?('admin') or current_user.has_role?('supervisao') or current_user.has_role?('planejamento') then%>
+              <td class="botao"><%= link_to 'Apagar', professor, :confirm => 'Tem certeza?', :method => :delete,:class=>"button" %></td>
+            <%end%>
           </tr>
         <% end %>
       </table>
@@ -66,7 +66,7 @@
     <div class="botao">
       <br/>
       <%= will_paginate @professors %>
-      <input type="Button" Value="Imprimir" onclick="Imprimir()">
+      <input type="Button" Value="Imprimir" onclick="Imprimir()"></input>
     </div>
     <br/>
     <br/>
