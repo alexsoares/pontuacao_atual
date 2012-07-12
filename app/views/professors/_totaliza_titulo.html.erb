@@ -5,6 +5,7 @@ display: none;
 </style>
 
 <% distancia = 0 %>
+<% contador = 0 %>
 <% $subtot_perm = 0 %>
 <% $subtot_um = 0 %>
 <% $subtot_cinco = 0 %>
@@ -60,14 +61,17 @@ display: none;
         <%= format("%.3f",tp1.pontuacao_titulo) %>
       </td>
       <td width="10%" align="center">      
-        <%if tp1.status == true then %>          
+        <%if tp1.status == true then %>
           <% teste = tp1.valores_a_distancia(tp1.professor_id, $data) %>
           <% unless tp1.distancia_p %>
-              <%distancia = distancia + teste%>
+              <%if contador == 1%>
+                <%distancia = distancia + teste%>
+              <%end%>
+              <% contador = contador + 1%>
               <%= 'Válido Distancia' %>
           <%else%>
               <% $subtot_um = $subtot_um + (tp1.pontuacao_titulo).to_f %>
-              <%= 'Válido Permanente' %>
+              <%= 'Válido' %>
           <%end%>
         <%else%>
           <%=  'Não Valido' %>

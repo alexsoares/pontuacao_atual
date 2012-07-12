@@ -116,6 +116,7 @@ class TituloProfessorsController < ApplicationController
     @titulo_professor = TituloProfessor.new(params[:titulo_professor])
     @titulo_professor.user = current_user.id
     @titulo_professor.current = Time.current
+    y = @titulo_professor.tipo_curso
     @titulo_professor.begin_period = "#{session[:begin_period]}"
     @titulo_professor.end_period =  "#{session[:end_period]}"
     @log = Log.new
@@ -229,22 +230,24 @@ class TituloProfessorsController < ApplicationController
     $id_titulo = params[:titulo_professor_titulo_id]
     $valor = Titulacao.find_by_id($id_titulo).valor
 
-    if $id_titulo.to_i == 7
+    if $id_titulo.to_i == 8 or $id_titulo.to_i == 6
       render :update do |page|
         page.replace_html 'valor', :text => 'O valor do Titulo é: ' + ($valor).to_s
-        page.replace_html 'tipo_titulo', :text => ""
+        page.replace_html 'qtde', :text => "<input id='titulo_professor_quantidade' type='text' value='0' size='10' name='titulo_professor[quantidade]'>"
       end
     else
       if $id_titulo.to_i == 1 || $id_titulo.to_i == 2 || $id_titulo.to_i == 3 || $id_titulo.to_i == 4 || $id_titulo.to_i == 5
         render :update do |page|
           page.replace_html "qtde", :text => "1"
           page.replace_html 'valor', :text => 'O valor do Titulo é: ' + ($valor).to_s
-          page.replace_html 'tipo_titulo', :text => ""
         end
       else
-        render :update do |page|
-          page.replace_html 'valor', :text => 'O valor do Titulo é: ' + ($valor).to_s
-          page.replace_html 'tipo_titulo', :partial => "distancia"
+        if $id_titulo.to_i == 7
+          render :update do |page|
+            page.replace_html 'valor', :text => 'O valor do Titulo é: ' + ($valor).to_s
+            page.replace_html 'qtde', :text => "<input id='titulo_professor_quantidade' type='text' value='0' size='10' name='titulo_professor[quantidade]'>"
+            page.replace_html 'tipo_titulo', :text => "<input id='titulo_professor_tipo_curso' type='checkbox' value='1' name='titulo_professor[tipo_curso]' checked='checked'> Presencial?"
+          end
         end
       end
     end

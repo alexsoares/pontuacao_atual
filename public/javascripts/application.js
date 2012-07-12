@@ -15,4 +15,14 @@
 jQuery(document).ready(function( $ ){
 // Button
     $( ".button").button();
+// Curso a distancia
+    $('select#titulo_professor_titulo_id').change(function(){
+      if ($(this).val() == 7){
+        $("#tipo_titulo").show();
+        
+      }
+      else {
+        $("#tipo_titulo").hide();
+      }
+    });
 });

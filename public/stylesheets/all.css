@@ -542,3 +542,6 @@ font-size: large;
 .tabelas .odd td {
   background-color: #D1D8F6;
 }
+#tipo_titulo {
+    display: none;
+}
