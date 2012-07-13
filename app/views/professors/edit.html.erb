@@ -1,7 +1,7 @@
 <br/>
 <div id="conteudo">   
    <fieldset>
-      <legend><font size=5>Alteração do Cadastro de Professores</font></legend>
+     <legend style="font-size: x-large">Alteração do Cadastro de Professores</legend>
 
       <% form_for(@professor) do |f| %>
        <%= f.error_messages %>
@@ -24,7 +24,7 @@
         <td><%= @professor.dt_ingresso.strftime("%d-%m-%Y") %> ==> <%= datepicker_tag(:professor, :dt_ingresso,{ :size => 10},{:dateFormat => "'dd-mm-yy'", :changeYear => true, :changeMonth => true,:yearRange => "'1930:+0'", :buttonImage => "'/stylesheets/images/datepicker.gif'",:showOn => "'both'"}) %></td>
      <%else%>
         <td>Data de Ingresso:</td>
-        <td><%= @professor.dt_ingresso %></td>
+        <td><%= @professor.dt_ingresso.strftime("%d-%m-%Y") %></td>
      <%end%>
     </tr>
       <tr>
@@ -90,12 +90,10 @@
         <td><%= f.text_field :telefone, :size => 15 %></td>
      </tr>
      <tr>
-       <td><%= f.label :entrada_concurso, "Formação para o concurso:" %></td>
+       <td><%= f.label :entrada_concurso, "Formação p/ concurso / exercício magistério:" %></td>
        <td>
          <b><%= @professor.entrada_concurso %></b>
-          <%  if current_user.has_role?('admin') or current_user.has_role?('supervisao') or current_user.has_role?('planejamento') then%>
-            <%= f.select :entrada_concurso, options_for_select(Professor::Curso), :include_blank => true%>
-          <%end%>
+         <%= f.select :entrada_concurso, options_for_select(Professor::Curso), :include_blank => true%>
        </td>
      </tr>
      <tr>

@@ -1,6 +1,5 @@
 <br/>
 <div id="conteudo">
-<p>
 <fieldset>
   <legend><font size=5> Cadastro de Professor</font></legend>
    <table width="100%">
@@ -22,16 +21,11 @@
       </tr>
       <tr>
         <td><%= f.label :dt_ingresso, 'Data Ingresso:' %></td>
-        
-          <td><%= datepicker_tag(:professor, :dt_ingresso,{ :size => 10},{:dateFormat => "'dd-mm-yy'", :changeYear => true, :changeMonth => true, :yearRange => "'-60:+0'", :buttonImage => "'/stylesheets/images/datepicker.gif'",:showOn => "'both'" }) %></td>
-
-
+        <td><%= datepicker_tag(:professor, :dt_ingresso,{ :size => 10},{:dateFormat => "'dd-mm-yy'", :changeYear => true, :changeMonth => true, :yearRange => "'-60:+0'", :buttonImage => "'/stylesheets/images/datepicker.gif'",:showOn => "'both'" }) %></td>
       </tr>
       <tr>
-
         <td><%= f.label :sede_id, 'Sede: ' %><font color="red" size="5">*</font></td>
         <td><%= f.collection_select :sede_id, @unidades, :id, :nome, :include_blank => ' -- Selecione -- ' %></td>
-
       </tr>
       <tr>
        <td> <%= f.label :endres, 'Endereço Res:' %></td>
@@ -48,30 +42,30 @@
      <tr>
        <td><%= f.label :bairro, 'Bairro:' %></td>
        <td><%= f.text_field :bairro, :size => 15 %></td>
+     </tr>
+     <tr>
+       <td><%= f.label :cidade, 'Cidade:' %></td>
+       <td><%= f.text_field :cidade, :size => 15 %></td>
     </tr>
     <tr>
-        <td><%= f.label :cidade, 'Cidade:' %></td>
-        <td><%= f.text_field :cidade, :size => 15 %></td>
+       <td><%= f.label :n_filhos, 'No. de Filhos:' %></td>
+       <td><%= f.text_field :n_filhos, :size => 03 %></td>
     </tr>
     <tr>
-        <td><%= f.label :n_filhos, 'No. de Filhos:' %></td>
-        <td><%= f.text_field :n_filhos, :size => 03 %></td>
+       <td><%= f.label :RG, 'No. RG:' %></td>
+       <td><%= f.text_field :RG, :size => 12 %></td>
     </tr>
     <tr>
-        <td><%= f.label :RG, 'No. RG:' %></td>
-        <td><%= f.text_field :RG, :size => 12 %></td>
+       <td><%= f.label :CPF, 'No. CPF:' %></td>
+       <td><%= f.text_field :CPF, :size => 12 %></td>
     </tr>
     <tr>
-        <td><%= f.label :CPF, 'No. CPF:' %></td>
-        <td><%= f.text_field :CPF, :size => 12 %></td>
+       <td><%= f.label :INEP, 'No. INEP:' %></td>
+       <td><%= f.text_field :INEP, :size => 12 %></td>
     </tr>
     <tr>
-        <td><%= f.label :INEP, 'No. INEP:' %></td>
-        <td><%= f.text_field :INEP, :size => 12 %></td>
-    </tr>
-    <tr>
-        <td><%= f.label :RD, 'No. RD:' %></td>
-        <td><%= f.text_field :RD, :size => 12 %></td>
+       <td><%= f.label :RD, 'No. RD:' %></td>
+       <td><%= f.text_field :RD, :size => 12 %></td>
     </tr>
     <tr>
        <td><%= f.label :dt_nasc, 'Data de Nascimento:' %></td>
@@ -86,12 +80,12 @@
        <td><%= f.text_field :telefone, :size => 15 %></td>
      </tr>
      <tr>
-       <td><%= f.label :telefone, 'Formação apresentada para o concurso:' %></td>
+       <td><%= f.label :entrada_concurso, 'Formação p/ concurso / exercício magistério:' %></td>
        <td><%= f.select :entrada_concurso, options_for_select(Professor::Curso), :include_blank => true%>      </td>
      </tr>
      <tr>
        <td><%= f.label :funcao, 'Cargo:' %> <font color="red" size="5">*</font></td>
-       <td>  <%= f.select :funcao, (CARGO).sort, :include_blank => '-- Selecionar --' %></td>
+       <td><%= f.select :funcao, (CARGO).sort, :include_blank => '-- Selecionar --' %></td>
      </tr>
      <tr>
        <td><%= f.label :obs, 'Observações:' %></td>
