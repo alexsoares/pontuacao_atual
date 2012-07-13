@@ -23,54 +23,53 @@
 
 <% for trabalho in @trabalho %>
   <tr>
-    <td>
-      <center> <%= trabalho.ano %><br/></center>
+     <td align="center">
+      <%= trabalho.ano %><br/>
+     </td>
+     <td>
+      <%= trabalho.dias%><br/>
+     </td>
+     <td align="center">
+      <%= trabalho.unidade %><br/>
+     </td>
+     <td align="center">
+      <%= trabalho.outro_trab %> <br/>
+     </td>
+     <td align="center">
+      <%= trabalho.f_abonada %><br/>
+     </td>
+     <td align="center">
+      <%= trabalho.atestado %><br/>
+     </td>
+     <td align="center">
+      <%= trabalho.f_justif %><br/>
+     </td>
+     <td align="center">
+      <%= trabalho.f_injustif %><br/>
     </td>
-     <td>
-      <center><%= trabalho.dias%><br/></center>
-     </td>
-     <td>
-        <center><%= trabalho.unidade %><br/></center>
-     </td>
-     <td>
-        <center><%= trabalho.outro_trab %> <br/></center>
-     </td>
-     <td>
-        <center><%= trabalho.f_abonada %><br/></center>
-     </td>
-     <td>
-        <center><%= trabalho.atestado %><br/></center>
-     </td>
-     <td>
-        <center><%= trabalho.f_justif %><br/></center>
-     </td>
-     <td>
-        <center><%= trabalho.f_injustif %><br/></center>
+    <td align="center">
+      <%= trabalho.lic_saude %><br/>
     </td>
-    <td>
-        <center><%= trabalho.lic_saude %><br/></center>
-    </td>
-    <td width ="7%">
-        <center><%= trabalho.afastamento %></center>
+    <td width ="7%" align="center">
+        <%= trabalho.afastamento %>
     </td>
     <td align="center">
        <%= trabalho.outras_ausencias %>
     </td>
-    <td width ="7%">
-      <center><%= $st_dt = trabalho.dias_trab %></center>
+    <td width ="7%" align="center">
+      <%= $st_dt = trabalho.dias_trab %>
       <% $soma_st_dt = $soma_st_dt + $st_dt %>
     </td>
-    <td width ="7%">
-      <center><%= $st_de = trabalho.dias_efetivos %></center>
+    <td width ="7%" align="center">
+      <%= $st_de = trabalho.dias_efetivos %>
       <% $soma_st_de = $soma_st_de + $st_de %>
     </td>
-    <td width ="7%">
-      <center><%= $st_dr = trabalho.dias_rede %></center>
+    <td width ="7%" align="center">
+      <%= $st_dr = trabalho.dias_rede %>
       <% $soma_st_dr = $soma_st_dr + $st_dr %>
-
     </td>
-    <td width ="7%">
-      <center><%= $st_du = trabalho.dias_unidade %></center>
+    <td width ="7%" align="center">
+      <%= $st_du = trabalho.dias_unidade %>
       <% $soma_st_du = $soma_st_du + $st_du %>
     </td>
   </tr>

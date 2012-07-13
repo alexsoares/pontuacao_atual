@@ -374,10 +374,11 @@
             <% $subtot_um = $subtot_um + (tp1.pontuacao_titulo).to_f %>
           <%end%>
       </td>
+      <% distancia_count = TituloProfessor.qtos_titulos($professor, $data) %>
         <%if tp1.status == true then %>
           <% distancia_existente = tp1.valores_a_distancia(tp1.professor_id, $data) %>
           <% unless tp1.distancia_p %>
-              <%if contador == 1%>
+              <%if contador == distancia_count.count%>
                 <%distancia = distancia + distancia_existente%>
               <%end%>
               <% contador = contador + 1%>
