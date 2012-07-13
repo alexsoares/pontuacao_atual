@@ -3,9 +3,8 @@
 display: none;
 }
 </style>
-
 <% distancia = 0 %>
-<% contador = 0 %>
+<% contador = 1 %>
 <% $subtot_perm = 0 %>
 <% $subtot_um = 0 %>
 <% $subtot_cinco = 0 %>
@@ -61,10 +60,11 @@ display: none;
         <%= format("%.3f",tp1.pontuacao_titulo) %>
       </td>
       <td width="10%" align="center">      
-        <%if tp1.status == true then %>
+      <% distancia_count = TituloProfessor.qtos_titulos($professor, $data) %>
+      <%if tp1.status == true then %>
           <% teste = tp1.valores_a_distancia(tp1.professor_id, $data) %>
           <% unless tp1.distancia_p %>
-              <%if contador == 1%>
+              <%if contador <= distancia_count.count%>
                 <%distancia = distancia + teste%>
               <%end%>
               <% contador = contador + 1%>

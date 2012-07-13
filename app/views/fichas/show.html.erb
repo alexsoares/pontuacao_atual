@@ -88,36 +88,35 @@
     <th colspan="1">Dias Rede</th>
     <th colspan="1">Dias Unidade</th>
   </tr>
-      <tr>
-    <td colspan="1">
-      <center><%= @ficha.trabalhado_anterior.ano %><br/></center>
+  <tr>
+    <td colspan="1" align="center">
+      <%= @ficha.trabalhado_anterior.ano %><br/>
     </td>
-     <td colspan="1">
-      <center><%= @ficha.trabalhado_anterior.dias%><br/></center>
+     <td colspan="1" align="center">
+      <%= @ficha.trabalhado_anterior.dias%><br/>
      </td>
-     <td colspan="1">
-        <center><%= @ficha.trabalhado_anterior.unidade %><br/></center>
+     <td colspan="1" align="center">
+        <%= @ficha.trabalhado_anterior.unidade %><br/>
      </td>
-     <td colspan="1">
-        <center><%= @ficha.trabalhado_anterior.outro_trab %> <br/></center>
+     <td colspan="1" align="center">
+        <%= @ficha.trabalhado_anterior.outro_trab %> <br/>
      </td>
-
-     <td colspan="1">
-        <center><%= @ficha.trabalhado_anterior.f_abonada %><br/></center>
+     <td colspan="1" align="center">
+        <%= @ficha.trabalhado_anterior.f_abonada %><br/>
      </td>
-     <td colspan="1">
-        <center><%= @ficha.trabalhado_anterior.atestado %><br/></center>
+     <td colspan="1" align="center">
+        <%= @ficha.trabalhado_anterior.atestado %><br/>
      </td>
-     <td colspan="1">
-        <center><%= @ficha.trabalhado_anterior.f_justif %><br/></center>
+     <td colspan="1" align="center">
+        <%= @ficha.trabalhado_anterior.f_justif %><br/>
      </td>
-     <td colspan="1">
-        <center><%= @ficha.trabalhado_anterior.f_injustif %><br/></center>
+     <td colspan="1" align="center">
+        <%= @ficha.trabalhado_anterior.f_injustif %><br/>
+     </td>
+     <td colspan="1" align="center">
+        <%= @ficha.trabalhado_anterior.lic_saude %><br/>
     </td>
-    <td colspan="1">
-        <center><%= @ficha.trabalhado_anterior.lic_saude %><br/></center>
-    </td>
-    <td colspan="1">
+    <td colspan="1" align="center">
         <center><%= @ficha.trabalhado_anterior.afastamento %></center>
     </td>
     <td colspan="1">
@@ -376,14 +375,12 @@
           <%end%>
       </td>
         <%if tp1.status == true then %>
-          <% teste = tp1.valores_a_distancia(tp1.professor_id, $data) %>
+          <% distancia_existente = tp1.valores_a_distancia(tp1.professor_id, $data) %>
           <% unless tp1.distancia_p %>
               <%if contador == 1%>
-                <%distancia = distancia + teste%>
+                <%distancia = distancia + distancia_existente%>
               <%end%>
               <% contador = contador + 1%>
-
-              <%distancia = distancia + teste%>
           <%else%>
               <% $subtot_um = $subtot_um + (tp1.pontuacao_titulo).to_f %>
           <%end%>

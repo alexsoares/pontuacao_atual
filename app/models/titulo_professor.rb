@@ -25,7 +25,6 @@ class TituloProfessor < ActiveRecord::Base
       Date.current
     end
   end
-
   def distancia_p
     self.tipo_curso
   end
@@ -37,6 +36,10 @@ class TituloProfessor < ActiveRecord::Base
       somatoria = somatoria + z.pontuacao_titulo
     end
     somatoria
+  end
+
+  def self.qtos_titulos(professor,ano_letivo)
+    find(:all, :conditions => ['professor_id = ? and tipo_curso = 0 and ano_letivo = ? and validade = 0 and titulo_id in (7)',professor,ano_letivo], :select => [:pontuacao_titulo])
   end
 
 
@@ -92,7 +95,7 @@ protected
              else
                if somatoria_distancia != 0.180
                  if pontuacao_nova < somatoria_distancia
-                  self.pontuacao_titulo = (somatoria_distancia - pontuacao_nova).abs
+                  self.pontuacao_titulo =(0.180 - somatoria_distancia).abs
                  else
                   self.pontuacao_titulo = (0.180 - somatoria_distancia).abs
                  end
